@@ -35,6 +35,19 @@ Revision history
 21/09/2010 - Version 1.2.4
 
 	- amended issue with incorrect argument names in deleteStatus() and retweet() methods
+	
+11/04/2011 - Version 1.2.5
+
+	- additional methods added
+		- getRetweets()
+		- retweetedBy()
+		- retweetedByIDs()
+		- geoSearch()
+		- geoSimilarPlaces()
+		- addMemberToList()
+		- deleteListMember()
+	- resolved minor authentication issues with getUserTimeline() and friendshipExists() methods
+	- revised spelling mistake in geoReverseGeocode() method name
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -156,13 +169,9 @@ Revision history
 		<cfargument name="max_id"		required="false" 	default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
 		<cfargument name="since_id"		required="false" 	default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
 		<cfargument name="format" 		required="false" 	default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
-				<cfscript>			
-					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format) & '?' & buildParamString(arguments);					
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+			<cfset var strTwitterMethod = '' />							
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format) & '?' & buildParamString(arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
 	</cffunction>
 	
 	<cffunction name="getRetweetsOfMe" access="public" output="false" hint="Returns the 20 most recent tweets of the authenticated user that have been retweeted by others.">
@@ -246,6 +255,41 @@ Revision history
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweet/' & arguments.id & '.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+	</cffunction>
+	
+	<cffunction name="getRetweets" access="public" output="false" hint="Returns up to 100 of the first retweets of a given tweet.">
+		<cfargument name="id" 					required="true" 	type="string" 					hint="The numerical ID of the desired status." />
+		<cfargument name="count" 				required="false" 	type="Numeric" 	default="100"	hint="Specifies the number of records to retrieve. must be less than or equal to 100." />
+		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+			<cfset var strTwitterMethod = '' />							
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweets/' & arguments.id & '.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+	</cffunction>
+	
+	<cffunction name="retweetedBy" access="public" output="false" hint="Show user objects of up to 100 members who retweeted the status.">
+		<cfargument name="id" 					required="true" 	type="string" 					hint="The numerical ID of the desired status." />
+		<cfargument name="page"					required="false" 	type="Numeric" 	default="1"		hint="Specifies the page of results to retrieve." />
+		<cfargument name="count" 				required="false" 	type="Numeric" 	default="100"	hint="Specifies the number of records to retrieve. must be less than or equal to 100." />
+		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+			<cfset var strTwitterMethod = '' />							
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/' & arguments.id & '/retweeted_by.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+	</cffunction>
+	
+	<cffunction name="retweetedByIDs" access="public" output="false" hint="Show user ids of up to 100 users who retweeted the status.">
+		<cfargument name="id" 					required="true" 	type="string" 					hint="The numerical ID of the desired status." />
+		<cfargument name="page"					required="false" 	type="Numeric" 	default="1"		hint="Specifies the page of results to retrieve." />
+		<cfargument name="count" 				required="false" 	type="Numeric" 	default="100"	hint="Specifies the number of records to retrieve. must be less than or equal to 100." />
+		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+			<cfset var strTwitterMethod = '' />							
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/' & arguments.id & '/retweeted_by/ids.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
 	</cffunction>
 	<!--- End of Tweets resources : status-specific methods --->
@@ -494,7 +538,7 @@ Revision history
 		<cfargument name="format" 		required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/exists.' & lcase(arguments.format)  & '?' & buildParamString(arguments) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
 	</cffunction>
 	
 	<cffunction name="showFriendships" access="public" output="false" returntype="Any" hint="Returns detailed information about the relationship between two users.">
@@ -784,7 +828,7 @@ Revision history
 	
 	
 	<!--- Geo resources	: geo-specific methods --->	
-	<cffunction name="geoReversGeocode" access="public" output="false" returntype="Any" hint="Given a latitude and a longitude, searches for up to 20 places that can be used as a place_id when updating a status. This request is an informative call and will deliver generalized results about geography.">
+	<cffunction name="geoReverseGeocode" access="public" output="false" returntype="Any" hint="Given a latitude and a longitude, searches for up to 20 places that can be used as a place_id when updating a status. This request is an informative call and will deliver generalized results about geography.">
 		<cfargument name="lat" 						required="true" 	type="String" 				 hint="The latitude to search around. This parameter will be ignored unless it is inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there isn't a corresponding long parameter." />
 		<cfargument name="long" 					required="true" 	type="String" 				 hint="The longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if geo_enabled is disabled, or if there not a corresponding lat parameter." />
 		<cfargument name="granularity" 				required="false" 	type="String" 				 hint="This is the minimal granularity of place types to return and must be one of: poi, neighborhood, city, admin or country. If no granularity is provided for the request neighborhood is assumed. Setting this to city, for example, will find places which have a type of city, admin or country." />
@@ -811,7 +855,44 @@ Revision history
 					strReturn = makeGetCall(strTwitterMethod);
 				</cfscript>
 		<cfreturn handleReturnFormat(strReturn, arguments.format) />
-	</cffunction>	
+	</cffunction>
+	
+	<cffunction name="geoSearch" access="public" output="false" returntype="Any" hint="Search for places that can be attached to a statuses/update. Given a latitude and a longitude pair, an IP address, or a name, this request will return a list of all the valid places that can be used as the place_id when updating a status.">
+		<cfargument name="lat" 							required="false" 	type="String" 					hint="The latitude to search around. This parameter will be ignored unless it is inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there isn't a corresponding long parameter." />
+		<cfargument name="long" 						required="false" 	type="String" 					hint="The longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if geo_enabled is disabled, or if there not a corresponding lat parameter." />
+		<cfargument name="query" 						required="false" 	type="String" 					hint="Free-form text to match against while executing a geo-based query, best suited for finding nearby locations by name. Remember to URL encode the query." />
+		<cfargument name="ip" 							required="false" 	type="String" 					hint="An IP address. Used when attempting to fix geolocation based off of the user's IP address." />
+		<cfargument name="granularity" 					required="false" 	type="String" 					hint="This is the minimal granularity of place types to return and must be one of: poi, neighborhood, city, admin or country. If no granularity is provided for the request neighborhood is assumed. Setting this to city, for example, will find places which have a type of city, admin or country." />
+		<cfargument name="accuracy" 					required="false" 	type="String" 					hint="A hint on the 'region' in which to search. If a number, then this is a radius in meters, but it can also take a string that is suffixed with ft to specify feet. If this is not passed in, then it is assumed to be 0m. If coming from a device, in practice, this value is whatever accuracy the device has measuring its location (whether it be coming from a GPS, WiFi triangulation, etc.)." />
+		<cfargument name="max_results" 					required="false" 	type="String" 					hint="A hint as to the number of results to return. This does not guarantee that the number of results returned will equal max_results, but instead informs how many 'nearby' results to return. Ideally, only pass in the number of places you intend to display to the user here." />
+		<cfargument name="contained_within" 			required="false" 	type="String" 					hint="This is the place_id which you would like to restrict the search results to. Setting this value means only places within the given place_id will be found. Specify a place_id. For example, to scope all results to places within 'San Francisco, CA USA', you would specify a place_id of '5a110d312052166f'." />
+		<cfargument name="callback" 					required="false" 	type="String" 					hint="If supplied, the response will use the JSONP format with a callback of the given name." />
+		<cfargument name="format" 						required="false" 	type="string" default="json" 	hint="The return format of the data. JSON." />
+			<cfset var strTwitterMethod = '' />
+			<cfset var strReturn 		= '' />			
+				<cfscript>
+					strTwitterMethod = getCorrectEndpoint('api') & 'geo/search.' & lcase(arguments.format) & '?' & buildParamString(arguments);
+					strReturn = makeGetCall(strTwitterMethod);
+				</cfscript>
+		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+	</cffunction>
+	
+	<cffunction name="geoSimilarPlaces" access="public" output="false" returntype="Any" hint="Locates places near the given coordinates which are similar in name.">
+		<cfargument name="lat" 							required="true" 	type="String" 					hint="The latitude to search around. This parameter will be ignored unless it is inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there isn't a corresponding long parameter." />
+		<cfargument name="long" 						required="true" 	type="String" 					hint="The longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if geo_enabled is disabled, or if there not a corresponding lat parameter." />
+		<cfargument name="name" 						required="true" 	type="String" 					hint="The name a place is known as." />
+		<cfargument name="contained_within" 			required="false" 	type="String" 					hint="This is the place_id which you would like to restrict the search results to. Setting this value means only places within the given place_id will be found. Specify a place_id. For example, to scope all results to places within 'San Francisco, CA USA', you would specify a place_id of '5a110d312052166f'." />
+		<cfargument name="callback" 					required="false" 	type="String" 					hint="If supplied, the response will use the JSONP format with a callback of the given name." />
+		<cfargument name="format" 						required="false" 	type="string" default="json" 	hint="The return format of the data. JSON." />
+			<cfset var strTwitterMethod = '' />
+			<cfset var strReturn 		= '' />			
+				<cfscript>
+					strTwitterMethod = getCorrectEndpoint('api') & 'geo/similar_places.' & lcase(arguments.format) & '?' & buildParamString(arguments);
+					strReturn = makeGetCall(strTwitterMethod);
+				</cfscript>
+		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+	</cffunction>
+	<!--- End of Geo resources	: geo-specific methods --->	
 	
 	<!--- Legal resources	: legal-specific methods --->
 	<cffunction name="getLegalTOS" 	access="public" output="false" returntype="Any" hint="Returns Twitter's' Terms of Service in the requested format. These are not the same as the Developer Terms of Service.">
@@ -927,6 +1008,24 @@ Revision history
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/members.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+	</cffunction>
+	
+	<cffunction name="addMemberToList" access="public" output="false" hint="Add a member to a list. The authenticated user must own the list to be able to add members to it. Lists are limited to having 500 members.">
+		<cfargument name="list_id" 		required="true" 				type="string" 	hint="The id or slug of the list." />
+		<cfargument name="id" 			required="true" 				type="String" 	hint="The user id of the list member." />
+		<cfargument name="format" 		required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+			<cfset var strTwitterMethod = '' />							
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/members.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+	</cffunction>
+	
+	<cffunction name="deleteListMember" access="public" output="false" hint="Removes the specified member from the list. The authenticated user must be the list's owner to remove members from the list.">
+		<cfargument name="list_id" 		required="true" 				type="string" 	hint="The id or slug of the list." />
+		<cfargument name="id" 			required="true" 				type="String" 	hint="The user id of the list member." />
+		<cfargument name="format" 		required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+			<cfset var strTwitterMethod = '' />							
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/members.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments) />
 	</cffunction>
 	<!--- End of List Member resources : list-member-specific methods --->
 	
