@@ -48,6 +48,11 @@ Revision history
 		- deleteListMember()
 	- resolved minor authentication issues with getUserTimeline() and friendshipExists() methods
 	- revised spelling mistake in geoReverseGeocode() method name
+	
+01/05/2011 - Version 1.2.6
+
+	-additional method added
+		- search()
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -1051,5 +1056,29 @@ Revision history
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments) />
 	</cffunction>
 	<!--- End of List Subscriber resources : list-subscriber-specific methods --->
+	
+	<!--- Search --->
+	<cffunction name="search" access="public" output="false" hint="Returns tweets that match a specified query.">
+		<cfargument name="q" 			required="true" 					type="String" 	hint="Search query. Should be URL encoded. Queries will be limited by complexity." />
+		<cfargument name="lang" 		required="false" 					type="String" 	hint="Restricts tweets to the given language, given by an ISO 639-1 code." />
+		<cfargument name="locale" 		required="false" 					type="String" 	hint="Specify the language of the query you are sending (only ja is currently effective). This is intended for language-specific clients and the default should work in the majority of cases." />
+		<cfargument name="rpp" 			required="false" 					type="String" 	hint="The number of tweets to return per page, up to a max of 100." />
+		<cfargument name="page" 		required="false" 					type="String" 	hint="The page number (starting at 1) to return, up to a max of roughly 1500 results (based on rpp * page)." />
+		<cfargument name="since_id" 	required="false" 					type="String" 	hint="Returns results with an ID greater than (that is, more recent than) the specified ID. There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the since_id, the since_id will be forced to the oldest ID available." />
+		<cfargument name="until" 		required="false" 					type="String" 	hint="Optional. Returns tweets generated before the given date. Date should be formatted as YYYY-MM-DD." />
+		<cfargument name="geocode" 		required="false" 					type="String" 	hint="Returns tweets by users located within a given radius of the given latitude/longitude. The location is preferentially taking from the Geotagging API, but will fall back to their Twitter profile. The parameter value is specified by 'latitude,longitude,radius', where radius units must be specified as either 'mi' (miles) or 'km' (kilometers). Note that you cannot use the near operator via the API to geocode arbitrary locations; however you can use this geocode parameter to search near geocodes directly." />
+		<cfargument name="show_user" 	required="false" 					type="Boolean" 	hint="When true, prepends ':' to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false." />
+		<cfargument name="result_type" 	required="false" 	default="mixed"	type="String" 	hint="Optional. Specifies what type of search results you would prefer to receive. The current default is 'mixed.' Valid values include: mixed: Include both popular and real time results in the response. recent: return only the most recent results in the response popular: return only the most popular results in the response. http://search.twitter.com/search.json?result_type=mixed http://search.twitter.com/search.json?result_type=recent http://search.twitter.com/search.json?result_type=popular" />
+		<cfargument name="format" 		required="false" 	default="json"	type="string" 	hint="The return format of the data. ATOM or JSON." />
+			<cfset var strTwitterMethod	=	'' />
+			<cfset var strReturn 		= 	'' />			
+				<cfscript>
+					arguments.q	=	urlEncodedFormat(arguments.q);
+					strTwitterMethod = getsearchURL() & 'search.' & arguments.format & '?' & buildParamString(arguments);
+					strReturn = makeGetCall(strTwitterMethod);
+				</cfscript>
+		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+	</cffunction>
+	<!--- End of Search --->
 
 </cfcomponent>
