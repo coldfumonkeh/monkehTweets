@@ -51,8 +51,12 @@ Revision history
 	
 01/05/2011 - Version 1.2.6
 
-	-additional method added
+	- additional method added
 		- search()
+		
+10/06/2011 - Version 1.2.7
+
+	- resolved issue with getUserTimeline() 401 error
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -173,9 +177,16 @@ Revision history
 		<cfargument name="max_id"		required="false" 	default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
 		<cfargument name="since_id"		required="false" 	default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
 		<cfargument name="format" 		required="false" 	default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
-			<cfset var strTwitterMethod = '' />							
-				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format) & '?' & buildParamString(arguments) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+			<cfset var strTwitterMethod = '' />
+			<cfset var strReturn 		= '' />
+				<cfscript>
+					if(!len(arguments.screen_name) OR !len(arguments.user_id)) {
+						arguments.screen_name	=	getAuthDetails().getUserAccountName();
+					}
+					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format) & '?' & buildParamString(arguments);					
+					strReturn = makeGetCall(strTwitterMethod);
+				</cfscript>
+		<cfreturn handleReturnFormat(strReturn, arguments.format) />		
 	</cffunction>
 	
 	<cffunction name="getRetweetsOfMe" access="public" output="false" hint="Returns the 20 most recent tweets of the authenticated user that have been retweeted by others.">
@@ -481,7 +492,7 @@ Revision history
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
 	</cffunction>
 	
-	<cffunction name="getDirectMessagesSent" access="public" output="false" returntype="Any" hint="Returns a list of the 20 most recent direct messages sent to the authenticating user.  The XML and JSON versions include detailed information about the sending and recipient users.">
+	<cffunction name="getDirectMessagesSent" access="public" output="false" returntype="Any" hint="Returns a list of the 20 most recent direct messages sent by the authenticating user.  The XML and JSON versions include detailed information about the sending and recipient users.">
 		<cfargument name="since_id"				required="false" default=""			type="string" 	hint="Returns only direct messages with an ID greater than (that is, more recent than) the specified ID." />
 		<cfargument name="max_id"				required="false" default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
 		<cfargument name="count" 				required="false" default="200" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
