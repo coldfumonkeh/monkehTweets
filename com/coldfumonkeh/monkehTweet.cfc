@@ -57,6 +57,10 @@ Revision history
 10/06/2011 - Version 1.2.7
 
 	- resolved issue with getUserTimeline() 401 error
+	
+29/06/2011 - Version 1.2.8
+
+	- revised error handling and message return information (thanks to Joel (cajunjoel)) for the enhancement request.
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">

@@ -177,8 +177,10 @@ Revision history
 	
 	<cffunction name="checkStatusCode" access="public" output="false" hint="I check the status code from all API calls">
 		<cfargument name="data" required="true" type="struct" hint="The data returned from the API." />
-			<cfset var strSuccess = false />
-			<cfset var strMessage = '' />
+			<cfset var strSuccess 		= false />
+			<cfset var strMessage 		= '' />
+			<cfset var stuErrInfo		= {} />
+			<cfset var arrErrSearch		= [] />
 			<cfswitch expression="#arguments.data.Statuscode#">
 				<cfcase value="200 OK">
 					<cfset strSuccess = true />
@@ -226,7 +228,22 @@ Revision history
 				</cfcase>
 			</cfswitch>
 			<cfif !strSuccess>
-				<cfthrow message="#arguments.data.Statuscode# - #strMessage#" />
+				
+				<cfscript>
+					
+					stuErrInfo.error_message 	= arguments.data.Statuscode & '-' & strMessage;
+					arrErrSearch				=	xmlSearch(arguments.data.FileContent,'hash/error');
+					stuErrInfo.api_Info 		= {};
+					stuErrInfo.api_Info.request = xmlSearch(arguments.data.FileContent,'hash/request')[1].XmlText;
+						
+					if(arrayLen(arrErrSearch)) {
+						stuErrInfo.api_Info.error	=	arrErrSearch[1].XmlText;
+					}
+					
+					stuErrInfo.full_Request		=	arguments.data;
+				</cfscript>
+
+				<cfdump var="#stuErrInfo#" />
 				<cfabort />
 			</cfif>
 	</cffunction>	
