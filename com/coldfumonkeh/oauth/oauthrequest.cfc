@@ -560,6 +560,21 @@ History:
 
 		<cfreturn Hash(sToEncode, "SHA")/>
 	</cffunction>
+	
+	<!---
+		Additional of secondary method for generateNonce that plays nicely with OpenBD.
+		Thanks to Craig328 for supplying this.
+		(http://www.mattgifford.co.uk/managing-multiple-twitter-users-authentication-with-monkehtweet/comment-page-1#comment-58828)
+	--->
+	<!---
+	<cffunction name="generateNonce" access="public" returntype="string" output="false" hint="generate nonce value">
+		<cfset var iMin = 0>
+		<cfset var iMax = 1000000000>
+		<cfset var sToEncode = generateTimestamp() & RandRange(iMin, iMax, "SHA1PRNG")>
+		
+		<cfreturn Hash(sToEncode, "SHA")/>
+	</cffunction>
+	--->
 
 	<!--- util function for turning the Authorization: header into parameters, has to do some unescaping --->
 	<cffunction name="splitHeader" access="private" output="false" returntype="struct">

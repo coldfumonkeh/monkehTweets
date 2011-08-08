@@ -47,6 +47,10 @@ Revision history
 21/09/2010 - Version 1.2.4
 
 	- revised a variable naming clash with Railo 3 (thanks to Aaron Longnion)
+	
+08/08/2011 - Version 1.2.9
+
+	- revision of request function to return header information as struct for debugging. (thanks to Gary Stanton for the idea)
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -475,6 +479,7 @@ Revision history
 		<cfargument name="httpURL" 		required="true" 	type="String" 							hint="I am the URL to which to make the request or post." />
 		<cfargument name="httpMethod" 	required="true" 	type="String" 	default="POST"			hint="I am the method of the authenticated request. GET or POST." />
 		<cfargument name="parameters" 	required="false" 	type="Struct"	default="#StructNew()#" hint="I am a structure of parameters for the request." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the headers and sent information for debugging." />
 			<cfset var twitRequest		= {} />
 			<cfset var strReturn 		= '' />
 				<cfscript>									
@@ -485,8 +490,13 @@ Revision history
 							httpmethod		: arguments.httpMethod,
 							parameters		: clearEmptyParams(arguments.parameters)
 						);
-					checkStatusCode(twitRequest);
-					strReturn = handleReturnFormat(twitRequest.fileContent, arguments.parameters.format);
+					
+					if(arguments.checkHeader) {
+						strReturn = twitRequest.responseHeader;
+					} else {
+						checkStatusCode(twitRequest);
+						strReturn = handleReturnFormat(twitRequest.fileContent, arguments.parameters.format);
+					}
 				</cfscript>
 		<cfreturn strReturn />
 	</cffunction>

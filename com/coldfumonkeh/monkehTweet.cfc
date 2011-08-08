@@ -61,6 +61,13 @@ Revision history
 29/06/2011 - Version 1.2.8
 
 	- revised error handling and message return information (thanks to Joel (cajunjoel)) for the enhancement request.
+	
+08/08/2011 - Version 1.2.9
+
+	- rate limit through authenticated requests issues resolved with revision of request handling and parameters being sent in URL query string
+	- addition of checkHeader argument to the majority of functions to assist in debugging headers
+	
+	Thanks to Gary Stanton and Ray Majoran for finding the issue with the rate limits on authenticated requests. 
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -129,101 +136,103 @@ Revision history
 	
 	<!--- status related methods --->
 	<cffunction name="getMentions" access="public" output="false" hint="Returns the 20 most recent mentions (status containing @username) for the authenticating user.">
-		<cfargument name="count" 	required="false" default="" 	type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 	required="false" default="" 	type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON, RSS or ATOM." />
+		<cfargument name="count" 		required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" 	default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, JSON, RSS or ATOM." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the headers and sent information for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/mentions.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getPublicTimeline" access="public" output="false" hint="Returns the 20 most recent statuses from non-protected users who have set a custom user icon.">
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON, RSS or ATOM." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, JSON, RSS or ATOM." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/public_timeline.' & lcase(arguments.format);					
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/public_timeline.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<!--- Timeline resources : timeline-specific methods --->
 	<cffunction name="getHomeTimeline" access="public" output="false" hint="Returns the 20 most recent statuses, including retweets, posted by the authenticating user and that user's friends. This is the equivalent of /timeline/home on the Web. Usage note: This home_timeline is identical to statuses/friends_timeline except it also contains retweets, which statuses/friends_timeline does not (for backwards compatibility reasons).">
-		<cfargument name="count" 	required="false" default=""		type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 	required="false" default=""		type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="count" 		required="false" default=""			type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" default=""			type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" default=""			type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" default="xml"		type="string" 	hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="checkHeader"	required="false" default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/home_timeline.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getFriendsTimeline" access="public" output="false" hint="Returns the 20 most recent statuses posted by the authenticating user and that user's friends. This is the equivalent of /timeline/home on the Web.">
-		<cfargument name="count" 	required="false" default="" 	type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 	required="false" default="" 	type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="count" 		required="false" default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" default=""			type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" default="xml"		type="string" 	hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="checkHeader"	required="false" default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/friends_timeline.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getUserTimeline" access="public" output="false" hint="Returns the 20 most recent statuses posted from the authenticating user. It's also possible to request another user's timeline via the id parameter. This is the equivalent of the Web /<user> page for your own user, or the profile page for a third party.">
-		<cfargument name="screen_name"	required="false"	default="" 		type="string" hint="Specfies the screen name of the user for whom to return the user_timeline. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="user_id"		required="false"	default="" 		type="string" hint="Specfies the ID of the user for whom to return the user_timeline. Helpful for disambiguating when a valid user ID is also a valid screen name. " />
-		<cfargument name="count" 		required="false" 	default="" 		type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 		required="false" 	default="" 		type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"		required="false" 	default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"		required="false" 	default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 		required="false" 	default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="screen_name"	required="false"	default="" 		type="string" 	hint="Specfies the screen name of the user for whom to return the user_timeline. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="user_id"		required="false"	default="" 		type="string" 	hint="Specfies the ID of the user for whom to return the user_timeline. Helpful for disambiguating when a valid user ID is also a valid screen name. " />
+		<cfargument name="count" 		required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" 	default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
 				<cfscript>
 					if(!len(arguments.screen_name) OR !len(arguments.user_id)) {
 						arguments.screen_name	=	getAuthDetails().getUserAccountName();
 					}
-					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format) & '?' & buildParamString(arguments);					
-					strReturn = makeGetCall(strTwitterMethod);
+					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format);				
 				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />		
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />		
 	</cffunction>
 	
 	<cffunction name="getRetweetsOfMe" access="public" output="false" hint="Returns the 20 most recent tweets of the authenticated user that have been retweeted by others.">
-		<cfargument name="count" 	required="false" default="" 	type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 	required="false" default="" 	type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="count" 		required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" 	default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweets_of_me.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getRetweetsByMe" access="public" output="false" hint="Returns the 20 most recent retweets posted by the authenticating user.">
-		<cfargument name="count" 	required="false" default="" type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 	required="false" default="" type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"	required="false" default=""	type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"	required="false" default=""	type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="count" 		required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" 	default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweeted_by_me.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getRetweetsToMe" access="public" output="false" hint="Returns the 20 most recent retweets posted by the authenticating user's friends.">
-		<cfargument name="count" 	required="false" default="" 	type="string" hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 	required="false" default="" 	type="string" hint="Specifies the page or results to retrieve." />
-		<cfargument name="max_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="since_id"	required="false" default=""		type="string" hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="count" 		required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 		required="false" 	default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="max_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="since_id"		required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, JSON or ATOM." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweeted_to_me.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Timeline resources : timeline-specific methods --->
 	
@@ -233,13 +242,10 @@ Revision history
 		<cfargument name="trim_user" 		required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 			required="false" 	type="string"   default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"		required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
-				<cfscript>			
-					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/show/' & arguments.id & '.' & lcase(arguments.format) & '?' & buildParamString(arguments);					
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/show/' & arguments.id & '.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="postUpdate" access="public" output="false" hint="Updates the authenticating user's status. Request must be a POST.  A status update with text identical to the authenticating user's current status will be ignored to prevent duplicates.">
@@ -252,9 +258,10 @@ Revision history
 		<cfargument name="trim_user" 				required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" 		required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 					required="false" 	type="string"	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"				required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/update.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="deleteStatus" access="public" output="false" hint="Destroys the status specified by the required ID parameter.  The authenticating user must be the author of the specified status.">
@@ -262,9 +269,10 @@ Revision history
 		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/destroy/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="retweet" access="public" output="false" hint="Retweets a tweet. Requires the id parameter of the tweet you are retweeting. Returns the original tweet with retweet details embedded.">
@@ -272,9 +280,10 @@ Revision history
 		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweet/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getRetweets" access="public" output="false" hint="Returns up to 100 of the first retweets of a given tweet.">
@@ -283,9 +292,10 @@ Revision history
 		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweets/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="retweetedBy" access="public" output="false" hint="Show user objects of up to 100 members who retweeted the status.">
@@ -295,9 +305,10 @@ Revision history
 		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/' & arguments.id & '/retweeted_by.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="retweetedByIDs" access="public" output="false" hint="Show user ids of up to 100 users who retweeted the status.">
@@ -307,9 +318,10 @@ Revision history
 		<cfargument name="trim_user" 			required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/' & arguments.id & '/retweeted_by/ids.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Tweets resources : status-specific methods --->
 	
@@ -319,13 +331,10 @@ Revision history
 		<cfargument name="id" 					required="true" 	type="string" 					hint="The ID or screen name of a user." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>			
-					strTwitterMethod = getCorrectEndpoint('api') & 'users/show.' & lcase(arguments.format)  & '?' & buildParamString(arguments);				
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = '' />		
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'users/show.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="lookupUser" access="public" output="false" returntype="any" hint="Return up to 100 users worth of extended information, specified by either ID, screen name, or combination of the two. The author's most recent status (if the authenticating user has permission) will be returned inline.">
@@ -333,9 +342,10 @@ Revision history
 		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="A comma separated list of screen names, up to 100 are allowed in a single request." />
 		<cfargument name="include_entities" 	required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	type="string" 	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'users/lookup.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="searchForUser" access="public" output="false" returntype="any" hint="Run a search for users similar to Find People button on Twitter.com; the same results returned by people search on Twitter.com will be returned by using this API.  It is only possible to retrieve the first 1000 matches from this API.">
@@ -344,25 +354,25 @@ Revision history
 		<cfargument name="page"					required="false"	default="1" 	type="string" 	hint="Specifies the page of results to retrieve." />
 		<cfargument name="include_entities" 	required="false" 	default="false" type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'users/search.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getUserSuggestions" access="public" output="false" returntype="any" hint="Access to Twitter's suggested user list. This returns the list of suggested user categories. If a category slug is supplied, it will access the users in a given category of the Twitter suggested user list.">
-		<cfargument name="slug" 	required="false" 	type="String" default=""	hint="The short name of list or a category" />
-		<cfargument name="format" 	required="false" 	type="string" default="xml" hint="The return format of the data. XML or JSON." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
+		<cfargument name="slug" 		required="false" 	type="String" 	default=""			hint="The short name of list or a category" />
+		<cfargument name="format" 		required="false" 	type="string" 	default="xml" 		hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	type="boolean"	default="false"		hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = '' />	
 				<cfscript>
 					strTwitterMethod = getCorrectEndpoint('api') & 'users/suggestions';
 					if(len(arguments.slug)) {
 						strTwitterMethod = strTwitterMethod & '/' & arguments.slug;
 					}
 					strTwitterMethod = strTwitterMethod & '.' & lcase(arguments.format);
-					strReturn = makeGetCall(strTwitterMethod);
 				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getUserProfileImage" access="public" output="false" returntype="any" hint="Access the profile image in various sizes for the user with the indicated screen_name. If no size is provided the normal image is returned. This resource does not return JSON or XML, but instead returns a 302 redirect to the actual image resource. This method should only be used by application developers to lookup or check the profile image URL for a user. This method must not be used as the image source URL presented to users of your application.">
@@ -375,245 +385,229 @@ Revision history
 					strTwitterMethod = getCorrectEndpoint('api') & 'users/profile_image/' & arguments.screen_name & '.' & lcase(arguments.format)  & '?' & buildParamString(arguments);
 					strReturn = makeGetCall(strTwitterMethod);
 				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfreturn strReturn />
 	</cffunction>
 	
 	<cffunction name="getFriendsStatus" access="public" output="false" hint="Returns a user's friends, each with current status inline. They are ordered by the order in which the user followed them, most recently followed first, 100 at a time. (Please note that the result set isn't guaranteed to be 100 every time as suspended users will be filtered out.) Use the cursor option to access older friends. With no user specified, request defaults to the authenticated user's friends. It's also possible to request another user's friends list via the id, screen_name or user_id parameter.">
-		<cfargument name="screen_name"			required="false"	default="" 		type="string" 	hint="Specfies the screen name of the user for whom to return the user_timeline. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="user_id"				required="false"	default="" 		type="string" 	hint="Specfies the ID of the user for whom to return the user_timeline. Helpful for disambiguating when a valid user ID is also a valid screen name. " />
-		<cfargument name="cursor"				required="false" 	default="-1"	type="string" 	hint="Breaks the results into pages. A single page contains 100 users. This is recommended for users who are following many users. Provide a value of  -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list" />
-		<cfargument name="include_entities" 	required="false" 	default="false" type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="screen_name"			required="false"	default="" 			type="string" 	hint="Specfies the screen name of the user for whom to return the user_timeline. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="user_id"				required="false"	default="" 			type="string" 	hint="Specfies the ID of the user for whom to return the user_timeline. Helpful for disambiguating when a valid user ID is also a valid screen name. " />
+		<cfargument name="cursor"				required="false" 	default="-1"		type="string" 	hint="Breaks the results into pages. A single page contains 100 users. This is recommended for users who are following many users. Provide a value of  -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list" />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/friends.' & lcase(arguments.format)  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/friends.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />	
 	</cffunction>
 	
 	<cffunction name="getFollowersStatus" access="public" output="false" hint="Returns the authenticating user's followers, each with current status inline.  They are ordered by the order in which they followed the user, 100 at a time. (Please note that the result set isn't guaranteed to be 100 every time as suspended users will be filtered out.) Use the cursor option to access earlier followers.">
-		<cfargument name="screen_name"			required="false"	default="" 		type="string"	hint="Specfies the screen name of the user for whom to return the user_timeline. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="user_id"				required="false"	default="" 		type="string" 	hint="Specfies the ID of the user for whom to return the user_timeline. Helpful for disambiguating when a valid user ID is also a valid screen name. " />
-		<cfargument name="cursor"				required="false" 	default="-1"	type="string" 	hint="Breaks the results into pages. A single page contains 100 users. This is recommended for users who are following many users. Provide a value of  -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list" />
-		<cfargument name="include_entities" 	required="false" 	default="false" type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="screen_name"			required="false"	default="" 			type="string"	hint="Specfies the screen name of the user for whom to return the user_timeline. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="user_id"				required="false"	default="" 			type="string" 	hint="Specfies the ID of the user for whom to return the user_timeline. Helpful for disambiguating when a valid user ID is also a valid screen name. " />
+		<cfargument name="cursor"				required="false" 	default="-1"		type="string" 	hint="Breaks the results into pages. A single page contains 100 users. This is recommended for users who are following many users. Provide a value of  -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list" />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/followers.' & lcase(arguments.format)  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'statuses/followers.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />	
 	</cffunction>
 	<!--- End of User resources : user-specific methods --->
 	
 	<!--- Trends resources : trend-specific methods --->
 	<cffunction name="trends" access="public" output="false" returntype="Any" hint="Returns the current top 10 trending topics on Twitter.  The response includes the time of the request, the name of each trending topic, and query used on Twitter Search results page for that topic">	
-		<cfset var strTwitterMethod = '' />
-		<cfset var strReturn 		= '' />			
-			<cfscript>
-				strTwitterMethod = getCorrectEndpoint('api') & 'trends.json';
-				strReturn = makeGetCall(strTwitterMethod);
-			</cfscript>
-		<cfreturn handleReturnFormat(strReturn, 'json') />
+		<cfargument name="checkHeader"	required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = '' />
+				<cfset arguments.format	=	'json' />			
+			<cfset strTwitterMethod = getCorrectEndpoint('api') & 'trends.' & arguments.format />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getCurrentTrends" access="public" output="false" returntype="Any" hint="Returns the current top 10 trending topics on Twitter.  The response includes the time of the request, the name of each trending topic, and query used on Twitter Search results page for that topic">
-		<cfargument name="exclude" required="false"	default="" 	type="string" hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="exclude" 		required="false"	default="" 			type="string" 	hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="checkHeader"	required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'trends/current.json'  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, 'json') />
+				<cfset arguments.format	=	'json' />	
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'trends/current.' & arguments.format />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getDailyTrends" access="public" output="false" returntype="Any" hint="Returns the top 20 trending topics for each hour in a given day.">
-		<cfargument name="date" 	required="false"	default="#DateFormat(Now(), 'YYYY-MM-DD')#" 	type="string" hint="Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD" />
-		<cfargument name="exclude" 	required="false"	default="" 										type="string" hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="date" 		required="false"	default="#DateFormat(Now(), 'YYYY-MM-DD')#" 	type="string" hint="Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD" />
+		<cfargument name="exclude" 		required="false"	default="" 										type="string" hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="checkHeader"	required="false"	default="false"									type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'trends/daily.json'  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, 'json') />
+				<cfset arguments.format	=	'json' />			
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'trends/daily.' & arguments.format />
+			<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getWeeklyTrends" access="public" output="false" returntype="Any" hint="Returns the top 30 trending topics for each day in a given week.">
-		<cfargument name="date" 	required="false"	default="#DateFormat(Now(), 'YYYY-MM-DD')#" 	type="string" hint="Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD" />
-		<cfargument name="exclude" 	required="false"	default="" 										type="string" hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="date" 		required="false"	default="#DateFormat(Now(), 'YYYY-MM-DD')#" 	type="string" 	hint="Permits specifying a start date for the report. The date should be formatted YYYY-MM-DD" />
+		<cfargument name="exclude" 		required="false"	default="" 										type="string" 	hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="checkHeader"	required="false"	default="false"									type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'trends/weekly.json'  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, 'json') />
+				<cfset arguments.format	=	'json' />		
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'trends/weekly.' & arguments.format />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<!--- Local trends --->
 	<cffunction name="availableTrends" access="public" output="false" returntype="Any" hint="Returns the locations that Twitter has trending topic information for. The response is an array of 'locations' that encode the location's WOEID (a Yahoo! Where On Earth ID) and some other human-readable information such as a canonical name and country the location belongs in.">
-		<cfargument name="lat" 		required="false" default="" 	type="String" hint="If passed in conjunction with long, then the available trend locations will be sorted by distance to the lat and long passed in.  The sort is nearest to furthest." />
-		<cfargument name="long" 	required="false" default="" 	type="String" hint="If passed in conjunction with lat, then the available trend locations will be sorted by distance to the lat and long passed in.  The sort is nearest to furthest." />
-		<cfargument name="format" 	required="false" default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="lat" 			required="false" 	default="" 		type="String" 	hint="If passed in conjunction with long, then the available trend locations will be sorted by distance to the lat and long passed in.  The sort is nearest to furthest." />
+		<cfargument name="long" 		required="false" 	default="" 		type="String" 	hint="If passed in conjunction with lat, then the available trend locations will be sorted by distance to the lat and long passed in.  The sort is nearest to furthest." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'trends/available.' & arguments.format  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'trends/available.' & arguments.format />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="trendByLocation" access="public" output="false" returntype="Any" hint="Returns the top 10 trending topics for a specific location Twitter has trending topic information for. The response is an array of 'trend' objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Search, and the direct URL that can be issued against Search. This information is cached for five minutes, and therefore users are discouraged from querying these endpoints faster than once every five minutes.  Global trends information is also available from this API by using a WOEID of 1.">
-		<cfargument name="woeid" 	required="true" 			   type="String" hint="The WOEID of the location to be querying for. (a Yahoo! Where On Earth ID)" />
-		<cfargument name="format" 	required="false" default="xml" type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="woeid" 		required="true" 			   		type="String" 	hint="The WOEID of the location to be querying for. (a Yahoo! Where On Earth ID)" />
+		<cfargument name="format" 		required="false" 	default="xml" 	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'trends/' & arguments.woeid & '.' & arguments.format;
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'trends/' & arguments.woeid & '.' & arguments.format />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Local trends --->
 	<!--- End of Trends resources : trend-specific methods --->
 	
 	<!--- Direct Messages resources	: DM-specific methods --->
 	<cffunction name="getDirectMessages" access="public" output="false" returntype="Any" hint="Returns a list of the 20 most recent direct messages sent to the authenticating user.  The XML and JSON versions include detailed information about the sending and recipient users.">
-		<cfargument name="since_id"				required="false" default=""			type="string" 	hint="Returns only direct messages with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="max_id"				required="false" default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="count" 				required="false" default="200" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 				required="false" default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML, RSS, ATOM or JSON." />
+		<cfargument name="since_id"				required="false" 	default=""			type="string" 	hint="Returns only direct messages with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="max_id"				required="false" 	default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="count" 				required="false" 	default="200" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 				required="false" 	default="" 			type="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML, RSS, ATOM or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'direct_messages.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getDirectMessagesSent" access="public" output="false" returntype="Any" hint="Returns a list of the 20 most recent direct messages sent by the authenticating user.  The XML and JSON versions include detailed information about the sending and recipient users.">
-		<cfargument name="since_id"				required="false" default=""			type="string" 	hint="Returns only direct messages with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="max_id"				required="false" default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="count" 				required="false" default="200" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 				required="false" default="" 		type="string" 	hint="Specifies the page or results to retrieve." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML, RSS, ATOM or JSON." />
+		<cfargument name="since_id"				required="false" 	default=""			type="string" 	hint="Returns only direct messages with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="max_id"				required="false" 	default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="count" 				required="false" 	default="200" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 				required="false" 	default="" 		t	ype="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML, RSS, ATOM or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'direct_messages/sent.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="createDM" access="public" output="false" returntype="Any" hint="Sends a new direct message to the specified user from the authenticating user. Requires both the user and text parameters. Request must be a POST. Returns the sent message in the requested format when successful.">
-		<cfargument name="screen_name" 			required="false" 			 		type="string" 	hint="The screen name of the user who should receive the direct message. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="user_id" 				required="false" 			 		type="string" 	hint="The ID of the user who should receive the direct message. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="text" 				required="true" 			 		type="string" 	hint="The text of your direct message.  Under 140 characters." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="screen_name" 			required="false" 			 			type="string" 	hint="The screen name of the user who should receive the direct message. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="user_id" 				required="false" 			 			type="string" 	hint="The ID of the user who should receive the direct message. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="text" 				required="true" 			 			type="string" 	hint="The text of your direct message.  Under 140 characters." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'direct_messages/new.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="deleteDM" access="public" output="false" returntype="Any" hint="Destroys the direct message specified in the required ID parameter.  The authenticating user must be the recipient of the specified direct message.">
-		<cfargument name="id" 					required="true" 					type="string" 	hint="The ID of the direct message to destroy." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="id" 					required="true" 						type="string" 	hint="The ID of the direct message to destroy." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'direct_messages/destroy/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Direct Messages resources	: DM-specific methods --->
 	
 	<!--- Friendship resources	: friendship-specific methods --->
 	<cffunction name="followUser" access="public" output="false" returntype="Any" hint="Allows the authenticating users to follow the user specified in the ID parameter.  Returns the befriended user in the requested format when successful.  Returns a string describing the failure condition when unsuccessful. If you are already friends with the user an HTTP 403 will be returned.">
-		<cfargument name="user_id" 				required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name"			required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="follow" 				required="false" 					type="string" 	hint="Enable notifications for the target user." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 			 			type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name"			required="false" 			 			type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="follow" 				required="false" 						type="string" 	hint="Enable notifications for the target user." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/create.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="unfollowUser" access="public" output="false" returntype="Any" hint="Allows the authenticating users to unfollow the user specified in the ID parameter. Returns the unfollowed user in the requested format when successful.  Returns a string describing the failure condition when unsuccessful.">
-		<cfargument name="user_id" 				required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name"			required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 			 			type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name"			required="false" 			 			type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/destroy.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="friendshipExists" access="public" output="false" returntype="Any" hint="Test for the existence of friendship between two users. Will return true if user_a follows user_b, otherwise will return false. Consider using showFriendships() instead of this method.">
-		<cfargument name="user_a" 		required="false" 			 	type="string" 	hint="The ID or screen_name of the subject user." />
-		<cfargument name="user_b"		required="false" 			 	type="string" 	hint="The ID or screen_name of the user to test for following." />
-		<cfargument name="format" 		required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_a" 		required="false" 			 		type="string" 	hint="The ID or screen_name of the subject user." />
+		<cfargument name="user_b"		required="false" 			 		type="string" 	hint="The ID or screen_name of the user to test for following." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
-				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/exists.' & lcase(arguments.format)  & '?' & buildParamString(arguments) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/exists.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="showFriendships" access="public" output="false" returntype="Any" hint="Returns detailed information about the relationship between two users.">
-		<cfargument name="source_id" 			required="false" 			 		type="string" hint="The user_id of the subject user." />
-		<cfargument name="source_screen_name" 	required="false" 			 		type="string" hint="The screen_name of the subject user." />
-		<cfargument name="target_id" 			required="false" 			 		type="string" hint="The user_id of the target user." />
-		<cfargument name="target_screen_name" 	required="false" 			 		type="string" hint="The screen_name of the target user." />
-		<cfargument name="format" 				required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="source_id" 			required="false" 			 		type="string" 	hint="The user_id of the subject user." />
+		<cfargument name="source_screen_name" 	required="false" 			 		type="string" 	hint="The screen_name of the subject user." />
+		<cfargument name="target_id" 			required="false" 			 		type="string" 	hint="The user_id of the target user." />
+		<cfargument name="target_screen_name" 	required="false" 			 		type="string" 	hint="The screen_name of the target user." />
+		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'friendships/show.' & lcase(arguments.format)  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/show.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getIncomingFriendships" access="public" output="false" returntype="Any" hint="Returns an array of numeric IDs for every user who has a pending request to follow the authenticating user.">
-		<cfargument name="cursor" 	required="false" 			 		type="string" hint="Breaks the results into pages. This is recommended for users who are following many users. Provide a value of -1 to begin paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="format" 	required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="cursor" 			required="false" 			 		type="string" 	hint="Breaks the results into pages. This is recommended for users who are following many users. Provide a value of -1 to begin paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="format" 			required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"		required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/incoming.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getOutgoingFriendships" access="public" output="false" returntype="Any" hint="Returns an array of numeric IDs for every protected user for whom the authenticating user has a pending follow request.">
-		<cfargument name="cursor" 	required="false" 			 		type="string" hint="Breaks the results into pages. This is recommended for users who are following many users. Provide a value of -1 to begin paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="format" 	required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="cursor" 			required="false" 			 		type="string" 	hint="Breaks the results into pages. This is recommended for users who are following many users. Provide a value of -1 to begin paging. Provide values as returned in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="format" 			required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"		required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friendships/outgoing.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<!--- Friends and followers resources --->
 	<cffunction name="getFriendsIDs" access="public" output="false" returntype="Any" hint="Returns an array of numeric IDs for every user the specified user is following.">
-		<cfargument name="user_id" 		required="false" 			 		type="string" hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 	required="false" 			 		type="string" hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="cursor" 		required="false" 	default="-1"	type="string" hint="Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
-		<cfargument name="format" 		required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'friends/ids.' & lcase(arguments.format)  & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfargument name="user_id" 		required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 	required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="cursor" 		required="false" 	default="-1"	type="string" 	hint="Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = '' />		
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'friends/ids.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getFollowersIDs" access="public" output="false" returntype="Any" hint="Returns an array of numeric IDs for every user following the specified user.">
-		<cfargument name="user_id" 		required="false" 			 		type="string" hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 	required="false" 			 		type="string" hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="cursor" 		required="false" 	default="-1"	type="string" hint="Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
-		<cfargument name="format" 		required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 			required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 		required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="cursor" 			required="false" 	default="-1"	type="string" 	hint="Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
+		<cfargument name="format" 			required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"		required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'followers/ids.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Friends and followers resources --->
 	<!--- End of Friendship resources	: friendship-specific methods --->
@@ -621,11 +615,12 @@ Revision history
 	
 	<!--- Account resources	: account-specific methods --->
 	<cffunction name="verifyCredentials" access="public" output="false" returntype="any" hint="Returns an HTTP 200 OK response code and a representation of the requesting user if authentication was successful; returns a 401 status code and an error message if not.  Use this method to test if supplied user credentials are valid.">
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'account/verify_credentials.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="rateLimitStatus" access="public" output="false" hint="Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour. Calls to rate_limit_status do not count against the rate limit.  If authentication credentials are provided, the rate limit status for the authenticating user is returned.  Otherwise, the rate limit status for the requester's IP address is returned.">
@@ -639,55 +634,68 @@ Revision history
 		<cfreturn handleReturnFormat(strReturn, arguments.format) />
 	</cffunction>
 	
+	<cffunction name="oauthRateLimitStatus" access="public" output="false" hint="Returns the remaining number of API requests available to the requesting user before the API limit is reached for the current hour. Calls to rate_limit_status do not count against the rate limit.  If authentication credentials are provided, the rate limit status for the authenticating user is returned.  Otherwise, the rate limit status for the requester's IP address is returned.">
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = '' />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'account/rate_limit_status.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
+	</cffunction>
+	
 	<cffunction name="endSession" access="public" output="false" returntype="any" hint="Ends the session of the authenticating user, returning a null cookie.  Use this method to sign users out of client-facing applications like widgets.">
-		<cfargument name="format" 	required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="format" 			required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"		required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'account/end_session.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="updateDeliveryDevice" access="public" output="false" returntype="any" hint="Sets which device Twitter delivers updates to for the authenticating user.  Sending none as the device parameter will disable IM or SMS updates.">
-		<cfargument name="device" 				required="true" 					type="string" 	hint="Must be one of: sms, none." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="device" 				required="true" 						type="string" 	hint="Must be one of: sms, none." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'account/update_delivery_device.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="updateProfileColors" access="public" output="false" returntype="any" hint="Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: ##fff or ##ffffff).">
-		<cfargument name="profile_background_color" 	required="false" default="" 		type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="profile_text_color" 			required="false" default="" 		type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="profile_link_color" 			required="false" default="" 		type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="profile_sidebar_fill_color" 	required="false" default="" 		type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="profile_sidebar_border_color" required="false" default="" 		type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="include_entities" 			required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 						required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="profile_background_color" 	required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="profile_text_color" 			required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="profile_link_color" 			required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="profile_sidebar_fill_color" 	required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="profile_sidebar_border_color" required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="include_entities" 			required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 						required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"					required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'account/update_profile_colors.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="updateProfile" access="public" output="false" returntype="any" hint="Sets values that users are able to set under the 'Account' tab of their settings page. Only the parameters specified will be updated.">
-		<cfargument name="name" 				required="false" 					type="string" 	hint="Full name associated with the profile. Maximum of 20 characters." />
-		<cfargument name="url" 					required="false" 					type="string" 	hint="URL associated with the profile. Will be prepended with 'http://' if not present. Maximum of 100 characters." />
-		<cfargument name="location" 			required="false" 					type="string" 	hint="The city or country describing where the user of the account is located. The contents are not normalized or geocoded in any way. Maximum of 30 characters." />
-		<cfargument name="description" 			required="false" 					type="string" 	hint="A description of the user owning the account. Maximum of 160 characters." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="name" 				required="false" 						type="string" 	hint="Full name associated with the profile. Maximum of 20 characters." />
+		<cfargument name="url" 					required="false" 						type="string" 	hint="URL associated with the profile. Will be prepended with 'http://' if not present. Maximum of 100 characters." />
+		<cfargument name="location" 			required="false" 						type="string" 	hint="The city or country describing where the user of the account is located. The contents are not normalized or geocoded in any way. Maximum of 30 characters." />
+		<cfargument name="description" 			required="false" 						type="string" 	hint="A description of the user owning the account. Maximum of 160 characters." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'account/update_profile.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Account resources	: account-specific methods --->
 	
 	
 	<!--- Favourote resources	: favorite-specific methods --->
 	<cffunction name="favorites" access="public" output="false" returntype="Any" hint="Returns the 20 most recent favorite statuses for the authenticating user or user specified by the ID parameter in the requested format.">
-		<cfargument name="id" 					required="false" default="" 		type="string" hint="The ID or screen name of the user for whom to request a list of favorite statuses. " />
-		<cfargument name="page" 				required="false" default="" 		type="string" hint="Specifies the page of favorites to retrieve. " />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML, JSON, ATOM or RSS." />
+		<cfargument name="id" 					required="false" 	default="" 			type="string" 	hint="The ID or screen name of the user for whom to request a list of favorite statuses. " />
+		<cfargument name="page" 				required="false" 	default="" 			type="string" 	hint="Specifies the page of favorites to retrieve. " />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML, JSON, ATOM or RSS." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />		
 				<cfscript>					
 					if(len(arguments.id)) {
@@ -696,148 +704,163 @@ Revision history
 						strTwitterMethod = getCorrectEndpoint('api') & 'favorites.' & lcase(arguments.format);
 					}
 				</cfscript>								
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<cffunction name="addToFavorites" access="public" output="false" returntype="Any" hint="Favorites the status specified in the ID parameter as the authenticating user. Returns the favorite status when successful.">
-		<cfargument name="id" 					required="true" 					type="string" 	hint="The numerical ID of the desired status." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="id" 					required="true" 						type="string" 	hint="The numerical ID of the desired status." />
+		<cfargument name="include_entities" 	required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset arguments.action = 'create' />
 		<cfreturn handleFavorites(argumentCollection=arguments) />
 	</cffunction>
 	
 	<cffunction name="removeFromFavorites" access="public" output="false" returntype="Any" hint="Un-favorites the status specified in the ID parameter as the authenticating user. Returns the un-favorited status in the requested format when successful.">
 		<cfargument name="id" 					required="true" 					type="string" 	hint="The numerical ID of the desired status." />
-		<cfargument name="include_entities" 	required="false" default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="include_entities" 	required="false" 	default="false" type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset arguments.action = 'destroy' />
 		<cfreturn handleFavorites(argumentCollection=arguments) />
 	</cffunction>
 	
 	<cffunction name="handleFavorites" access="private" output="false" returntype="Any" hint="I am the private method that handles the 'favorites' methods.">
-		<cfargument name="id" 					required="true"  type="string" 	hint="The numerical ID of the desired status." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	hint="The return format of the data. XML or JSON." />
-		<cfargument name="action" 				required="true"  type="String" 	hint="I am the action to take on this favorite. CREATE or DESTROY." />
+		<cfargument name="id" 					required="true"  	type="string" 					hint="The numerical ID of the desired status." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 					hint="The return format of the data. XML or JSON." />
+		<cfargument name="action" 				required="true"  	type="String" 					hint="I am the action to take on this favorite. CREATE or DESTROY." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'favorites/' & arguments.action & '/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Favourote resources	: favorite-specific methods --->
 	
 	<!--- Notifications resource	: notification-specific methods --->
 	<cffunction name="addNotification" access="public" output="false" returntype="Any" hint="Enables device notifications for updates from the specified user.  Returns the specified user when successful.">
-		<cfargument name="user_id" 				required="false" type="string" 					hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 			required="false" type="string" 					hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />		
+		<cfargument name="user_id" 				required="false" 	type="string" 					hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />		
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'notifications/follow.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="removeNotification" access="public" output="false" returntype="Any" hint="Disables notifications for updates from the specified user to the authenticating user.  Returns the specified user when successful.">
-		<cfargument name="user_id" 				required="false" type="string" 					hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 			required="false" type="string" 					hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 	type="string" 					hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'notifications/leave.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Notifications resource	: notification-specific methods --->
 		
 	<!--- Block resources	: block-specific methods --->
 	<cffunction name="blockUser" access="public" output="false" returntype="Any" hint="Blocks the user specified in the ID parameter as the authenticating user. Destroys a friendship to the blocked user if it exists. Returns the blocked user in the requested format when successful">
-		<cfargument name="user_id" 				required="false" type="string" 					hint="The ID of the potentially blocked user. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 			required="false" type="string" 					hint="The screen name of the potentially blocked user. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 	type="string" 					hint="The ID of the potentially blocked user. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="The screen name of the potentially blocked user. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'blocks/create.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="unblockUser" access="public" output="false" returntype="Any" hint="Un-blocks the user specified in the ID parameter for the authenticating user.  Returns the un-blocked user in the requested format when successful.">
-		<cfargument name="user_id" 				required="false" type="string" 					hint="The ID of the potentially blocked user. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 			required="false" type="string" 					hint="The screen name of the potentially blocked user. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 	type="string" 					hint="The ID of the potentially blocked user. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="The screen name of the potentially blocked user. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'blocks/destroy.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="blockExists" access="public" output="false" returntype="Any" hint="Returns if the authenticating user is blocking a target user. Will return the blocked user's object if a block exists, and error with a HTTP 404 response code otherwise.">
-		<cfargument name="user_id" 				required="false" type="string" 					hint="The ID of the potentially blocked user. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 			required="false" type="string" 					hint="The screen name of the potentially blocked user. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 	type="string" 					hint="The ID of the potentially blocked user. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="The screen name of the potentially blocked user. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'blocks/exists.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getBlockedUsers" access="public" output="false" returntype="Any" hint="Returns an array of user objects that the authenticating user is blocking.">
-		<cfargument name="page" 				required="false" type="string"					hint="Specifies the page of results to retrieve." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="page" 				required="false" 	type="string"					hint="Specifies the page of results to retrieve." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'blocks/blocking.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getBlockingIDs" access="public" output="false" returntype="Any" hint="Returns an array of numeric user ids the authenticating user is blocking.">
-		<cfargument name="format" required="false" 	default="xml" type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="format" 		required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'blocks/blocking/ids.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Block resources	: block-specific methods --->
 	
 	<!--- Spam resources	: spam-specific methods --->
 	<cffunction name="reportSpam" access="public" output="false" hint="The user specified in the id is blocked by the authenticated user and reported as a spammer.">
-		<cfargument name="user_id" 				required="false" type="string" 					hint="The ID of the user you want to report as a spammer. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 			required="false" type="string" 					hint="The ID or screen_name of the user you want to report as a spammer. Helpful for disambiguating when a valid screen name is also a user ID." />
-		<cfargument name="include_entities" 	required="false" type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="user_id" 				required="false" 	type="string" 					hint="The ID of the user you want to report as a spammer. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 			required="false" 	type="string" 					hint="The ID or screen_name of the user you want to report as a spammer. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="include_entities" 	required="false" 	type="Boolean"					hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	type="string" 	default="xml"	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'report_spam.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Spam resources	: spam-specific methods --->
 	
 	<!--- Saved Searches resources	: saved searches-specific methods --->
 	<cffunction name="getSavedSearches" access="public" output="false" returntype="Any" hint="Returns the authenticated user's saved search queries.">
-		<cfargument name="format" required="false" default="xml" type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="format" 		required="false" 	default="xml" 		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'saved_searches.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getSearchByID" access="public" output="false" returntype="Any" hint="Retrieve the data for a saved search owned by the authenticating user specified by the given id.">
-		<cfargument name="id" 		required="true" 			 		type="string" hint="The id of the saved search to be retrieved." />
-		<cfargument name="format" 	required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="id" 			required="true" 			 			type="string" 	hint="The id of the saved search to be retrieved." />
+		<cfargument name="format" 		required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />					
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'saved_searches/show/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="saveThisSearch" access="public" output="false" returntype="Any" hint="Creates a saved search for the authenticated user.">
-		<cfargument name="query" 	required="true" 			 		type="string" hint="The query of the search the user would like to save." />
-		<cfargument name="format" 	required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="query" 		required="true" 			 			type="string" 	hint="The query of the search the user would like to save." />
+		<cfargument name="format" 		required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'saved_searches/create.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="deleteSavedSearch" access="public" output="false" returntype="Any" hint="Destroys a saved search for the authenticated user. The search specified by id must be owned by the authenticating user.">
-		<cfargument name="id" 		required="true" 			 		type="string" hint="The id of the saved search to be deleted." />
-		<cfargument name="format" 	required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="id" 			required="true" 			 			type="string" 	hint="The id of the saved search to be deleted." />
+		<cfargument name="format" 		required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'saved_searches/destroy/' & arguments.id & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Saved Searches resources	: saved searches-specific methods --->
 	
@@ -936,139 +959,149 @@ Revision history
 
 	<!--- List resources : list-specific methods --->
 	<cffunction name="createList" access="public" output="false" hint="Creates a new list for the authenticated user. Accounts are limited to 20 lists.">
-		<cfargument name="name" 		required="true" 						type="string" hint="The name of the list you are creating." />
-		<cfargument name="mode" 		required="false" 	default="public"	type="string" hint="Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified." />
-		<cfargument name="description" 	required="false" 						type="string" hint="The description of the list you are creating." />
-		<cfargument name="format" 		required="false" 	default="xml"		type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="name" 		required="true" 						type="string" 	hint="The name of the list you are creating." />
+		<cfargument name="mode" 		required="false" 	default="public"	type="string" 	hint="Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified." />
+		<cfargument name="description" 	required="false" 						type="string" 	hint="The description of the list you are creating." />
+		<cfargument name="format" 		required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="updateList" access="public" output="false" hint="Updates the specified list. ">
-		<cfargument name="listID"		required="true" 						type="string" hint="I am the ID of the list you wish to update." />
-		<cfargument name="name" 		required="false" 	default=""			type="string" hint="The name of the list you are creating." />
-		<cfargument name="mode" 		required="false" 	default="public"	type="string" hint="Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified." />
-		<cfargument name="description" 	required="false" 	default=""			type="string" hint="The description of the list you are creating." />
-		<cfargument name="format" 		required="false" 	default="xml"		type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="listID"		required="true" 						type="string" 	hint="I am the ID of the list you wish to update." />
+		<cfargument name="name" 		required="false" 	default=""			type="string" 	hint="The name of the list you are creating." />
+		<cfargument name="mode" 		required="false" 	default="public"	type="string" 	hint="Whether your list is public or private. Values can be public or private. Lists are public by default if no mode is specified." />
+		<cfargument name="description" 	required="false" 	default=""			type="string" 	hint="The description of the list you are creating." />
+		<cfargument name="format" 		required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/' & arguments.listID & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getLists" access="public" output="false" hint="List the lists of the specified user. Private lists will be included if the authenticated users is the same as the user who'se lists are being returned.">
-		<cfargument name="cursor" required="false" default="-1" 	type="string" hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="format" required="false" default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="cursor" 		required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getListByID" access="public" output="false" hint="Show the specified list. Private lists will only be shown if the authenticated user owns the specified list.">
-		<cfargument name="listID" required="true" 					type="string" hint="The id or slug of the list." />
-		<cfargument name="format" required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="listID" 		required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/' & arguments.listID & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="deleteList" access="public" output="false" hint="Deletes the specified list.">
-		<cfargument name="listID" required="true" 					type="string" hint="The id or slug of the list." />
-		<cfargument name="format" required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="listID" 		required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/' & arguments.listID & '.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getListStatuses" access="public" output="false" hint="Show tweet timeline for members of the specified list.">
-		<cfargument name="listID" 				required="true" 				type="string" 	hint="The id or slug of the list." />
-		<cfargument name="since_id" 			required="false" default="" 	type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
-		<cfargument name="max_id" 				required="false" default="" 	type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
-		<cfargument name="per_page" 			required="false" default="" 	type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 				required="false" default="" 	type="string" 	hint="Specifies the page of results to retrieve." />
-		<cfargument name="include_entities" 	required="false" 				type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"	type="string" 	hint="The return format of the data. XML, ATOM or JSON." />
+		<cfargument name="listID" 				required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="since_id" 			required="false" 	default="" 		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="max_id" 				required="false" 	default="" 		type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="per_page" 			required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="page" 				required="false" 	default="" 		type="string" 	hint="Specifies the page of results to retrieve." />
+		<cfargument name="include_entities" 	required="false" 					type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML, ATOM or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />			
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/' & arguments.listID & '/statuses.' & lcase(arguments.format);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/' & arguments.listID & '/statuses.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getListMemberships" access="public" output="false" hint="List the lists the specified user has been added to.">
-		<cfargument name="cursor" required="false" default="-1" 	type="string" hint="Optional. Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="format" required="false" default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="cursor" 		required="false" 	default="-1" 	type="string" 	hint="Optional. Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/memberships.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="getListSubscriptions" access="public" output="false" hint="List the lists the specified user follows.">
-		<cfargument name="cursor" required="false" default="-1" 	type="string" hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="format" required="false" default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="cursor" 		required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/lists/subscriptions.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of List resources : list-specific methods --->
 	
 	<!--- List Member resources : list-member-specific methods --->
 	<cffunction name="getListMembers" access="public" output="false" hint="Returns the members of the specified list.">
-		<cfargument name="list_id" 				required="true" 				type="string" 	hint="The id or slug of the list." />
-		<cfargument name="cursor" 				required="false" default="-1"	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="include_entities" 	required="false" 				type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 				required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="list_id" 				required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="cursor" 				required="false" 	default="-1"	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="include_entities" 	required="false" 					type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 				required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"			required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/members.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="addMemberToList" access="public" output="false" hint="Add a member to a list. The authenticated user must own the list to be able to add members to it. Lists are limited to having 500 members.">
-		<cfargument name="list_id" 		required="true" 				type="string" 	hint="The id or slug of the list." />
-		<cfargument name="id" 			required="true" 				type="String" 	hint="The user id of the list member." />
-		<cfargument name="format" 		required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="list_id" 		required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="id" 			required="true" 					type="String" 	hint="The user id of the list member." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/members.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="deleteListMember" access="public" output="false" hint="Removes the specified member from the list. The authenticated user must be the list's owner to remove members from the list.">
-		<cfargument name="list_id" 		required="true" 				type="string" 	hint="The id or slug of the list." />
-		<cfargument name="id" 			required="true" 				type="String" 	hint="The user id of the list member." />
-		<cfargument name="format" 		required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="list_id" 		required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="id" 			required="true" 					type="String" 	hint="The user id of the list member." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/members.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of List Member resources : list-member-specific methods --->
 	
 	<!--- List Subscriber resources : list-subscriber-specific methods --->
 	<cffunction name="getListSubscribers" access="public" output="false" hint="Returns the subscribers of the specified list.">
-		<cfargument name="list_id" 			required="true" 				type="string" 	hint="The id or slug of the list." />
-		<cfargument name="cursor" 			required="false" default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
-		<cfargument name="include_entities" required="false" 				type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
-		<cfargument name="format" 			required="false" default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="list_id" 			required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="cursor" 			required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="include_entities" required="false" 					type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
+		<cfargument name="format" 			required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"		required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/subscribers.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="addListSubscriber" access="public" output="false" hint="Make the authenticated user follow the specified list.">
-		<cfargument name="list_id" required="true" 					type="string" hint="The id or slug of the list." />
-		<cfargument name="format" required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="list_id" 		required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/subscribers.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
 	<cffunction name="deleteListSubscriber" access="public" output="false" hint="Unsubscribes the authenticated user form the specified list.">
-		<cfargument name="list_id" required="true" 					type="string" hint="The id or slug of the list." />
-		<cfargument name="format" required="false" 	default="xml"	type="string" hint="The return format of the data. XML or JSON." />
+		<cfargument name="list_id" 		required="true" 					type="string" 	hint="The id or slug of the list." />
+		<cfargument name="format" 		required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />							
 				<cfset strTwitterMethod = getCorrectEndpoint('api') & getAuthDetails().getUserAccountName() & '/' & arguments.list_id & '/subscribers.' & lcase(arguments.format) />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of List Subscriber resources : list-subscriber-specific methods --->
 	
@@ -1085,14 +1118,11 @@ Revision history
 		<cfargument name="show_user" 	required="false" 					type="Boolean" 	hint="When true, prepends ':' to the beginning of the tweet. This is useful for readers that do not display Atom's author field. The default is false." />
 		<cfargument name="result_type" 	required="false" 	default="mixed"	type="String" 	hint="Optional. Specifies what type of search results you would prefer to receive. The current default is 'mixed.' Valid values include: mixed: Include both popular and real time results in the response. recent: return only the most recent results in the response popular: return only the most popular results in the response. http://search.twitter.com/search.json?result_type=mixed http://search.twitter.com/search.json?result_type=recent http://search.twitter.com/search.json?result_type=popular" />
 		<cfargument name="format" 		required="false" 	default="json"	type="string" 	hint="The return format of the data. ATOM or JSON." />
-			<cfset var strTwitterMethod	=	'' />
-			<cfset var strReturn 		= 	'' />			
-				<cfscript>
-					arguments.q	=	urlEncodedFormat(arguments.q);
-					strTwitterMethod = getsearchURL() & 'search.' & arguments.format & '?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod	=	'' />			
+				<cfset arguments.q	=	urlEncodedFormat(arguments.q) />
+				<cfset strTwitterMethod = getsearchURL() & 'search.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	<!--- End of Search --->
 
