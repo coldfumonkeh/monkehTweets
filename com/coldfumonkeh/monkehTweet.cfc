@@ -90,6 +90,10 @@ Revision history
 	Please check your argument names and amend if required.
 	
 	=====
+	
+05/01/2012 - Version 1.3.1
+
+	- addition of @Anywhere functionality for front-end enhancements (hovercards, linkifying users, tweet box and authentication login)
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -1516,6 +1520,180 @@ Revision history
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 
-	<!--- End Users --->	
+	<!--- End Users --->
+		
+		
+	<!--- @Anywhere methods --->
+
+	<cffunction name="twitAnywhere" access="public" output="false" hint="I build the JS script block and populate the required calls to the @Anywhere service.">
+		<cfargument name="params" 				required="true" 	type="struct" 					hint="I am a structure of method names and their parameters that you send through to this function." />
+		<cfargument name="includHeaderScript" 	required="false" 	type="boolean" 	default="true"  hint="I include the required remote Javascript file with your consumer key into the page." />
+			<cfset var strReturn 		= 	'' />
+			<cfset var strContent		=	'' />
+			<cfset var methodResult		=	'' />			
+				<!--- Loop over the provided params to invoke the methods --->
+				<cfloop collection="#arguments.params#" item="item">
+					<cftry>
+						<cfset structInsert(arguments.params[item],'individual',false) />
+						<!--- Make the call to the method and assign the results to the content variable. --->
+						<cfinvoke method="#item#" argumentcollection="#arguments.params[item]#" returnvariable="methodResult" />
+						<cfset strContent = strContent & methodResult />
+						<!--- Just to catch any erroneous method names that may be passed through. --->
+						<cfcatch></cfcatch>
+					</cftry>
+				</cfloop>
+				<cfif arguments.includHeaderScript>
+					<cfset strReturn	=	anywhereScriptHeader() />
+				</cfif>
+				<cfset strReturn		=	strReturn & getOpeningScript() & strContent & getClosingScript() />
+ 		<cfreturn strReturn />
+	</cffunction>
+		
+	<cffunction name="linkifyUsers" access="public" output="false" hint="">
+		<cfargument name="htmlSection" 	required="false" type="string" 	default="" 		hint="The ID of the document element to apply the linkifyUsers to. If left blank, all Twitter names within the document will be linkified." /> 
+		<cfargument name="className" 	required="false" type="string" 	default="" 		hint="By default, linkifying usernames will wrap matched names in an anchor element with a class of 'twitter-anywhere-user'. Here you can specify an alternate class name to adjust to suit your CSS." /> 
+		<cfargument name="individual"	required="false" type="boolean"	default="true" 	hint="If set to true, this method will generate purely the function to deal with the linkification of users." />
+			<cfset var strReturn		=	'' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	anywhereScriptHeader() & chr(10) & getOpeningScript() />
+				</cfif>
+				<cfset strReturn		=	strReturn & 'T' />
+				<cfif len(arguments.htmlSection)>
+					<cfset strReturn 	= strReturn & '("###arguments.htmlSection#")' />	
+				</cfif>
+				<cfset strReturn		=	strReturn & '.linkifyUsers(_className_);' />
+				<cfif len(arguments.className)>
+					<cfset strReturn 	= replaceNoCase(strReturn,"_className_","{ className: '#arguments.className#' }") />
+				<cfelse>
+					<cfset strReturn 	= replaceNoCase(strReturn,'_className_',' ') />
+				</cfif>
+				<cfif arguments.individual>
+					<cfset strReturn	=	strReturn & chr(10) & getClosingScript() />
+				</cfif>	
+		<cfreturn strReturn />
+	</cffunction>
+	
+	<cffunction name="hovercards" access="public" output="false" hint="Hovercard is a small, context-aware tooltip that provides access to data about a particular Twitter user. Hovercards also allows a user to take action upon a Twitter user such as following and unfollowing, as well as toggling device updates.">
+		<cfargument name="htmlSection" 	required="false" type="string" 	default="" 		hint="The ID of the document element to apply the hovercard to. If left blank, all Twitter names within the document will be converted." /> 
+		<cfargument name="linkify" 		required="false" type="boolean" default="true" 	hint="If Twitter names have already been linkified elsewhere, set to false." /> 
+		<cfargument name="infer" 		required="false" type="boolean" default="false"	hint="Use the infer option to trigger Hovercards on elements whose text contains a Twitter username. When the infer option is used, the hovercards method will not call the linkifyUsers method. This is useful when Twitter usernames have already been linkified by some other means. For example: <a ...>Follow @coldfumonkeh on Twitter!</a>." />
+		<cfargument name="expanded" 	required="false" type="boolean" default="false"	hint="Set to true to render the hovercards in expanded state by default." />
+		<cfargument name="individual"	required="false" type="boolean"	default="true" 	hint="If set to true, this method will generate purely the function to deal with the hovercards." />
+			<cfset var strReturn		=	'' />
+			<cfset var strParamList		=	'' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	anywhereScriptHeader() & chr(10) & getOpeningScript() />
+				</cfif>
+				<cfset strReturn		=	strReturn & 'T' />
+				<cfif !arguments.linkify><cfset strParamList 	= listAppend(strParamList,'linkify: #arguments.linkify#') /></cfif>
+				<cfif arguments.infer><cfset strParamList 		= listAppend(strParamList,'infer: #arguments.infer#') /></cfif>
+				<cfif arguments.expanded><cfset strParamList 	= listAppend(strParamList,'expanded: #arguments.expanded#') /></cfif>
+				<cfif len(arguments.htmlSection)>
+					<cfset strReturn 	= strReturn & '("###arguments.htmlSection#")' />
+				</cfif>
+				<cfset strReturn 		= strReturn & '.hovercards({ #strParamList# });' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	strReturn & chr(10) & getClosingScript() />
+				</cfif>	
+		<cfreturn strReturn />
+	</cffunction>
+	
+	<cffunction name="followButton" access="public" output="false" hint="Follow buttons make it easy to provide users of your site or application with a way to follow users on Twitter.">
+		<cfargument name="htmlSection" 	required="true" 	type="string" 					hint="The ID of the document element to apply the follow button to." /> 
+		<cfargument name="twittername" 	required="true" 	type="string" 					hint="The Twitter username you wish the follow button to follow." />
+		<cfargument name="individual"	required="false" 	type="boolean"	default="true" 	hint="If set to true, this method will generate purely the function to deal with the follow button." />
+			<cfset var strReturn		=	'' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	anywhereScriptHeader() & chr(10) & getOpeningScript() />
+				</cfif>
+				<cfset strReturn		=	strReturn & 'T' />
+				<cfif len(arguments.htmlSection)>
+					<cfset strReturn 	= strReturn & '("###arguments.htmlSection#")' />	
+				</cfif>
+				<cfset strReturn 		= strReturn & '.followButton("#arguments.twittername#");' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	strReturn & chr(10) & getClosingScript() />
+				</cfif>	
+		<cfreturn strReturn />
+	</cffunction>
+	
+	<cffunction name="tweetBox" access="public" output="false" hint="The Tweet Box allows Twitter users to tweet directly from within your web site or web application.">
+		<cfargument name="htmlSection" 		required="true" 	type="string" 								hint="The ID of the document element to apply the tweetbox to." /> 
+		<cfargument name="counter" 			required="true" 	type="boolean" 	default="true" 				hint="Display a counter in the Tweet Box for counting characters. True or false." />
+		<cfargument name="height" 			required="false" 	type="numeric" 	default="65" 				hint="The height of the Tweet Box in pixels." />
+		<cfargument name="width" 			required="false" 	type="numeric" 	default="515" 				hint="The width of the Tweet Box in pixels." />
+		<cfargument name="label" 			required="false" 	type="string"	default="What's happening?" hint="The text above the Tweet Box, a call to action." />
+		<cfargument name="defaultContent" 	required="false" 	type="string"	default="" 					hint="Pre-populated text in the Tweet Box. Useful for an @mention, a ##hashtag, a link, etc." />
+		<cfargument name="onTweet"			required="false"	type="string"	default=""					hint="Specify a listener for when a tweet is sent from the Tweet Box. The listener receives two arguments: a plaintext tweet and an HTML tweet." />
+		<cfargument name="data"				required="false"	type="struct"	default="#structNew()#"		hint="Key + value pairs representing any of the additional metadata that can be set when updating a user's status. See the REST API documentation for a complete list of the possible options." />
+		<cfargument name="individual"		required="false" 	type="boolean"	default="true" 				hint="If set to true, this method will generate purely the function to deal with the tweetbox." />
+			<cfset var strReturn	=	'' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	anywhereScriptHeader() & chr(10) & getOpeningScript() />
+				</cfif>
+				<cfset strReturn	=	strReturn & 'T("###arguments.htmlSection#").tweetBox({ 
+											counter: 		#arguments.counter#,
+											height: 		#arguments.height#,
+											width: 			#arguments.width#,
+											label: 			"#arguments.label#",
+											defaultContent: "#arguments.defaultContent#",
+											onTweet:		function(plaintext, html) {
+												#arguments.onTweet#
+											},
+											data:			#lcase(serializeJSON(arguments.data))#
+										});' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	strReturn & chr(10) & getClosingScript() />
+				</cfif>	
+										
+		<cfreturn strReturn />
+	</cffunction>
+	
+	<cffunction name="login" access="public" output="false" hint="The 'Connect with Twitter' button provides a method for users to authenticate securely with Twitter, yielding your application with an access token for use in API calls.">
+		<cfargument name="htmlSection" 	required="true" 	type="string" 						hint="The ID of the document element to apply the login button to." /> 
+		<cfargument name="size" 		required="false" 	type="string" 	default="medium" 	hint="A range of sizes to choose from: small, medium, large, xlarge. 'medium' is the default size." /> 
+		<cfargument name="authComplete"	required="false"	type="string"	default=""			hint="I am the JS code to run when authorisation is complete." />
+		<cfargument name="signOut"		required="false"	type="string"	default=""			hint="I am the JS code to run when a user signs out." />
+		<cfargument name="custom"		required="false"	type="boolean"	default="false"		hint="If set to true, the @Anywhere signIn() method will be applied to the supplied htmlSection DOM element." />
+		<cfargument name="individual"	required="false" 	type="boolean"	default="true" 		hint="If set to true, this method will generate purely the function to deal with the login button." />
+			<cfset var strReturn 		= '' />
+				<cfif arguments.individual>
+					<cfset strReturn	=	anywhereScriptHeader() & chr(10) & getOpeningScript() />
+				</cfif>
+				<cfif arguments.custom>
+					<cfset strReturn	=	strReturn & 'document.getElementById("#arguments.htmlSection#").onclick = function () { T.signIn(); };' />
+				<cfelse>
+					<cfset strReturn	=	strReturn & 'T("###arguments.htmlSection#").connectButton({ 
+												size: "#arguments.size#", 
+												authComplete: function(user) {
+											        // triggered when auth completed successfully
+											        #arguments.authComplete#
+  												},
+  												signOut: function(user) {
+										        	// triggered when user logs out
+										        	#arguments.signOut#
+										        } 
+  											});' />
+				</cfif>
+				<cfif arguments.individual>
+					<cfset strReturn	=	strReturn & chr(10) & getClosingScript() />
+				</cfif>	
+		<cfreturn strReturn />
+	</cffunction>
+	
+	<cffunction name="anywhereScriptHeader" access="public" output="false" returntype="String" hint="I return the required script tag for the @Anywhere api.">
+		<cfargument name="consumerKey" required="true" type="string" default="#getAuthDetails().getConsumerKey()#" />
+		<cfreturn "<script src='http://platform.twitter.com/anywhere.js?id=#arguments.consumerKey#&v=1' type='text/javascript'></script>" />
+	</cffunction>
+	
+	<cffunction name="getOpeningScript" access="private" otput="false" hint="I return the opening portion of the @Anywhere script.">
+		<cfreturn '<script type="text/javascript">twttr.anywhere(function (T) {' />
+	</cffunction>
+	
+	<cffunction name="getClosingScript" access="private" otput="false" hint="I return the closing portion of the @Anywhere script.">
+		<cfreturn '});</script>' />
+	</cffunction>
+		
+	<!--- End of @Anywhere methods --->
 
 </cfcomponent>

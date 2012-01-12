@@ -36,7 +36,7 @@ All methods and parameters within the monkehTweet component are documented and h
  
 	<!--- Set up the application. --->
 	<cfscript>
-		this.Name 				= "monkehTweet_V1.3.0";
+		this.Name 				= "monkehTweet_V1.3.1";
 		this.ApplicationTimeout = CreateTimeSpan( 0, 0, 1, 0 );
 		this.SessionManagement 	= true;
 		this.SetClientCookies 	= true;
@@ -63,13 +63,14 @@ All methods and parameters within the monkehTweet component are documented and h
 					userAccountName		=	'',
 					parseResults		=	true
 			*/
-			application.objMonkehTweet = createObject('component',
+			/*application.objMonkehTweet = createObject('component',
 		        'com.coldfumonkeh.monkehTweet')
 				.init(
 					consumerKey			=	'< your consumer key >',
 					consumerSecret		=	'< your consumer secret >',
 					parseResults		=	true
-				);
+				);*/
+
 			return true;
 		</cfscript>
 	</cffunction>
