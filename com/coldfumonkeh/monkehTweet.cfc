@@ -820,7 +820,7 @@ Revision history
 		<cfargument name="slug" 					required="false"	default="" 		type="String" 	hint="You can identify a list by its slug instead of its numerical id. If you decide to do so, note that you'll also have to specify the list owner using the owner_id or owner_screen_name parameters." />
 		<cfargument name="format" 					required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & '/lists/destroy.' & lcase(arguments.format) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/destroy.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='DELETE',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
@@ -835,7 +835,7 @@ Revision history
 		<cfargument name="owner_id" 				required="false" 	default=""			type="string" 	hint="The user ID of the user who owns the list being requested by a slug." />
 		<cfargument name="format" 					required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & '/lists/update.' & lcase(arguments.format) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/update.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
@@ -846,7 +846,7 @@ Revision history
 		<cfargument name="description" 				required="false" 						type="string" 	hint="The description of the list you are creating." />
 		<cfargument name="format" 					required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & '/lists/create.' & lcase(arguments.format) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/create.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
@@ -857,7 +857,7 @@ Revision history
 		<cfargument name="cursor" 					required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
 		<cfargument name="format" 					required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & '/lists.' & lcase(arguments.format) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
@@ -869,7 +869,7 @@ Revision history
 		<cfargument name="owner_id" 				required="false" 	default=""			type="string" 	hint="The user ID of the user who owns the list being requested by a slug." />
 		<cfargument name="format" 					required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & '/lists/show.' & lcase(arguments.format) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/show.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
@@ -881,7 +881,7 @@ Revision history
 		<cfargument name="cursor" 					required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
 		<cfargument name="format" 					required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & '/lists/subscriptions.' & lcase(arguments.format) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/subscriptions.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
@@ -1264,7 +1264,8 @@ Revision history
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = '' />
 				<cfscript>
-					if(!len(arguments.screen_name) OR !len(arguments.user_id)) {
+					// Conditional discrepancy found by @aqlong - Thanks, Aaron!
+					if(!len(arguments.screen_name) AND !len(arguments.user_id)) {
 						arguments.screen_name	=	getAuthDetails().getUserAccountName();
 					}
 					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format);				

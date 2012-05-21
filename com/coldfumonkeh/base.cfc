@@ -63,6 +63,11 @@ Revision history
 	- addition of new methods to handle mimetype checking (for use with the update_with_media method)
 	- organisation of methods and functions to enable quicker updates and maintenance for future revisions
 
+21/05/2012 - Version 1.3.1
+
+	- resolved post authentication issues with Railo servers (tested against Railo 3.3.1.000)
+	- resolved conditional discrepancy with screen_name check in getUserTimeline method - thanks @aqlong and Harel Malka for the find
+
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
 
@@ -241,20 +246,24 @@ Revision history
 					<cfset stuErrInfo.api_Info 			= {} />
 					<cfswitch expression="#arguments.format#">
 						<cfcase value="json">
-							<cfset stuJSONResponse = deserializeJSON(arguments.data.FileContent.toString()) />
-							<cfif structKeyExists(stuJSONResponse,'error')>
-								<cfset stuErrInfo.api_Info.error	=	stuJSONResponse.error />
+							<cfif isJSON(arguments.data.FileContent)>
+								<cfset stuJSONResponse = deserializeJSON(arguments.data.FileContent.toString()) />
+								<cfif structKeyExists(stuJSONResponse,'error')>
+									<cfset stuErrInfo.api_Info.error	=	stuJSONResponse.error />
+								</cfif>
 							</cfif>
 							<cfset stuErrInfo.full_Request			=	arguments.data />
 						</cfcase>
 						<cfdefaultcase>
-							<cfset arrErrSearch						= xmlSearch(arguments.data.FileContent,'hash/error') />
-							<!--- Mr Phipps was here - thanks to David for finding the issue here with CF8.01 --->
-							<!---<cfset stuErrInfo.api_Info.request 	= xmlSearch(arguments.data.FileContent,'hash/request')[1].XmlText />--->
-							<cfset reqXML 							= xmlSearch(arguments.data.FileContent,'hash/request') />
-							<cfset stuErrInfo.api_Info.request 		= reqXML[1].XmlText />
-							<cfif arrayLen(arrErrSearch)>
-								<cfset stuErrInfo.api_Info.error	=	arrErrSearch[1].XmlText />
+							<cfif isXML(arguments.data.FileContent)>
+								<cfset arrErrSearch						= xmlSearch(arguments.data.FileContent,'hash/error') />
+								<!--- Mr Phipps was here - thanks to David for finding the issue here with CF8.01 --->
+								<!---<cfset stuErrInfo.api_Info.request 	= xmlSearch(arguments.data.FileContent,'hash/request')[1].XmlText />--->
+								<cfset reqXML 							= xmlSearch(arguments.data.FileContent,'hash/request') />
+								<cfset stuErrInfo.api_Info.request 		= reqXML[1].XmlText />
+								<cfif arrayLen(arrErrSearch)>
+									<cfset stuErrInfo.api_Info.error	=	arrErrSearch[1].XmlText />
+								</cfif>
 							</cfif>
 							<cfset stuErrInfo.full_Request			=	arguments.data />
 						</cfdefaultcase>
@@ -289,25 +298,30 @@ Revision history
 		<cfargument name="url" 			type="string" 	displayname="url" 		hint="URL to request" 		required="true" />
 		<cfargument name="method" 		type="string" 	displayname="method" 	hint="Method of HTTP Call" 	required="true" />
 		<cfargument name="parameters" 	type="struct" 	displayname="method" 	hint="HTTP parameters" 		required="false" default="#structNew()#" />
-			<cfset var returnStruct = {} />	
+			<cfset var returnStruct = {} />
+			
+				<cfif structKeyExists(arguments.parameters,'params')>
+					<cfset structAppend(arguments.parameters,arguments.parameters['params']) />
+					<cfset structDelete(arguments.parameters,'params') />
+				</cfif>
+
 				<cfhttp url="#arguments.url#" method="#arguments.method#" result="returnStruct" multipart="true">
-					<cfif structKeyExists (arguments.parameters,'Authorization') and arguments.method is 'post'>
-						<cfhttpparam type="header" name="Authorization" value="#arguments.parameters.Authorization#" />
-					</cfif>
-					<cfif structKeyExists (arguments.parameters,'media[]') and arguments.method is 'post'>
+					<cfif structKeyExists (arguments.parameters,'media[]') and arguments.method is 'POST'>
 						<cfhttpparam type="file" file="#arguments.parameters['media[]']#" name="media[]" />
-						
-						<!--- Strip out the non-required parameters (the custom monkehTweet arguments) --->
-						<cfset structDelete(arguments.parameters['params'],'checkHeader') />
-						<cfset structDelete(arguments.parameters['params'],'format') />
-						<cfset structDelete(arguments.parameters['params'],'media[]') />
-						
-						<cfloop collection="#arguments.parameters['params']#" item="key">
-							<cfhttpparam type="formfield" name="#key#" value="#arguments.parameters['params'][key]#" />
+					</cfif>
+					
+					<!--- Strip out the non-required parameters (the custom monkehTweet arguments) --->
+					<cfset structDelete(arguments.parameters,'checkHeader', false) />
+					<cfset structDelete(arguments.parameters,'format', false) />
+					<cfset structDelete(arguments.parameters,'media[]', false) />
+					
+					<cfif arguments.method is 'POST'>
+						<cfloop collection="#arguments.parameters#" item="key">
+							<cfhttpparam type="formfield" name="#key#" value="#arguments.parameters[key]#" />
 						</cfloop>
-						
 					</cfif>
 				</cfhttp>
+				
 		<cfreturn returnStruct />
 	</cffunction>
 	
