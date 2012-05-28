@@ -94,6 +94,12 @@ Revision history
 05/01/2012 - Version 1.3.1
 
 	- addition of @Anywhere functionality for front-end enhancements (hovercards, linkifying users, tweet box and authentication login)
+	
+28/05/2012 - Version 1.3.2
+
+	- addition of new functions:
+		- getOEmbed (GET statuses/oembed) to return information allowing the creation of an embedded representation of a Tweet on third party sites
+		- destoryAllListMembers (POST lists/members/destroy_all) to remove multiple members from a list, by specifying a comma-separated list of member ids or screen names.
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -875,14 +881,28 @@ Revision history
 	
 	<!--- GET lists/subscriptions --->
 	<cffunction name="getListSubscriptions" access="public" output="false" hint="Obtain a collection of the lists the specified user is subscribed to, 20 lists per page by default. Does not include the user's own lists.">
-		<cfargument name="user_id" 					required="false" 	default=""		type="String" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
-		<cfargument name="screen_name" 				required="false" 	default=""		type="String" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="user_id" 					required="false" 	default=""		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 				required="false" 	default=""		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
 		<cfargument name="count" 					required="false" 	default="20" 	type="string" 	hint="The amount of results to return per page. Defaults to 20. Maximum of 1,000 when using cursors." />
 		<cfargument name="cursor" 					required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
 		<cfargument name="format" 					required="false" 	default="xml"	type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/subscriptions.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
+	</cffunction>
+	
+	<!--- POST lists/members/destroy_all --->
+	<cffunction name="destoryAllListMembers" access="public" output="false" hint="Removes multiple members from a list, by specifying a comma-separated list of member ids or screen names. The authenticated user must own the list to be able to remove members from it. Note that lists can't have more than 500 members, and you are limited to removing up to 100 members to a list at a time with this method. Please note that there can be issues with lists that rapidly remove and add memberships. Take care when using these methods such that you are not too rapidly switching between removals and adds on the same list.">
+		<cfargument name="list_id" 					required="false" 	default=""			type="string" 	hint="The numerical id of the list." />
+		<cfargument name="slug" 					required="false"	default="" 			type="string" 	hint="You can identify a list by its slug instead of its numerical id. If you decide to do so, note that youll also have to specify the list owner using the owner_id or owner_screen_name parameters." />
+		<cfargument name="user_id" 					required="false" 	default=""			type="string" 	hint="TA comma separated list of user IDs, up to 100 are allowed in a single request." />
+		<cfargument name="screen_name" 				required="false" 	default=""			type="string" 	hint="A comma separated list of screen names, up to 100 are allowed in a single request." />
+		<cfargument name="owner_screen_name" 		required="false" 	default=""			type="string" 	hint="The screen name of the user who owns the list being requested by a slug." />
+		<cfargument name="owner_id" 				required="false" 	default=""			type="string" 	hint="The user ID of the user who owns the list being requested by a slug." />
+		<cfargument name="format" 					required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"				required="false"	default="false" 	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/members/destroy_all.' & lcase(arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<!--- End of List resources : list-specific methods --->
@@ -893,8 +913,8 @@ Revision history
 		
 	<!--- GET trends/:woeid --->
 	<cffunction name="trendByLocation" access="public" output="false" returntype="Any" hint="Returns the top 10 trending topics for a specific location Twitter has trending topic information for. The response is an array of 'trend' objects that encode the name of the trending topic, the query parameter that can be used to search for the topic on Search, and the direct URL that can be issued against Search. This information is cached for five minutes, and therefore users are discouraged from querying these endpoints faster than once every five minutes.  Global trends information is also available from this API by using a WOEID of 1.">
-		<cfargument name="woeid" 					required="true" 			   		type="String" 	hint="The WOEID of the location to be querying for. (a Yahoo! Where On Earth ID)" />
-		<cfargument name="exclude" 					required="false" 			   		type="String" 	hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
+		<cfargument name="woeid" 					required="true" 			   		type="string" 	hint="The WOEID of the location to be querying for. (a Yahoo! Where On Earth ID)" />
+		<cfargument name="exclude" 					required="false" 			   		type="string" 	hint="Setting this equal to hashtags will remove all hashtags from the trends list." />
 		<cfargument name="format" 					required="false" 	default="xml" 	type="string" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'trends/' & arguments.woeid & '.' & arguments.format />
@@ -1441,6 +1461,26 @@ Revision history
 				<cfset structDelete(arguments,'media') />						
 				<cfset strTwitterMethod = getCorrectEndpoint('upload') & 'statuses/update_with_media.' & lcase(arguments.format) />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST', parameters=arguments, checkHeader=arguments.checkHeader) />
+	</cffunction>
+	
+	<!--- GET statuses/oembed --->
+	<cffunction name="getOEmbed" access="public" output="false" hint="Returns information allowing the creation of an embedded representation of a Tweet on third party sites. See the oEmbed specification (http://oembed.com/) for information about the response format. While this endpoint allows a bit of customization for the final appearance of the embedded Tweet, be aware that the appearance of the rendered Tweet may change over time to be consistent with Twitter's Display Guidelines. Do not rely on any class or id parameters to stay constant in the returned markup.">
+		<cfargument name="id" 						required="false" 	type="string" 	default=""		hint="The Tweet/status ID to return embed code for." />
+		<cfargument name="url" 						required="false" 	type="string" 	default=""		hint="The URL of the Tweet/status to be embedded." />
+		<cfargument name="maxwidth" 				required="false" 	type="string" 					hint="The maximum width in pixels that the embed should be rendered at. This value is constrained to be between 250 and 550 pixels. Note that Twitter does not support the oEmbed maxheight parameter. Tweets are fundamentally text, and are therefore of unpredictable height that cannot be scaled like an image or video. Relatedly, the oEmbed response will not provide a value for height. Implementations that need consistent heights for Tweets should refer to the hide_thread and hide_media parameters below." />
+		<cfargument name="hide_media" 				required="false" 	type="string" 					hint="Specifies whether the embedded Tweet should automatically expand images which were uploaded via POST statuses/update_with_media. When set to either true, t or 1 images will not be expanded. Defaults to false." />
+		<cfargument name="hide_thread" 				required="false" 	type="string" 					hint="Specifies whether the embedded Tweet should automatically show the original message in the case that the embedded Tweet is a reply. When set to either true, t or 1 the original Tweet will not be shown. Defaults to false." />
+		<cfargument name="omit_script" 				required="false" 	type="string" 					hint="Specifies whether the embedded Tweet HTML should include a <script> element pointing to widgets.js. In cases where a page already includes widgets.js, setting this value to true will prevent a redundant script element from being included. When set to either true, t or 1 the <script> element will not be included in the embed HTML, meaning that pages must include a reference to widgets.js manually. Defaults to false." />
+		<cfargument name="align" 					required="false" 	type="string" 					hint="Specifies whether the embedded Tweet should be left aligned, right aligned, or centered in the page. Valid values are left, right, center, and none. Defaults to none, meaning no alignment styles are specified for the Tweet." />
+		<cfargument name="related" 					required="false" 	type="string" 					hint="A value for the TWT related parameter, as described in Web Intents. This value will be forwarded to all Web Intents calls. Examples: twitterapi,twittermedia,twitter." />
+		<cfargument name="lang" 					required="false" 	type="string" 					hint="Language code for the rendered embed. This will affect the text and localization of the rendered HTML. Examples: fr." />
+		<cfargument name="format" 					required="false" 	type="string"	default="xml" 	hint="The return format of the data. XML or JSON." />
+		<cfargument name="checkHeader"				required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/oembed.' & lcase(arguments.format)  & '?' & buildParamString(arguments) />
+			<cfif !len(arguments.id) AND !len(arguments.url)>
+				<cfabort showerror="Please supply either an id or a URL of the Tweet you wish to embed." />
+			</cfif>
+		<cfreturn makeGetCall(strTwitterMethod) />
 	</cffunction>
 	
 	<!--- End Tweets --->
