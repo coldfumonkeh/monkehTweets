@@ -379,7 +379,7 @@ Revision history
 		<cfargument name="since_id"					required="false" 	default=""			type="string" 	hint="Returns only direct messages with an ID greater than (that is, more recent than) the specified ID." />
 		<cfargument name="max_id"					required="false" 	default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
 		<cfargument name="count" 					required="false" 	default="200" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
-		<cfargument name="page" 					required="false" 	default="" 		t	ype="string" 	hint="Specifies the page or results to retrieve." />
+		<cfargument name="page" 					required="false" 	default="" 			type="string" 	hint="Specifies the page or results to retrieve." />
 		<cfargument name="include_entities" 		required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="format" 					required="false" 	default="xml"		type="string" 	hint="The return format of the data. XML, RSS, ATOM or JSON." />
 		<cfargument name="checkHeader"				required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
@@ -1285,7 +1285,7 @@ Revision history
 			<cfset var strTwitterMethod = '' />
 				<cfscript>
 					// Conditional discrepancy found by @aqlong - Thanks, Aaron!
-					if(!len(arguments.screen_name) AND !len(arguments.user_id)) {
+					if(not len(arguments.screen_name) AND not len(arguments.user_id)) {
 						arguments.screen_name	=	getAuthDetails().getUserAccountName();
 					}
 					strTwitterMethod = getCorrectEndpoint('api') & 'statuses/user_timeline.' & lcase(arguments.format);				
@@ -1477,7 +1477,7 @@ Revision history
 		<cfargument name="format" 					required="false" 	type="string"	default="xml" 	hint="The return format of the data. XML or JSON." />
 		<cfargument name="checkHeader"				required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/oembed.' & lcase(arguments.format)  & '?' & buildParamString(arguments) />
-			<cfif !len(arguments.id) AND !len(arguments.url)>
+			<cfif not len(arguments.id) AND not len(arguments.url)>
 				<cfabort showerror="Please supply either an id or a URL of the Tweet you wish to embed." />
 			</cfif>
 		<cfreturn makeGetCall(strTwitterMethod) />
@@ -1626,7 +1626,7 @@ Revision history
 					<cfset strReturn	=	anywhereScriptHeader() & chr(10) & getOpeningScript() />
 				</cfif>
 				<cfset strReturn		=	strReturn & 'T' />
-				<cfif !arguments.linkify><cfset strParamList 	= listAppend(strParamList,'linkify: #arguments.linkify#') /></cfif>
+				<cfif not arguments.linkify><cfset strParamList 	= listAppend(strParamList,'linkify: #arguments.linkify#') /></cfif>
 				<cfif arguments.infer><cfset strParamList 		= listAppend(strParamList,'infer: #arguments.infer#') /></cfif>
 				<cfif arguments.expanded><cfset strParamList 	= listAppend(strParamList,'expanded: #arguments.expanded#') /></cfif>
 				<cfif len(arguments.htmlSection)>

@@ -191,8 +191,8 @@ Revision history
 		<cfargument name="format" 	required="false" 	type="string" default="json" 	hint="The return format of the data. JSON." />
 			<cfset var strSuccess 		= false />
 			<cfset var strMessage 		= '' />
-			<cfset var stuErrInfo		= {} />
-			<cfset var arrErrSearch		= [] />
+			<cfset var stuErrInfo		= StructNew() />
+			<cfset var arrErrSearch		= ArrayNew(1) />
 			<cfset var reqXML			= '' />
 			<cfset var stuJSONResponse	= '' />
 				<cfswitch expression="#arguments.data.Statuscode#">
@@ -241,9 +241,9 @@ Revision history
 						<cfset strMessage = 'The Twitter servers are up, but overloaded with requests. Try again later.' />
 					</cfcase>
 				</cfswitch>
-				<cfif !strSuccess>
+				<cfif not strSuccess>
 					<cfset stuErrInfo.error_message 	= arguments.data.Statuscode & '-' & strMessage />
-					<cfset stuErrInfo.api_Info 			= {} />
+					<cfset stuErrInfo.api_Info 			= StructNew() />
 					<cfswitch expression="#arguments.format#">
 						<cfcase value="json">
 							<cfif isJSON(arguments.data.FileContent)>
@@ -298,7 +298,7 @@ Revision history
 		<cfargument name="url" 			type="string" 	displayname="url" 		hint="URL to request" 		required="true" />
 		<cfargument name="method" 		type="string" 	displayname="method" 	hint="Method of HTTP Call" 	required="true" />
 		<cfargument name="parameters" 	type="struct" 	displayname="method" 	hint="HTTP parameters" 		required="false" default="#structNew()#" />
-			<cfset var returnStruct = {} />
+			<cfset var returnStruct = StructNew() />
 			
 				<cfif structKeyExists(arguments.parameters,'params')>
 					<cfset structAppend(arguments.parameters,arguments.parameters['params']) />
@@ -328,7 +328,7 @@ Revision history
 	<cffunction name="queryString2struct" displayname="queryString2Struct" description="Turns a query string into a struct." access="private" output="false" returntype="Struct" >
 		<cfargument name="queryString"	type="string" displayname="queryString" hint="Query String to Decihper" required="true" />
 		<cfscript>
-			var returnStruct 	= {};
+			var returnStruct 	= StructNew();
 			var localPair		= '';
 			var localKey		= '';
 			var localValue		= '';
@@ -343,19 +343,19 @@ Revision history
 			return returnStruct;
 		</cfscript>
 	</cffunction>
-	
+    
 	<!--- PUBLIC FUNCTIONS --->
 	<cffunction name="getAuthorisation" access="public" output="false" returntype="struct" hint="I make the call to Twitter to request authorisation to access the account.">
 		<cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
 		<cfscript>
-			var returnStruct					= {};
-			var requestToken					= {};
-			var oAuthKeys						= {};
+			var returnStruct					= StructNew();
+			var requestToken					= StructNew();
+			var oAuthKeys						= StructNew();
 			var callBackURLEncoded				= '';
 			var AuthURL							= '';
 			var twitRequest						= '';
 			
-			var stuParams						= {};
+			var stuParams						= StructNew();
 			
 				stuParams['oauth_callback']		= arguments.callBackURL;
 			
@@ -399,11 +399,11 @@ Revision history
 		<cfargument name="requestSecret"	type="string" 	required="true" hint="Request Token Secret needed to get Access Token." />
 		<cfargument name="verifier" 		type="string"	required="true" hint="I am the oauth_verifier string returned from the authentication request." />
 		<cfscript>
-			var returnStruct		= {};
-			var accessToken			= {};
-			var oAuthKeys			= {};
+			var returnStruct		= StructNew();
+			var accessToken			= StructNew();
+			var oAuthKeys			= StructNew();
 			var twitRequest			= '';
-			var stuParams			= {};
+			var stuParams			= StructNew();
 			
 				stuParams['oauth_verifier']		= arguments.verifier;
 			
@@ -440,13 +440,13 @@ Revision history
 		<cfscript>
 			var requestResult		= '';
 			var twitRequest			= '';
-			var stuParams			= {};
+			var stuParams			= StructNew();
 			var stuParameters		= '';
 				/* If we're sending through media to upload, we need to keep the parameters empty
 				 and not send anything through that would break the multipart request
 				*/
 				if (structKeyExists(arguments.parameters,'media[]')) {
-					stuParameters	=	{};
+					stuParameters	=	StructNew();
 				} else {
 					stuParameters	=	arguments.parameters;
 				}
@@ -477,7 +477,7 @@ Revision history
 		<cfargument name="httpmethod"		type="string"	required="false"	displayname="httpmethod"		hint="HTTP Method"	default="GET" />
 		<cfargument name="parameters"		type="struct"	required="false"	displayname="parameters"		hint="Parameters for the url to the service"	default="#structNew()#" />
 		<cfscript>
-			var returnStruct	= {};
+			var returnStruct	= StructNew();
 			var authToken 		= '';
 			var twitRequest			= '';
 
@@ -517,7 +517,7 @@ Revision history
 	
 	<cffunction name="clearEmptyParams" access="public" output="false" hint="I accept the structure of arguments and remove any empty / nulls values before they are sent to the OAuth processing.">
 		<cfargument name="paramStructure" required="true" type="Struct" hint="I am a structure containing the arguments / parameters you wish to filter." />
-			<cfset var stuRevised = {} />
+			<cfset var stuRevised = StructNew() />
 				<cfloop collection="#arguments.paramStructure#" item="key">
 					<cfif len(arguments.paramStructure[key])>
 						<cfset structInsert(stuRevised, lcase(key), arguments.paramStructure[key], true) />
@@ -531,14 +531,14 @@ Revision history
 		<cfargument name="httpMethod" 	required="true" 	type="String" 	default="POST"			hint="I am the method of the authenticated request. GET or POST." />
 		<cfargument name="parameters" 	required="false" 	type="Struct"	default="#StructNew()#" hint="I am a structure of parameters for the request." />
 		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the headers and sent information for debugging." />
-			<cfset var twitRequest		= 	{} />
+			<cfset var twitRequest		= 	StructNew() />
 			<cfset var isOKToProceed	=	true />
 			<cfset var strReturn 		= 	'' />
 				<cfscript>
 					// Check if a file is being uploaded
 					if(structKeyExists(arguments.parameters, 'media[]')) {
 						// If so, check the mimetype is acceptable
-						if(!checkMedia(file=arguments.parameters['media[]'])) {
+						if(not checkMedia(file=arguments.parameters['media[]'])) {
 							// If not, set to false
 							isOKToProceed	=	false;
 							strReturn		=	'The media you are trying to upload seems to be incompatible or an Incorrect file type.';
