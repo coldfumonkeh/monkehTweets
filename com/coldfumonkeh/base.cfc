@@ -67,6 +67,11 @@ Revision history
 
 	- resolved post authentication issues with Railo servers (tested against Railo 3.3.1.000)
 	- resolved conditional discrepancy with screen_name check in getUserTimeline method - thanks @aqlong and Harel Malka for the find
+	
+26/10/2012 - Version 1.4.0
+
+	- removed handleReturnFormat method. All requests are being made in JSON format, so no longer needed the XML catch.
+	- removed checkStatusCode method. Users will now have to capture errors themselves. 
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -78,9 +83,9 @@ Revision history
 		<cfargument name="parseResults"	required="false" 	type="boolean" default="false" 	hint="A boolean value to determine if the output data is parsed or returned as a string" />
 			<cfscript>
 				variables.instance.baseURL 			= 'http://twitter.com/';
-				variables.instance.apiURL			= 'http://api.twitter.com/1/';
+				variables.instance.apiURL			= 'https://api.twitter.com/1.1/';
 				variables.instance.searchURL 		= 'http://search.twitter.com/';
-				variables.instance.uploadURL 		= 'https://upload.twitter.com/1/';
+				variables.instance.uploadURL 		= 'https://upload.twitter.com/1.1/';
 				variables.instance.parseResults 	= arguments.parseResults;
 				
 				// OAuth specific constuctors
@@ -131,23 +136,11 @@ Revision history
 	
 	<cffunction name="handleReturnFormat" access="public" output="false" hint="I handle how the data is returned based upon the provided format">
 		<cfargument name="data" 	required="true" 				type="string" hint="The data returned from the API." />
-		<cfargument name="format" 	required="true" default="xml" 	type="string" hint="The return format of the data. Commonly XML, JSON or in some cases RSS and ATOM." />
-			<cfswitch expression="#arguments.format#">
-				<cfcase value="json">
-					<cfif getparseResults()>
-						<cfreturn DeserializeJSON(arguments.data) />
-					<cfelse>
-						<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />
-					</cfif>
-				</cfcase>
-				<cfdefaultcase>
-					<cfif getparseResults()>
-						<cfreturn XmlParse(arguments.data) />
-					<cfelse>
-						<cfreturn arguments.data />
-					</cfif>
-				</cfdefaultcase>
-			</cfswitch>
+			<cfif getparseResults()>
+				<cfreturn DeserializeJSON(arguments.data) />
+			<cfelse>
+				<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />
+			</cfif>
 		<cfabort>
 	</cffunction>
 	
@@ -185,93 +178,6 @@ Revision history
 			<cfset checkStatusCode(cfhttp) />
 		<cfreturn cfhttp.FileContent />
 	</cffunction>
-	
-	<cffunction name="checkStatusCode" access="public" output="false" hint="I check the status code from all API calls">
-		<cfargument name="data" 	required="true" 	type="struct" 					hint="The data returned from the API." />
-		<cfargument name="format" 	required="false" 	type="string" default="json" 	hint="The return format of the data. JSON." />
-			<cfset var strSuccess 		= false />
-			<cfset var strMessage 		= '' />
-			<cfset var stuErrInfo		= {} />
-			<cfset var arrErrSearch		= [] />
-			<cfset var reqXML			= '' />
-			<cfset var stuJSONResponse	= '' />
-				<cfswitch expression="#arguments.data.Statuscode#">
-					<cfcase value="200 OK">
-						<cfset strSuccess = true />
-						<cfset strMessage = 'Success!' />
-					</cfcase>
-					<cfcase value="304 Not Modified">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'There was no new data to return.' />
-					</cfcase>
-					<cfcase value="400 Bad Request">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'The request was invalid.' />
-					</cfcase>
-					<cfcase value="401 Unauthorized">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'Authentication credentials were missing or incorrect.' />
-					</cfcase>
-					<cfcase value="403 Forbidden">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'The request is understood, but it has been refused.' />
-					</cfcase>
-					<cfcase value="404 Not Found">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'The URI requested is invalid or the resource requested, such as a user, does not exist.' />
-					</cfcase>
-					<cfcase value="406 Not Acceptable">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'Returned by the Search API when an invalid format is specified in the request.' />
-					</cfcase>
-					<cfcase value="420 Enhance Your Calm">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'Returned by the Search and Trends API  when you are being rate limited.' />
-					</cfcase>
-					<cfcase value="500 Internal Server Error">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'Something is broken. Please post to the group so the Twitter team can investigate.' />
-					</cfcase>
-					<cfcase value="502 Bad Gateway">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'Twitter is down or being upgraded.' />
-					</cfcase>
-					<cfcase value="503 Service Unavailable">
-						<cfset strSuccess = false />
-						<cfset strMessage = 'The Twitter servers are up, but overloaded with requests. Try again later.' />
-					</cfcase>
-				</cfswitch>
-				<cfif !strSuccess>
-					<cfset stuErrInfo.error_message 	= arguments.data.Statuscode & '-' & strMessage />
-					<cfset stuErrInfo.api_Info 			= {} />
-					<cfswitch expression="#arguments.format#">
-						<cfcase value="json">
-							<cfif isJSON(arguments.data.FileContent)>
-								<cfset stuJSONResponse = deserializeJSON(arguments.data.FileContent.toString()) />
-								<cfif structKeyExists(stuJSONResponse,'error')>
-									<cfset stuErrInfo.api_Info.error	=	stuJSONResponse.error />
-								</cfif>
-							</cfif>
-							<cfset stuErrInfo.full_Request			=	arguments.data />
-						</cfcase>
-						<cfdefaultcase>
-							<cfif isXML(arguments.data.FileContent)>
-								<cfset arrErrSearch						= xmlSearch(arguments.data.FileContent,'hash/error') />
-								<!--- Mr Phipps was here - thanks to David for finding the issue here with CF8.01 --->
-								<!---<cfset stuErrInfo.api_Info.request 	= xmlSearch(arguments.data.FileContent,'hash/request')[1].XmlText />--->
-								<cfset reqXML 							= xmlSearch(arguments.data.FileContent,'hash/request') />
-								<cfset stuErrInfo.api_Info.request 		= reqXML[1].XmlText />
-								<cfif arrayLen(arrErrSearch)>
-									<cfset stuErrInfo.api_Info.error	=	arrErrSearch[1].XmlText />
-								</cfif>
-							</cfif>
-							<cfset stuErrInfo.full_Request			=	arguments.data />
-						</cfdefaultcase>
-					</cfswitch>
-					<cfdump var="#stuErrInfo#">
-					<cfabort>
-				</cfif>
-	</cffunction>	
 	
 	<!--- OAuth specific methods here --->
 	
@@ -557,8 +463,7 @@ Revision history
 						if(arguments.checkHeader) {
 							strReturn = twitRequest.responseHeader;
 						} else {
-							checkStatusCode(data=twitRequest,format=arguments.parameters.format);
-							strReturn = handleReturnFormat(twitRequest.fileContent, arguments.parameters.format);
+							strReturn = handleReturnFormat(twitRequest.fileContent);
 						}
 					}
 				</cfscript>
