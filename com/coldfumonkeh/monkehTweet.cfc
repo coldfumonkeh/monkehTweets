@@ -341,7 +341,7 @@ Revision history
 		<cfargument name="max_id"					required="false" 	default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
 		<cfargument name="include_entities" 		required="false" 	default="true"	type="String" 	hint="Optional. When set to either true, t or 1, each tweet will include a node called 'entities,'. This node offers a variety of metadata about the tweet in a discreet structure, including: urls, media and hashtags. Note that user mentions are currently not supported for search and there will be no 'user_mentions' key in the entities map." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod	= getCorrectEndpoint('api') & 'search/tweets.json?' & buildParamString(arguments) />
+			<cfset var strTwitterMethod	= getCorrectEndpoint('api') & 'search/tweets.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 	
