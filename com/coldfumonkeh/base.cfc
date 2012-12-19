@@ -71,7 +71,11 @@ Revision history
 26/10/2012 - Version 1.4.0
 
 	- removed handleReturnFormat method. All requests are being made in JSON format, so no longer needed the XML catch.
-	- removed checkStatusCode method. Users will now have to capture errors themselves. 
+	- removed checkStatusCode method. Users will now have to capture errors themselves.
+	
+19/12/2012 - Version 1.4.1
+
+	- addition of parseTwitterDateFormat method. Thanks to Adam Tuttle and Sam Farmer for pointing out how Twitter returns the date format. Mega laughs.
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -536,6 +540,13 @@ Revision history
 				</cfif>
 			</cfloop>
 		<cfreturn resultStruct />
+	</cffunction>
+	
+	<cffunction name="parseTwitterDateFormat" output="false" returntype="String" hint="I return a date in a useable date format.">
+		<cfargument name="twitterDate" required="true" type="string" hint="The Twitter date." />
+	        <cfset var formatter = CreateObject("java", "java.text.SimpleDateFormat").init("EEE MMM d kk:mm:ss Z yyyy") />
+				<cfset formatter.setLenient(true) />
+		<cfreturn formatter.parse(arguments.twitterDate) />
 	</cffunction>
 	
 </cfcomponent>
