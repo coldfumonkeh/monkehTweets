@@ -549,4 +549,37 @@ Revision history
 		<cfreturn formatter.parse(arguments.twitterDate) />
 	</cffunction>
 	
+	<cffunction name="entify">
+		<cfargument name="tweetStruct" />
+			<cfset var html = arguments.tweetStruct.text />
+			<cfif structKeyExists(arguments.tweetStruct, "entities")>
+				<cfloop collection="#arguments.tweetStruct.entities#" item="type">
+					<cfloop array="#arguments.tweetStruct.entities[type]#" index="entity">
+						<cfset find 	= '' />
+						<cfset replace 	= '' />
+						<cfswitch expression="#type#">
+							<cfcase value="hashtags">
+								<cfset find 	= '##' & entity.text />
+								<cfset replace 	= '<a href="http://twitter.com/search?q=%23#entity.text#&amp;src=hash" rel="nofollow" target="_blank">#find#</a>' />
+							</cfcase>
+							<cfcase value="urls">
+								<cfset find 	= entity.url />
+                    			<cfset replace 	= '<a href="#entity.url#" rel="nofollow" target="_blank">#find#</a>' />
+							</cfcase>
+							<cfcase value="media">
+								<cfset find 	= entity.url />
+                    			<cfset replace 	= '<a href="#entity.url#" rel="nofollow" target="_blank">#find#</a>' />
+							</cfcase>
+							<cfcase value="user_mentions">
+								<cfset find 	= '@' & entity.screen_name />
+                    			<cfset replace 	= '<a href="http://twitter.com/#entity.screen_name#" title="#entity.name#" rel="nofollow" target="_blank">#find#</a>' />
+							</cfcase>
+						</cfswitch>
+						<cfset html = replace(html, find, replace) />
+					</cfloop> 
+				</cfloop>
+			</cfif>
+		<cfreturn html />
+	</cffunction>
+	
 </cfcomponent>
