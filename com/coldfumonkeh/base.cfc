@@ -77,6 +77,12 @@ Revision history
 
 	- addition of parseTwitterDateFormat method. Thanks to Adam Tuttle and Sam Farmer for pointing out how Twitter returns the date format. Mega laughs.
 
+21/12/2012 - Version 1.4.2
+
+	- addition of entify method to convert hashtags, urls and users referenced in tweet entities into HTML URLs for direct output.
+		Thanks to Matt Hinchliffe (i-like-robots) for the suggestion.
+
+
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
 
