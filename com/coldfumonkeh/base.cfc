@@ -555,8 +555,8 @@ Revision history
 		<cfreturn formatter.parse(arguments.twitterDate) />
 	</cffunction>
 	
-	<cffunction name="entify">
-		<cfargument name="tweetStruct" />
+	<cffunction name="entify" output="false" returntype="string" hint="I convert all user mentions, links and hashtags to HTML URLs for display.">
+		<cfargument name="tweetStruct" required="true" type="struct" hint="I am a struct containing the tweet response. You MUST have include_entities = true in your request, otherwise I won't have anything to parse." />
 			<cfset var html = arguments.tweetStruct.text />
 			<cfif structKeyExists(arguments.tweetStruct, "entities")>
 				<cfloop collection="#arguments.tweetStruct.entities#" item="type">
