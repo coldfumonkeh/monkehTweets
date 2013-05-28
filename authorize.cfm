@@ -24,12 +24,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --->
 
 <cfscript>
-	returnData	= application.objMonkehTweet.getAccessToken(  
+	returnData	= application.objMonkehTweet.getAccessToken(
 									requestToken	= 	session.oAuthToken,
 									requestSecret	= 	session.oAuthTokenSecret,
 									verifier		=	url.oauth_verifier
 								);
-				
+
 if (returnData.success) {
 	//Save these off to your database against your User so you can access their account in the future
 	session['accessToken']	= returnData.token;
