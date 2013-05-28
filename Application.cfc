@@ -33,7 +33,7 @@ All methods and parameters within the monkehTweet component are documented and h
 
 --->
 <cfcomponent output="true">
- 
+
 	<!--- Set up the application. --->
 	<cfscript>
 		this.Name 				= "monkehTweet_V1.3.1";
@@ -44,12 +44,12 @@ All methods and parameters within the monkehTweet component are documented and h
 		this.mappings 			= structnew();
 		//do this for CF 8+
 		this.mappings['/com'] 	= GetDirectoryFromPath(GetCurrentTemplatePath()) & "/com";
-	</cfscript>	
-  
- 
+	</cfscript>
+
+
 	<cffunction name="OnApplicationStart" access="public" returntype="boolean" output="false">
  		<cfscript>
- 			/* 
+ 			/*
 				If you are using this for a number of different accounts (allowing numerous users to acces Twitter)
 				you will need to specify only the consumerKey and consumerSecret
 
@@ -74,7 +74,7 @@ All methods and parameters within the monkehTweet component are documented and h
 			return true;
 		</cfscript>
 	</cffunction>
-	
+
 	<cffunction name="onrequestStart">
 		<cfscript>
 		if(structKeyExists(url, 'reinit')) {
@@ -82,5 +82,5 @@ All methods and parameters within the monkehTweet component are documented and h
 		}
 		</cfscript>
 	</cffunction>
- 
+
 </cfcomponent>

@@ -54,7 +54,7 @@ History:
 		<cfset ArrayAppend(	aSignature,
 							encoder.encodePercent(arguments.oRequest.getSignableParameters()) )>
 
-		<cfset sKey = encoder.encodePercent(arguments.oConsumer.getSecret()) & "&" & encoder.encodePercent(arguments.oToken.getSecret())> 
+		<cfset sKey = encoder.encodePercent(arguments.oConsumer.getSecret()) & "&" & encoder.encodePercent(arguments.oToken.getSecret())>
 		<cfset sResult = ArrayToList(aSignature, "&")>
 
 		<cfset sHashed = hmac_sha1(

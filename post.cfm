@@ -29,12 +29,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 									oauthTokenSecret	=	session['accessSecret'],
 									userAccountName		=	session['screen_name']
 								);
-	
+
 	// Let's make a test call. This will update the status of the authenticated user.
 	// If you are using this for a number of users , you will need to set the details prior to each call
 	// using the setFinalAccessDetails() method above.
-	
-	// If you are using this purely for a single user, you can set all of the 
+
+	// If you are using this purely for a single user, you can set all of the
 	// authentication details in the init() constructor method when instantiating the application
 	returnData = application.objMonkehTweet.postUpdate("I'm using the awesome ##monkehTweets ColdFusion library from @coldfumonkeh!");
 </cfscript>
