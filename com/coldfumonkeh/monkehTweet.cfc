@@ -1204,7 +1204,7 @@ Revision history
 			<cfset var strContent		=	'' />
 			<cfset var methodResult		=	'' />
 				<!--- Loop over the provided params to invoke the methods --->
-				<cfloop collection="#arguments.params#" item="item">
+				<cfloop collection="#arguments.params#" item="local.item">
 					<cftry>
 						<cfset structInsert(arguments.params[item],'individual',false) />
 						<!--- Make the call to the method and assign the results to the content variable. --->

@@ -157,7 +157,7 @@ Revision history
 	<cffunction name="buildParamString" access="public" output="false" returntype="String" hint="I loop through a struct to convert to query params for the URL">
 		<cfargument name="argScope" required="true" type="struct" hint="I am the struct containing the method params" />
 			<cfset var strURLParam 	= '' />
-			<cfloop collection="#arguments.argScope#" item="key">
+			<cfloop collection="#arguments.argScope#" item="local.key">
 				<cfif len(arguments.argScope[key])>
 					<cfif listLen(strURLParam)>
 						<cfset strURLParam = strURLParam & '&' />
@@ -232,7 +232,7 @@ Revision history
 					<cfset structDelete(arguments.parameters,'media[]', false) />
 
 					<cfif arguments.method is 'POST'>
-						<cfloop collection="#arguments.parameters#" item="key">
+						<cfloop collection="#arguments.parameters#" item="local.key">
 							<cfhttpparam type="formfield" name="#key#" value="#arguments.parameters[key]#" />
 						</cfloop>
 					</cfif>
@@ -248,7 +248,7 @@ Revision history
 			var localPair		= '';
 			var localKey		= '';
 			var localValue		= '';
-				for(i=1; i LTE listLen(arguments.queryString,'&');i=i+1) {
+				for(local.i=1; i LTE listLen(arguments.queryString,'&');i=i+1) {
 					localPair	= listGetAt(arguments.queryString,i,'&');
 					localKey	= listGetAt(localPair,1,'=');
 					if (listlen(localPair,'=') EQ 2) {
@@ -434,7 +434,7 @@ Revision history
 	<cffunction name="clearEmptyParams" access="public" output="false" hint="I accept the structure of arguments and remove any empty / nulls values before they are sent to the OAuth processing.">
 		<cfargument name="paramStructure" required="true" type="Struct" hint="I am a structure containing the arguments / parameters you wish to filter." />
 			<cfset var stuRevised = {} />
-				<cfloop collection="#arguments.paramStructure#" item="key">
+				<cfloop collection="#arguments.paramStructure#" item="local.key">
 					<cfif len(arguments.paramStructure[key])>
 						<cfset structInsert(stuRevised, lcase(key), arguments.paramStructure[key], true) />
 					</cfif>
@@ -534,7 +534,7 @@ Revision history
 				LookupArray[5][4] = "png";
 			</cfscript>
 			<cflock type="readonly" name="MimeLock#Hash(Arguments.filePath)#" timeout="10" throwontimeout="no">
-				<cffile action="readbinary" file="#Arguments.filePath#" variable="theBinaryFile" />
+				<cffile action="readbinary" file="#Arguments.filePath#" variable="local.theBinaryFile" />
 			</cflock>
 			<cfset hexFile = BinaryEncode(theBinaryFile,'Hex') />
 			<cfloop from="1" to="#ArrayLen(LookupArray)#" step="1" index="i">
@@ -559,10 +559,10 @@ Revision history
 		<cfargument name="tweetStruct" required="true" type="struct" hint="I am a struct containing the tweet response. You MUST have include_entities = true in your request, otherwise I won't have anything to parse." />
 			<cfset var html = arguments.tweetStruct.text />
 			<cfif structKeyExists(arguments.tweetStruct, "entities")>
-				<cfloop collection="#arguments.tweetStruct.entities#" item="type">
-					<cfloop array="#arguments.tweetStruct.entities[type]#" index="entity">
-						<cfset find 	= '' />
-						<cfset replace 	= '' />
+				<cfloop collection="#arguments.tweetStruct.entities#" item="local.type">
+					<cfloop array="#arguments.tweetStruct.entities[type]#" index="local.entity">
+						<cfset var find 	= '' />
+						<cfset var replace 	= '' />
 						<cfswitch expression="#type#">
 							<cfcase value="hashtags">
 								<cfset find 	= '##' & entity.text />
