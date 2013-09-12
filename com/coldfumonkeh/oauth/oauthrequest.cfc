@@ -484,6 +484,7 @@ History:
   	<!--- builds the Authorization: header --->
 	<cffunction name="toHeader" access="public" returntype="string" output="false">
 		<cfargument name="sHeaderRealm" default="" required="false" type="string">
+    <cfargument name="includeHeaderName" default=true />
 
 		<cfset var sRealm = arguments.sHeaderRealm>
 		<cfset var sResult = "">
@@ -492,8 +493,10 @@ History:
 		<cfset var aKeys = getParameterKeys()>
 		<cfset var aValues = getParameterValues()>
 
-		<!--- optional realm parameter --->
-		<cfset sResult = """Authorization: OAuth realm=""" & sRealm & """,">
+    <!--- optional realm parameter --->
+    <cfif len(arguments.sHeaderRealm)>
+      <cfset ArrayAppend(aTotal,"""realm=""" & sRealm & """")>
+    </cfif>
 
 		<cfloop from="1" to="#ArrayLen(aKeys)#" index="i">
 			<cfif Left(aKeys[i], 5) EQ "oauth">
@@ -502,7 +505,13 @@ History:
 			</cfif>
 		</cfloop>
 
-		<cfset sResult = sResult & ArrayToList(aTotal, ",")>
+    <cfset sResult = ArrayToList(aTotal, ",")>
+    <cfset sResult = "OAuth #sResult#">
+
+    <cfif arguments.includeHeaderName>
+      <cfset sResult = """Authorization: #sResult#">
+    </cfif>
+
 		<cfreturn sResult>
 	</cffunction>
 
