@@ -259,8 +259,37 @@ Revision history
 			return returnStruct;
 		</cfscript>
 	</cffunction>
-	
+
 	<!--- PUBLIC FUNCTIONS --->
+  <cffunction name="getAccessToAuthenticate" output="false" returntype="Struct" hint="Gets a Twitter access token via POST request which can be stored and used for future access.  Designed to have same function signature as coldfumunkeh's getAuthorisation().">
+    <cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
+    <cfset var returnStruct = {}/>
+    <cfset returnStruct['success'] = false/>
+    <cfset var twitterAuthPoint = "https://api.twitter.com/oauth/authenticate"/>
+    <cfset var requestParameters = {}/>
+    <cfset requestParameters['oauth_callback'] = arguments.callBackURL/>
+    <cfset var oReq = oAuthAccessObject(
+      httpURL = variables.instance.reqEndpoint,
+      httpMethod = "POST",
+      parameters = requestParameters
+    )/>
+
+    <cfhttp method="post" url="#variables.instance.reqEndpoint#" charset="utf-8" >
+      <cfhttpparam type="header" name="Authorization" value="#oReq.toHeader(includeHeaderName=false)#" />
+    </cfhttp>
+
+    <cfif findNoCase("oauth_token",cfhttp.filecontent)>
+       <cfset var oauthToken = listlast(listfirst(cfhttp.filecontent,"&"),"=")>
+       <cfset var oauthTokenSecret = listlast(listlast(cfhttp.filecontent,"&"),"=")>
+       <cfset returnStruct['authURL'] = twitterAuthPoint & "?oauth_token=" & oauthToken/>
+       <cfset returnStruct['token'] = oauthToken/>
+       <cfset returnStruct['token_secret'] = oauthTokenSecret/>
+       <cfset returnStruct['success'] = true/>
+    </cfif>
+
+    <cfreturn returnStruct/>
+  </cffunction>
+
 	<cffunction name="getAuthorisation" access="public" output="false" returntype="struct" hint="I make the call to Twitter to request authorisation to access the account.">
 		<cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
 		<cfscript>
