@@ -305,7 +305,7 @@ History:
 		<cfset stDefault["oauth_nonce"] = generateNonce()>
 		<cfset stDefault["oauth_timestamp"] = generateTimestamp()>
 		<cfset stDefault["oauth_consumer_key"] = arguments.oConsumer.getKey()>
-		
+
 		<cfif arguments.sCallbackURL NEQ ''>
 		<cfset stDefault["oauth_callback"] = arguments.sCallbackURL />
 		</cfif>
@@ -521,7 +521,7 @@ History:
 		<cfset removeParameter(sParameterName = "oauth_signature")>
 
 		<cfset setParameter(sKey = "oauth_signature_method", sValue = arguments.oSignatureMethod.getName())>
-		
+
 		<cfset sSignature = buildSignature(arguments.oSignatureMethod, arguments.oConsumer, arguments.oToken)>
 		<cfset setParameter(sKey = "oauth_signature", sValue = sSignature)>
 	</cffunction>
@@ -560,7 +560,7 @@ History:
 
 		<cfreturn Hash(sToEncode, "SHA")/>
 	</cffunction>
-	
+
 	<!---
 		Additional of secondary method for generateNonce that plays nicely with OpenBD.
 		Thanks to Craig328 for supplying this.
@@ -571,7 +571,7 @@ History:
 		<cfset var iMin = 0>
 		<cfset var iMax = 1000000000>
 		<cfset var sToEncode = generateTimestamp() & RandRange(iMin, iMax, "SHA1PRNG")>
-		
+
 		<cfreturn Hash(sToEncode, "SHA")/>
 	</cffunction>
 	--->
