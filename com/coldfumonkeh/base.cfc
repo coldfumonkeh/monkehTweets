@@ -149,7 +149,9 @@ Revision history
 			<cfif getparseResults()>
 				<cfreturn DeserializeJSON(arguments.data) />
 			<cfelse>
-				<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />
+				<!---<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />--->
+				<!--- CF's deserializeJSON will turn strings into numbers even if you want them to be strings! --->
+				<cfreturn arguments.data.toString() />
 			</cfif>
 		<cfabort>
 	</cffunction>
