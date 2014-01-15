@@ -82,6 +82,11 @@ Revision history
 	- addition of entify method to convert hashtags, urls and users referenced in tweet entities into HTML URLs for direct output.
 		Thanks to Matt Hinchliffe (i-like-robots) for the suggestion.
 
+14/01/2014 - Version 1.4.3
+
+	- revision of handleReturnFormat to return a string without messing around with serialization and back again.
+		Thanks to Mark Hetherington for suggesting this on Github
+	- fixing local variable error (for < CF9 ) on the entify method. 
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -149,7 +154,8 @@ Revision history
 			<cfif getparseResults()>
 				<cfreturn DeserializeJSON(arguments.data) />
 			<cfelse>
-				<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />
+				<!---<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />--->
+				<cfreturn arguments.data.toString() />
 			</cfif>
 		<cfabort>
 	</cffunction>
@@ -260,7 +266,7 @@ Revision history
 		</cfscript>
 	</cffunction>
 
-	<!--- PUBLIC FUNCTIONS --->
+	<!--- PUBLIC FUNCTIONS --->		
 	<cffunction name="getAuthorisation" access="public" output="false" returntype="struct" hint="I make the call to Twitter to request authorisation to access the account.">
 		<cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
 		<cfscript>
@@ -557,12 +563,14 @@ Revision history
 
 	<cffunction name="entify" output="false" returntype="string" hint="I convert all user mentions, links and hashtags to HTML URLs for display.">
 		<cfargument name="tweetStruct" required="true" type="struct" hint="I am a struct containing the tweet response. You MUST have include_entities = true in your request, otherwise I won't have anything to parse." />
-			<cfset var html = arguments.tweetStruct.text />
+			<cfset var html 	= arguments.tweetStruct.text />
+			<cfset var find 	= '' />
+			<cfset var replace 	= '' />
 			<cfif structKeyExists(arguments.tweetStruct, "entities")>
 				<cfloop collection="#arguments.tweetStruct.entities#" item="local.type">
 					<cfloop array="#arguments.tweetStruct.entities[type]#" index="local.entity">
-						<cfset var find 	= '' />
-						<cfset var replace 	= '' />
+						<cfset find 	= '' />
+						<cfset replace 	= '' />
 						<cfswitch expression="#type#">
 							<cfcase value="hashtags">
 								<cfset find 	= '##' & entity.text />
