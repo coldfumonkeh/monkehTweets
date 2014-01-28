@@ -110,6 +110,18 @@ Revision history
 		- ALL methods now return JSON format only (no more XML). Make sure to update your applications accordingly if you use XML.
 		- DELETED a butt-load (official terminology) of methods that have been removed / deprecated in v1.1 API.
 
+27/01/2014 - Version 1.4.4
+
+	- addition of the following methods:
+		- getRetweeterIDs
+		- getRetweetsOfMe
+		- getFriendsNoRetweetsIDs
+		- getFriendsList
+		- getFollowersList
+		- getListOwnerships
+	- fixed endpoint for reportSpam() method
+
+
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
 
@@ -178,7 +190,7 @@ Revision history
 	<!--- Timelines --->
 	<!--- Timelines are collections of Tweets, ordered with the most recent first. --->
 
-	<!--- GET statuses/mentions --->
+	<!--- GET statuses/mentions_timeline --->
 	<cffunction name="getMentions" access="public" output="false" hint="Returns the 20 most recent mentions (status containing @username) for the authenticating user.">
 		<cfargument name="count" 					required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
 		<cfargument name="since_id"					required="false" 	default=""		type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
@@ -225,6 +237,21 @@ Revision history
 		<cfargument name="include_entities"			required="false" 	default=""			type="string" 	hint="When set to either true, t or 1, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags. While entities are opt-in on timelines at present, they will be made a default component of output in the future." />
 		<cfargument name="checkHeader"				required="false" 	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/home_timeline.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
+	</cffunction>
+
+	<!--- GET statuses/retweets_of_me --->
+	<cffunction name="getRetweetsOfMe" access="public" output="false" hint="Returns the most recent tweets authored by the authenticating user that have been retweeted by others. This timeline is a subset of the user's GET statuses/user_timeline.">
+		<cfargument name="count" 					required="false" 	default=""			type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
+		<cfargument name="since_id"					required="false" 	default=""			type="string" 	hint="Returns only statuses with an ID greater than (that is, more recent than) the specified ID." />
+		<cfargument name="max_id"					required="false" 	default=""			type="string" 	hint="Returns only statuses with an ID less than (that is, older than) or equal to the specified ID." />
+		<cfargument name="trim_user"				required="false" 	default=""			type="string" 	hint="When set to either true, t or 1, each tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object." />
+		<cfargument name="exclude_replies"			required="false" 	default=""			type="string" 	hint="This parameter will prevent replies from appearing in the returned timeline. Using exclude_replies with the count parameter will mean you will receive up-to count tweets — this is because the count parameter retrieves that many tweets before filtering out retweets and replies." />
+		<cfargument name="contributor_details"		required="false" 	default=""			type="string" 	hint="This parameter enhances the contributors element of the status response to include the screen_name of the contributor. By default only the user_id of the contributor is included." />
+		<cfargument name="include_entities"			required="false" 	default=""			type="string" 	hint="When set to either true, t or 1, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags. While entities are opt-in on timelines at present, they will be made a default component of output in the future." />
+		<cfargument name="include_user_entities"	required="false" 	default=""			type="string" 	hint="The user entities node will be disincluded when set to false." />
+		<cfargument name="checkHeader"				required="false" 	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweets_of_me.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
@@ -322,8 +349,19 @@ Revision history
 			</cfif>
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET', parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
+	
+	<!--- GET statuses/retweeters/ids --->
+	<cffunction name="getRetweeterIDs" access="public" output="false" hint="Returns a collection of up to 100 user IDs belonging to users who have retweeted the tweet specified by the id parameter. This method offers similar data to GET statuses/retweets/:id and replaces API v1's GET statuses/:id/retweeted_by/ids method.">
+		<cfargument name="id" 				required="true" 	type="string" 					hint="The numerical ID of the desired status." />
+		<cfargument name="cursor" 			required="false" 	type="string"	default="-1"	hint="Causes the list of IDs to be broken into pages of no more than 100 IDs at a time. The number of IDs returned is not guaranteed to be 100 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth." />
+		<cfargument name="stringify_ids" 	required="false" 	type="boolean"	default="false"	hint="Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead." />
+		<cfargument name="checkHeader"		required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweeters/ids.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
+	</cffunction>
 
 	<!--- End Tweets --->
+		
 
 	<!--- Search --->
 	<!--- Find relevant Tweets based on queries performed by your users. --->
@@ -407,12 +445,23 @@ Revision history
 	<!--- Friends & Followers --->
 	<!--- Users follow their interests on Twitter through both one-way and mutual following relationships. --->
 
+
+	<!--- GET friendships/no_retweets/ids --->
+	<cffunction name="getFriendsNoRetweetsIDs" access="public" output="false" returntype="Any" hint="Returns a collection of user_ids that the currently authenticated user does not want to receive retweets from. Use POST friendships/update to set the 'no retweets' status for a given user account on behalf of the current user.">
+		<cfargument name="stringify_ids" 			required="false" 	default="false"	type="boolean" 	hint="Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead." />
+		<cfargument name="checkHeader"				required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'friendships/no_retweets/ids.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
+	</cffunction>
+	
+
 	<!--- GET friends/ids --->
 	<cffunction name="getFriendsIDs" access="public" output="false" returntype="Any" hint="Returns an array of numeric IDs for every user the specified user is following. This method is powerful when used in conjunction with users/lookup.">
 		<cfargument name="user_id" 					required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
 		<cfargument name="screen_name" 				required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
 		<cfargument name="cursor" 					required="false" 	default="-1"	type="string" 	hint="Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
 		<cfargument name="stringify_ids" 			required="false" 	default="false"	type="boolean" 	hint="Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead." />
+		<cfargument name="count" 					required="false" 	default="200" 	type="string" 	hint="Specifies the number of IDs attempt retrieval of, up to a maximum of 5,000 per distinct request. The value of count is best thought of as a limit to the number of results to return. When using the count parameter with this method, it is wise to use a consistent count value across all requests to the same user's collection. Usage of this parameter is encouraged in environments where all 5,000 IDs constitutes too large of a response." />
 		<cfargument name="checkHeader"				required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'friends/ids.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
@@ -424,6 +473,7 @@ Revision history
 		<cfargument name="screen_name" 				required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
 		<cfargument name="cursor" 					required="false" 	default="-1"	type="string" 	hint="Causes the list of connections to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
 		<cfargument name="stringify_ids" 			required="false" 	default="false"	type="boolean" 	hint="Many programming environments will not consume our ids due to their size. Provide this option to have ids returned as strings instead." />
+		<cfargument name="count" 					required="false" 	default="200" 	type="string" 	hint="Specifies the number of IDs attempt retrieval of, up to a maximum of 5,000 per distinct request. The value of count is best thought of as a limit to the number of results to return. When using the count parameter with this method, it is wise to use a consistent count value across all requests to the same user's collection. Usage of this parameter is encouraged in environments where all 5,000 IDs constitutes too large of a response." />
 		<cfargument name="checkHeader"				required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'followers/ids.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
@@ -497,6 +547,32 @@ Revision history
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'friendships/show.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
+	
+	<!--- GET friends/list --->
+	<cffunction name="getFriendsList" access="public" output="false" returntype="Any" hint="Returns a cursored collection of user objects for every user the specified user is following (otherwise known as their 'friends'). At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple 'pages' of results can be navigated through using the next_cursor value in subsequent requests. ">
+		<cfargument name="user_id" 					required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 				required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="cursor" 					required="false" 	default="-1"	type="string" 	hint="Causes the list of results to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
+		<cfargument name="count" 					required="false" 	default="20"	type="string" 	hint="The number of users to return per page, up to a maximum of 200. Defaults to 20." />
+		<cfargument name="skip_status" 				required="false" 					type="boolean" 	hint="When set to either true, t or 1 statuses will not be included in the returned user objects." />
+		<cfargument name="include_user_entities"	required="false"					type="boolean"	hint="The user object entities node will be disincluded when set to false." />
+		<cfargument name="checkHeader"				required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'friends/list.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
+	</cffunction>
+		
+	<!--- GET followers/list --->
+	<cffunction name="getFollowersList" access="public" output="false" returntype="Any" hint="Returns a cursored collection of user objects for users following the specified user. At this time, results are ordered with the most recent following first — however, this ordering is subject to unannounced change and eventual consistency issues. Results are given in groups of 20 users and multiple 'pages' of results can be navigated through using the next_cursor value in subsequent requests. ">
+		<cfargument name="user_id" 					required="false" 			 		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 				required="false" 			 		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="cursor" 					required="false" 	default="-1"	type="string" 	hint="Causes the list of results to be broken into pages of no more than 5000 IDs at a time. The number of IDs returned is not guaranteed to be 5000 as suspended users are filterd out after connections are queried. To begin paging provide a value of -1 as the cursor. The response from the API will include a previous_cursor and next_cursor to allow paging back and forth. If the cursor is not provided the API will attempt to return all IDs. For users with many connections this will probably fail. Querying without the cursor parameter is deprecated and should be avoided. The API is being updated to force the cursor to be -1 if it isn't supplied." />
+		<cfargument name="count" 					required="false" 	default="20"	type="string" 	hint="The number of users to return per page, up to a maximum of 200. Defaults to 20." />
+		<cfargument name="skip_status" 				required="false" 					type="boolean" 	hint="When set to either true, t or 1 statuses will not be included in the returned user objects." />
+		<cfargument name="include_user_entities"	required="false"					type="boolean"	hint="The user object entities node will be disincluded when set to false." />
+		<cfargument name="checkHeader"				required="false"	default="false"	type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'followers/list.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
+	</cffunction>
 
 	<!--- End Friends & Followers --->
 
@@ -528,7 +604,6 @@ Revision history
 		<cfargument name="end_sleep_time" 			required="false" 	default="" 			type="string"	hint="The hour that sleep time should end if it is enabled. The value for this parameter should be provided in ISO8601 format (i.e. 00-23). The time is considered to be in the same timezone as the user's time_zone setting." />
 		<cfargument name="time_zone" 				required="false" 	default="" 			type="string"	hint="The timezone dates and times should be displayed in for the user. The timezone must be one of the Rails TimeZone names. Example: Europe/Copenhagen, Pacific/Tongatapu" />
 		<cfargument name="lang" 					required="false" 	default="" 			type="string"	hint="The language which Twitter should render in for this user. The language must be specified by the appropriate two letter ISO 639-1 representation. Currently supported languages are provided by GET help/languages." />
-		<cfargument name="skip_status" 				required="false" 	default="" 			type="string"	hint="When set to either true, t or 1 statuses will not be included in the returned user objects." />
 		<cfargument name="checkHeader"				required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'account/settings.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
@@ -562,10 +637,10 @@ Revision history
 	<!--- POST account/update_profile_colors --->
 	<cffunction name="updateProfileColors" access="public" output="false" returntype="any" hint="Sets one or more hex values that control the color scheme of the authenticating user's profile page on twitter.com. Each parameter's value must be a valid hexidecimal value, and may be either three or six characters (ex: ##fff or ##ffffff).">
 		<cfargument name="profile_background_color" 	required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="profile_text_color" 			required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
 		<cfargument name="profile_link_color" 			required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
-		<cfargument name="profile_sidebar_fill_color" 	required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
 		<cfargument name="profile_sidebar_border_color" required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="profile_sidebar_fill_color" 	required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
+		<cfargument name="profile_text_color" 			required="false" 	default="" 			type="string" 	hint="Must be a valid hexidecimal value, and may be either three or six characters (ex: fff or ffffff)" />
 		<cfargument name="include_entities" 			required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="skip_status" 					required="false" 	default="" 			type="string"	hint="When set to either true, t or 1 statuses will not be included in the returned user objects." />
 		<cfargument name="checkHeader"					required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
@@ -981,6 +1056,17 @@ Revision history
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/members/destroy_all.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
+	
+	<!--- GET lists/ownerships --->
+	<cffunction name="getListOwnerships" access="public" output="false" hint="Returns the lists owned by the specified Twitter user. Private lists will only be shown if the authenticated user is also the owner of the lists.">
+		<cfargument name="user_id" 					required="false" 	default=""		type="string" 	hint="The ID of the user for whom to return results for. Helpful for disambiguating when a valid user ID is also a valid screen name." />
+		<cfargument name="screen_name" 				required="false" 	default=""		type="string" 	hint="The screen name of the user for whom to return results for. Helpful for disambiguating when a valid screen name is also a user ID." />
+		<cfargument name="count" 					required="false" 	default="20" 	type="string" 	hint="The amount of results to return per page. Defaults to 20. Maximum of 1,000 when using cursors." />
+		<cfargument name="cursor" 					required="false" 	default="-1" 	type="string" 	hint="Breaks the results into pages. A single page contains 20 lists. Provide a value of -1 to begin paging. Provide values as returned to in the response body's next_cursor and previous_cursor attributes to page back and forth in the list." />
+		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'lists/ownerships.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
+	</cffunction>
 
 	<!--- End of List resources : list-specific methods --->
 
@@ -1148,12 +1234,12 @@ Revision history
 	<!--- Spam Reporting --->
 	<!--- These methods are used to report user accounts as spam accounts. --->
 
-	<!--- POST report_spam --->
+	<!--- POST users/report_spam --->
 	<cffunction name="reportSpam" access="public" output="false" hint="The user specified in the id is blocked by the authenticated user and reported as a spammer.">
 		<cfargument name="user_id" 					required="false" 	type="string" 					hint="The ID of the user you want to report as a spammer. Helpful for disambiguating when a valid user ID is also a valid screen name." />
 		<cfargument name="screen_name" 				required="false" 	type="string" 					hint="The ID or screen_name of the user you want to report as a spammer. Helpful for disambiguating when a valid screen name is also a user ID." />
 		<cfargument name="checkHeader"				required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'report_spam.json' />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'users/report_spam.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
@@ -1193,7 +1279,6 @@ Revision history
 	</cffunction>
 
 	<!--- End of Help / Configuration methods --->
-
 
 	<!--- @Anywhere methods --->
 

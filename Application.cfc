@@ -36,7 +36,7 @@ All methods and parameters within the monkehTweet component are documented and h
 
 	<!--- Set up the application. --->
 	<cfscript>
-		this.Name 				= "monkehTweet_V1.3.1";
+		this.Name 				= "monkehTweet_V1.4.4";
 		this.ApplicationTimeout = CreateTimeSpan( 0, 0, 1, 0 );
 		this.SessionManagement 	= true;
 		this.SetClientCookies 	= true;

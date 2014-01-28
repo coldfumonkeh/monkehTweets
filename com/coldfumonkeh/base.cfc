@@ -87,6 +87,10 @@ Revision history
 	- revision of handleReturnFormat to return a string without messing around with serialization and back again.
 		Thanks to Mark Hetherington for suggesting this on Github
 	- fixing local variable error (for < CF9 ) on the entify method. 
+	
+27/01/2014 - Version 1.4.4
+
+	- added api endpoint value (without the version number) and additional getter to retrieve it within the main component using the no_version filter.
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -97,8 +101,9 @@ Revision history
 		<cfargument name="authDetails" 	required="true" 	type="any" 						hint="I am the authDetails class." />
 		<cfargument name="parseResults"	required="false" 	type="boolean" default="false" 	hint="A boolean value to determine if the output data is parsed or returned as a string" />
 			<cfscript>
+				variables.instance.apiEndpoint		= 'https://api.twitter.com/';
 				variables.instance.baseURL 			= 'http://twitter.com/';
-				variables.instance.apiURL			= 'https://api.twitter.com/1.1/';
+				variables.instance.apiURL			= variables.instance.apiEndpoint & '1.1/';
 				variables.instance.searchURL 		= 'http://search.twitter.com/';
 				variables.instance.uploadURL 		= 'https://upload.twitter.com/1.1/';
 				variables.instance.parseResults 	= arguments.parseResults;
@@ -106,7 +111,7 @@ Revision history
 				// OAuth specific constuctors
 				variables.instance.consumerKey 		= arguments.authDetails.getConsumerKey();
 				variables.instance.consumerSecret 	= arguments.authDetails.getConsumerSecret();
-
+				
 				variables.instance.reqEndpoint		= 'https://api.twitter.com/oauth/request_token';
 				variables.instance.authEndpoint		= 'https://api.twitter.com/oauth/authorize';
 				variables.instance.accessEndpoint	= 'http://api.twitter.com/oauth/access_token';
@@ -130,6 +135,10 @@ Revision history
 		<cfreturn variables.instance.baseURL />
 	</cffunction>
 
+	<cffunction name="getapiEndpoint" access="public" output="false" returntype="string" hint="I return the api endpoint for use in the OAuth method calls.">
+		<cfreturn variables.instance.apiEndpoint />
+	</cffunction>
+	
 	<cffunction name="getapiURL" access="public" output="false" returntype="string" hint="I return the api url for use in the method calls.">
 		<cfreturn variables.instance.apiURL />
 	</cffunction>
@@ -183,6 +192,7 @@ Revision history
 					<cfcase value="api"><cfset strMethod 	= getapiURL() /></cfcase>
 					<cfcase value="search"><cfset strMethod = getsearchURL() /></cfcase>
 					<cfcase value="upload"><cfset strMethod = getuploadURL() /></cfcase>
+					<cfcase value="no_version"><cfset strMethod = getapiEndpoint() /></cfcase>
 				</cfswitch>
 			<cfreturn strMethod />
 	</cffunction>
