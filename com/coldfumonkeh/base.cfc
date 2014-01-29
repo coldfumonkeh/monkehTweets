@@ -112,9 +112,9 @@ Revision history
 				variables.instance.consumerKey 		= arguments.authDetails.getConsumerKey();
 				variables.instance.consumerSecret 	= arguments.authDetails.getConsumerSecret();
 				
-				variables.instance.reqEndpoint		= 'https://api.twitter.com/oauth/request_token';
-				variables.instance.authEndpoint		= 'https://api.twitter.com/oauth/authorize';
-				variables.instance.accessEndpoint	= 'http://api.twitter.com/oauth/access_token';
+				variables.instance.reqEndpoint		= variables.instance.apiEndpoint & 'oauth/request_token';
+				variables.instance.authEndpoint		= variables.instance.apiEndpoint & 'oauth/authorize';
+				variables.instance.accessEndpoint	= variables.instance.apiEndpoint & 'auth/access_token';
 
 				variables.instance.reqSigMethodSHA	= CreateObject("component", "oauth.oauthsignaturemethod_hmac_sha1");
 
@@ -336,7 +336,7 @@ Revision history
 			var oAuthKeys			= {};
 			var twitRequest			= '';
 			var stuParams			= {};
-
+			
 				stuParams['oauth_verifier']		= arguments.verifier;
 
 				twitRequest			= oAuthAccessObject(
@@ -345,9 +345,8 @@ Revision history
 										httpurl		: variables.instance.accessEndpoint,
 										parameters	: stuParams
 									);
-
 			returnStruct['success']	= false;
-
+			
 			accessToken				= httpOAuthCall(twitRequest.toURL(),'get');
 
 			// If there is a string for auth token
