@@ -264,7 +264,7 @@ Revision history
 			var localPair		= '';
 			var localKey		= '';
 			var localValue		= '';
-				for(local.i=1; i LTE listLen(arguments.queryString,'&');i=i+1) {
+				for(i=1; i LTE listLen(arguments.queryString,'&');i=i+1) {
 					localPair	= listGetAt(arguments.queryString,i,'&');
 					localKey	= listGetAt(localPair,1,'=');
 					if (listlen(localPair,'=') EQ 2) {
@@ -449,7 +449,7 @@ Revision history
 	<cffunction name="clearEmptyParams" access="public" output="false" hint="I accept the structure of arguments and remove any empty / nulls values before they are sent to the OAuth processing.">
 		<cfargument name="paramStructure" required="true" type="Struct" hint="I am a structure containing the arguments / parameters you wish to filter." />
 			<cfset var stuRevised = {} />
-				<cfloop collection="#arguments.paramStructure#" item="local.key">
+				<cfloop collection="#arguments.paramStructure#" item="key">
 					<cfif len(arguments.paramStructure[key])>
 						<cfset structInsert(stuRevised, lcase(key), arguments.paramStructure[key], true) />
 					</cfif>
