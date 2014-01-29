@@ -114,7 +114,7 @@ Revision history
 				
 				variables.instance.reqEndpoint		= variables.instance.apiEndpoint & 'oauth/request_token';
 				variables.instance.authEndpoint		= variables.instance.apiEndpoint & 'oauth/authorize';
-				variables.instance.accessEndpoint	= variables.instance.apiEndpoint & 'auth/access_token';
+				variables.instance.accessEndpoint	= variables.instance.apiEndpoint & 'oauth/access_token';
 
 				variables.instance.reqSigMethodSHA	= CreateObject("component", "oauth.oauthsignaturemethod_hmac_sha1");
 
