@@ -121,6 +121,9 @@ Revision history
 		- getListOwnerships
 	- fixed endpoint for reportSpam() method
 
+26/03/2014 - Version 1.4.5
+
+	- fixed an issue with the geo functions that were passing to a non-existant request method as they now need authentication. Thanks to Allan Schumann for finding this.
 
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
@@ -1111,31 +1114,23 @@ Revision history
 
 	<!--- GET geo/id/:place_id --->
 	<cffunction name="geoGetPlaceByID" access="public" output="false" returntype="Any" hint="Returns all the information about a known place.">
-		<cfargument name="place_id" 				required="true" 	type="String" 				 hint="A place in the world. These IDs can be retrieved from the geoReversGeocode() method." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'geo/id/' & arguments.place_id & '.json';
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfargument name="place_id" 		required="true" 	type="String" 				 	hint="A place in the world. These IDs can be retrieved from the geoReversGeocode() method." />
+		<cfargument name="checkHeader"		required="false"	type="boolean"	default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'geo/id/' & arguments.place_id & '.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<!--- GET geo/reverse_geocode --->
 	<cffunction name="geoReverseGeocode" access="public" output="false" returntype="Any" hint="Given a latitude and a longitude, searches for up to 20 places that can be used as a place_id when updating a status. This request is an informative call and will deliver generalized results about geography.">
-		<cfargument name="lat" 						required="true" 	type="String" 				 hint="The latitude to search around. This parameter will be ignored unless it is inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there isn't a corresponding long parameter." />
-		<cfargument name="long" 					required="true" 	type="String" 				 hint="The longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if geo_enabled is disabled, or if there not a corresponding lat parameter." />
-		<cfargument name="granularity" 				required="false" 	type="String" 				 hint="This is the minimal granularity of place types to return and must be one of: poi, neighborhood, city, admin or country. If no granularity is provided for the request neighborhood is assumed. Setting this to city, for example, will find places which have a type of city, admin or country." />
-		<cfargument name="accuracy" 				required="false" 	type="String" 				 hint="A hint on the 'region' in which to search. If a number, then this is a radius in meters, but it can also take a string that is suffixed with ft to specify feet. If this is not passed in, then it is assumed to be 0m. If coming from a device, in practice, this value is whatever accuracy the device has measuring its location (whether it be coming from a GPS, WiFi triangulation, etc.)." />
-		<cfargument name="max_results" 				required="false" 	type="String" 				 hint="A hint as to the number of results to return. This does not guarantee that the number of results returned will equal max_results, but instead informs how many 'nearby' results to return. Ideally, only pass in the number of places you intend to display to the user here." />
-		<cfargument name="callback" 				required="false" 	type="String" 				 hint="If supplied, the response will use the JSONP format with a callback of the given name." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
-				<cfscript>
-					strTwitterMethod = getCorrectEndpoint('api') & 'geo/reverse_geocode.json?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
-				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfargument name="lat" 						required="true" 	type="String" 				 	hint="The latitude to search around. This parameter will be ignored unless it is inside the range -90.0 to +90.0 (North is positive) inclusive. It will also be ignored if there isn't a corresponding long parameter." />
+		<cfargument name="long" 					required="true" 	type="String" 				 	hint="The longitude to search around. The valid ranges for longitude is -180.0 to +180.0 (East is positive) inclusive. This parameter will be ignored if outside that range, if it is not a number, if geo_enabled is disabled, or if there not a corresponding lat parameter." />
+		<cfargument name="granularity" 				required="false" 	type="String" 				 	hint="This is the minimal granularity of place types to return and must be one of: poi, neighborhood, city, admin or country. If no granularity is provided for the request neighborhood is assumed. Setting this to city, for example, will find places which have a type of city, admin or country." />
+		<cfargument name="accuracy" 				required="false" 	type="String" 				 	hint="A hint on the 'region' in which to search. If a number, then this is a radius in meters, but it can also take a string that is suffixed with ft to specify feet. If this is not passed in, then it is assumed to be 0m. If coming from a device, in practice, this value is whatever accuracy the device has measuring its location (whether it be coming from a GPS, WiFi triangulation, etc.)." />
+		<cfargument name="max_results" 				required="false" 	type="String" 				 	hint="A hint as to the number of results to return. This does not guarantee that the number of results returned will equal max_results, but instead informs how many 'nearby' results to return. Ideally, only pass in the number of places you intend to display to the user here." />
+		<cfargument name="callback" 				required="false" 	type="String" 				 	hint="If supplied, the response will use the JSONP format with a callback of the given name." />
+		<cfargument name="checkHeader"				required="false"	type="boolean" default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'geo/reverse_geocode.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<!--- GET geo/search --->
@@ -1150,15 +1145,15 @@ Revision history
 		<cfargument name="contained_within" 		required="false" 	type="String" 					hint="This is the place_id which you would like to restrict the search results to. Setting this value means only places within the given place_id will be found. Specify a place_id. For example, to scope all results to places within 'San Francisco, CA USA', you would specify a place_id of '5a110d312052166f'." />
 		<cfargument name="street_address" 			required="false" 	type="String" 					hint="This parameter searches for places which have this given street address. There are other well-known, and application specific attributes available. Custom attributes are also permitted." />
 		<cfargument name="callback" 				required="false" 	type="String" 					hint="If supplied, the response will use the JSONP format with a callback of the given name." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
+		<cfargument name="checkHeader"				required="false"	type="boolean" default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'geo/search.json' />
 				<cfscript>
+					if(structKeyExists(arguments, 'street_address') AND len(arguments.street_address)) {
 					arguments["attribute:street_address"] = arguments.street_address;
 					structDelete(arguments,'street_address');
-					strTwitterMethod = getCorrectEndpoint('api') & 'geo/search.json?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
+					}
 				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<!--- GET geo/similar_places --->
@@ -1169,15 +1164,15 @@ Revision history
 		<cfargument name="contained_within" 		required="false" 	type="String" 					hint="This is the place_id which you would like to restrict the search results to. Setting this value means only places within the given place_id will be found. Specify a place_id. For example, to scope all results to places within 'San Francisco, CA USA', you would specify a place_id of '5a110d312052166f'." />
 		<cfargument name="street_address" 			required="false" 	type="String" 					hint="This parameter searches for places which have this given street address. There are other well-known, and application specific attributes available. Custom attributes are also permitted." />
 		<cfargument name="callback" 				required="false" 	type="String" 					hint="If supplied, the response will use the JSONP format with a callback of the given name." />
-			<cfset var strTwitterMethod = '' />
-			<cfset var strReturn 		= '' />
+		<cfargument name="checkHeader"				required="false"	type="boolean" default="false"	hint="If set to true, I will abort the request and return the response headers for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'geo/similar_places.json' />
 				<cfscript>
+					if(structKeyExists(arguments, 'street_address') AND len(arguments.street_address)) {
 					arguments["attribute:street_address"] = arguments.street_address;
 					structDelete(arguments,'street_address');
-					strTwitterMethod = getCorrectEndpoint('api') & 'geo/similar_places.json?' & buildParamString(arguments);
-					strReturn = makeGetCall(strTwitterMethod);
+					}
 				</cfscript>
-		<cfreturn handleReturnFormat(strReturn, arguments.format) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<!--- POST geo/place --->
@@ -1190,10 +1185,13 @@ Revision history
 		<cfargument name="street_address" 			required="false" 					type="String" 	hint="This parameter searches for places which have this given street address. There are other well-known, and application specific attributes available. Custom attributes are also permitted." />
 		<cfargument name="callback"					required="false" 					type="string" 	hint="If supplied, the response will use the JSONP format with a callback of the given name." />
 		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the headers and sent information for debugging." />
-			<cfset var strTwitterMethod = '' />
-				<cfset arguments["attribute:street_address"] = arguments.street_address />
-				<cfset structDelete(arguments,'street_address') />
-				<cfset strTwitterMethod = getCorrectEndpoint('api') & 'geo/place.json' />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'geo/place.json' />
+				<cfscript>
+					if(structKeyExists(arguments, 'street_address') AND len(arguments.street_address)) {
+					arguments["attribute:street_address"] = arguments.street_address;
+					structDelete(arguments,'street_address');
+					}
+				</cfscript>
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments,checkHeader=arguments.checkHeader) />
 	</cffunction>
 
