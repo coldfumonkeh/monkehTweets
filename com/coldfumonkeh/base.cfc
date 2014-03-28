@@ -104,7 +104,7 @@ Revision history
 
 				variables.instance.reqEndpoint		= 'https://api.twitter.com/oauth/request_token';
 				variables.instance.authEndpoint		= 'https://api.twitter.com/oauth/authorize';
-				variables.instance.accessEndpoint	= 'http://api.twitter.com/oauth/access_token';
+				variables.instance.accessEndpoint	= 'https://api.twitter.com/oauth/access_token';
 
 				variables.instance.reqSigMethodSHA	= CreateObject("component", "oauth.oauthsignaturemethod_hmac_sha1");
 
