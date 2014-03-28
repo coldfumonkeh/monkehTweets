@@ -82,15 +82,6 @@ Revision history
 	- addition of entify method to convert hashtags, urls and users referenced in tweet entities into HTML URLs for direct output.
 		Thanks to Matt Hinchliffe (i-like-robots) for the suggestion.
 
-14/01/2014 - Version 1.4.3
-
-	- revision of handleReturnFormat to return a string without messing around with serialization and back again.
-		Thanks to Mark Hetherington for suggesting this on Github
-	- fixing local variable error (for < CF9 ) on the entify method. 
-	
-27/01/2014 - Version 1.4.4
-
-	- added api endpoint value (without the version number) and additional getter to retrieve it within the main component using the no_version filter.
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -101,9 +92,8 @@ Revision history
 		<cfargument name="authDetails" 	required="true" 	type="any" 						hint="I am the authDetails class." />
 		<cfargument name="parseResults"	required="false" 	type="boolean" default="false" 	hint="A boolean value to determine if the output data is parsed or returned as a string" />
 			<cfscript>
-				variables.instance.apiEndpoint		= 'https://api.twitter.com/';
 				variables.instance.baseURL 			= 'http://twitter.com/';
-				variables.instance.apiURL			= variables.instance.apiEndpoint & '1.1/';
+				variables.instance.apiURL			= 'https://api.twitter.com/1.1/';
 				variables.instance.searchURL 		= 'http://search.twitter.com/';
 				variables.instance.uploadURL 		= 'https://upload.twitter.com/1.1/';
 				variables.instance.parseResults 	= arguments.parseResults;
@@ -111,10 +101,10 @@ Revision history
 				// OAuth specific constuctors
 				variables.instance.consumerKey 		= arguments.authDetails.getConsumerKey();
 				variables.instance.consumerSecret 	= arguments.authDetails.getConsumerSecret();
-				
-				variables.instance.reqEndpoint		= variables.instance.apiEndpoint & 'oauth/request_token';
-				variables.instance.authEndpoint		= variables.instance.apiEndpoint & 'oauth/authorize';
-				variables.instance.accessEndpoint	= variables.instance.apiEndpoint & 'oauth/access_token';
+
+				variables.instance.reqEndpoint		= 'https://api.twitter.com/oauth/request_token';
+				variables.instance.authEndpoint		= 'https://api.twitter.com/oauth/authorize';
+				variables.instance.accessEndpoint	= 'https://api.twitter.com/oauth/access_token';
 
 				variables.instance.reqSigMethodSHA	= CreateObject("component", "oauth.oauthsignaturemethod_hmac_sha1");
 
@@ -135,10 +125,6 @@ Revision history
 		<cfreturn variables.instance.baseURL />
 	</cffunction>
 
-	<cffunction name="getapiEndpoint" access="public" output="false" returntype="string" hint="I return the api endpoint for use in the OAuth method calls.">
-		<cfreturn variables.instance.apiEndpoint />
-	</cffunction>
-	
 	<cffunction name="getapiURL" access="public" output="false" returntype="string" hint="I return the api url for use in the method calls.">
 		<cfreturn variables.instance.apiURL />
 	</cffunction>
@@ -164,6 +150,7 @@ Revision history
 				<cfreturn DeserializeJSON(arguments.data) />
 			<cfelse>
 				<!---<cfreturn serializeJSON(DeserializeJSON(arguments.data)) />--->
+				<!--- CF's deserializeJSON will turn strings into numbers even if you want them to be strings! --->
 				<cfreturn arguments.data.toString() />
 			</cfif>
 		<cfabort>
@@ -192,7 +179,6 @@ Revision history
 					<cfcase value="api"><cfset strMethod 	= getapiURL() /></cfcase>
 					<cfcase value="search"><cfset strMethod = getsearchURL() /></cfcase>
 					<cfcase value="upload"><cfset strMethod = getuploadURL() /></cfcase>
-					<cfcase value="no_version"><cfset strMethod = getapiEndpoint() /></cfcase>
 				</cfswitch>
 			<cfreturn strMethod />
 	</cffunction>
@@ -264,7 +250,7 @@ Revision history
 			var localPair		= '';
 			var localKey		= '';
 			var localValue		= '';
-				for(i=1; i LTE listLen(arguments.queryString,'&');i=i+1) {
+				for(local.i=1; i LTE listLen(arguments.queryString,'&');i=i+1) {
 					localPair	= listGetAt(arguments.queryString,i,'&');
 					localKey	= listGetAt(localPair,1,'=');
 					if (listlen(localPair,'=') EQ 2) {
@@ -276,7 +262,7 @@ Revision history
 		</cfscript>
 	</cffunction>
 
-	<!--- PUBLIC FUNCTIONS --->		
+	<!--- PUBLIC FUNCTIONS --->
 	<cffunction name="getAuthorisation" access="public" output="false" returntype="struct" hint="I make the call to Twitter to request authorisation to access the account.">
 		<cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
 		<cfscript>
@@ -336,7 +322,7 @@ Revision history
 			var oAuthKeys			= {};
 			var twitRequest			= '';
 			var stuParams			= {};
-			
+
 				stuParams['oauth_verifier']		= arguments.verifier;
 
 				twitRequest			= oAuthAccessObject(
@@ -345,8 +331,9 @@ Revision history
 										httpurl		: variables.instance.accessEndpoint,
 										parameters	: stuParams
 									);
+
 			returnStruct['success']	= false;
-			
+
 			accessToken				= httpOAuthCall(twitRequest.toURL(),'get');
 
 			// If there is a string for auth token
@@ -449,7 +436,7 @@ Revision history
 	<cffunction name="clearEmptyParams" access="public" output="false" hint="I accept the structure of arguments and remove any empty / nulls values before they are sent to the OAuth processing.">
 		<cfargument name="paramStructure" required="true" type="Struct" hint="I am a structure containing the arguments / parameters you wish to filter." />
 			<cfset var stuRevised = {} />
-				<cfloop collection="#arguments.paramStructure#" item="key">
+				<cfloop collection="#arguments.paramStructure#" item="local.key">
 					<cfif len(arguments.paramStructure[key])>
 						<cfset structInsert(stuRevised, lcase(key), arguments.paramStructure[key], true) />
 					</cfif>
@@ -572,14 +559,12 @@ Revision history
 
 	<cffunction name="entify" output="false" returntype="string" hint="I convert all user mentions, links and hashtags to HTML URLs for display.">
 		<cfargument name="tweetStruct" required="true" type="struct" hint="I am a struct containing the tweet response. You MUST have include_entities = true in your request, otherwise I won't have anything to parse." />
-			<cfset var html 	= arguments.tweetStruct.text />
-			<cfset var find 	= '' />
-			<cfset var replace 	= '' />
+			<cfset var html = arguments.tweetStruct.text />
 			<cfif structKeyExists(arguments.tweetStruct, "entities")>
 				<cfloop collection="#arguments.tweetStruct.entities#" item="local.type">
 					<cfloop array="#arguments.tweetStruct.entities[type]#" index="local.entity">
-						<cfset find 	= '' />
-						<cfset replace 	= '' />
+						<cfset var find 	= '' />
+						<cfset var replace 	= '' />
 						<cfswitch expression="#type#">
 							<cfcase value="hashtags">
 								<cfset find 	= '##' & entity.text />
@@ -606,3 +591,4 @@ Revision history
 	</cffunction>
 
 </cfcomponent>
+
