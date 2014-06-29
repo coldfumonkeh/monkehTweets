@@ -65,17 +65,7 @@ component extends="mxunit.framework.TestCase" {
 	}
 	
 	public any function testDM() {
-		objMonkehTweet = createObject('component',
-       'monkehTweet.com.coldfumonkeh.monkehTweet')
-            .init(
-            	consumerKey			=	'jmNKuslFxhRl5hoEOTcw',
-				consumerSecret		=	'1LzHvvhGCxf3T2ZtywJBr8UUXYi1tdjr982RYSN0kE',
-				oauthToken			=	'14234482-B2vKR8BZoybW8S0Arb6PCDP6a8Y7yubXgZ8waCRJh',
-				oauthTokenSecret	=	'NhOR1LqTAHPfHl4SOmRlXjLbYdSdhlpAfF3vaxnoBTAuy',
-				userAccountName		=	'coldfumonkeh',
-				parseResults		=	true
-            );
-         dataReturn = objMonkehTweet.createDM(user="coldfumonkeh", text="Hello World @ #TimeFormat(Now(), 'medium')#!");
+         dataReturn = variables.monkehTweet.createDM(user="coldfumonkeh", text="Hello World @ #TimeFormat(Now(), 'medium')#!");
 		debug(dataReturn);
 		return dataReturn;
 	}
