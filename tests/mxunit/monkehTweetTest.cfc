@@ -78,6 +78,11 @@ component extends="mxunit.framework.TestCase" {
 		return dataReturn;
 	}
 	
+	public any function getRetweets() {
+		var dataReturn = variables.monkehTweet.getRetweets(id='487224072070504448');
+		debug(dataReturn);
+	}
+	
 	public any function getRetweetsOfMe() {
 		var dataReturn = variables.monkehTweet.getRetweetsOfMe(include_entities = true, include_user_entities = true );
 		debug(dataReturn);
@@ -244,7 +249,18 @@ component extends="mxunit.framework.TestCase" {
 		var dataReturn	=	variables.monkehTweet.getListMembers(list_id='59032657');
 		debug(dataReturn);
 	}
-
+	
+	/*public void function updateProfileImage() {
+		var dataReturn = variables.monkehTweet.updateProfileImage(image='/Applications/ColdFusion10/cfusion/wwwroot/monkehTweet/tests/mxunit/random.jpg');
+		debug(dataReturn);
+	}
+	
+	
+	public void function updateProfileBackgroundImage() {
+		var dataReturn = variables.monkehTweet.updateProfileBackgroundImage(image='/Applications/ColdFusion10/cfusion/wwwroot/monkehTweet/tests/mxunit/random.jpg', use=1);
+		debug(dataReturn);
+	}*/
+	
     public void function testDummy() {
         assertTrue(true);
     }

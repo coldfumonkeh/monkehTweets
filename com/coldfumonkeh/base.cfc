@@ -241,11 +241,15 @@ Revision history
 					<cfif structKeyExists (arguments.parameters,'media[]') and arguments.method is 'POST'>
 						<cfhttpparam type="file" file="#arguments.parameters['media[]']#" name="media[]" />
 					</cfif>
-
+					<cfif structKeyExists (arguments.parameters,'image') and arguments.method is 'POST'>
+						<cfhttpparam type="file" file="#arguments.parameters['image']#" name="image" />
+					</cfif>
+					
 					<!--- Strip out the non-required parameters (the custom monkehTweet arguments) --->
 					<cfset structDelete(arguments.parameters,'checkHeader', false) />
 					<cfset structDelete(arguments.parameters,'format', false) />
 					<cfset structDelete(arguments.parameters,'media[]', false) />
+					<cfset structDelete(arguments.parameters,'image', false) />
 
 					<cfif arguments.method is 'POST'>
 						<cfloop collection="#arguments.parameters#" item="local.key">
@@ -376,7 +380,7 @@ Revision history
 				/* If we're sending through media to upload, we need to keep the parameters empty
 				 and not send anything through that would break the multipart request
 				*/
-				if (structKeyExists(arguments.parameters,'media[]')) {
+				if (structKeyExists(arguments.parameters,'media[]') OR structKeyExists(arguments.parameters,'image')) {
 					stuParameters	=	{};
 				} else {
 					stuParameters	=	arguments.parameters;
@@ -394,6 +398,10 @@ Revision history
 				if (structKeyExists(arguments.parameters,'media[]')) {
 				stuParams['media[]']		=	arguments.parameters['media[]'];
 				stuParams['params']			=	arguments.parameters;
+				}
+
+				if (structKeyExists(arguments.parameters,'image')) {
+					structInsert(stuParams,'image',arguments.parameters['image']);
 				}
 
 			requestResult = httpOAuthCall(twitRequest.toURL(),arguments.httpmethod, stuParams);
@@ -472,7 +480,7 @@ Revision history
 						if(!checkMedia(file=arguments.parameters['media[]'])) {
 							// If not, set to false
 							isOKToProceed	=	false;
-							strReturn		=	'The media you are trying to upload seems to be incompatible or an Incorrect file type.';
+							strReturn		=	'The media you are trying to upload seems to be incompatible or an incorrect file type.';
 						}
 					}
 					// if ok to proceed, do so.

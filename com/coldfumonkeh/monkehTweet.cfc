@@ -125,6 +125,11 @@ Revision history
 
 	- fixed an issue with the geo functions that were passing to a non-existant request method as they now need authentication. Thanks to Allan Schumann for finding this.
 
+10/07/2014 - Version 1.4.6
+
+	- fixed an issue with the updateProfileBackgroundImage and updateProfileImage methods producing a 414 error. Thanks to @DanielElmore for finding and reporting this.
+	- fixed an issue with the getRetweets method using the incorrect HTTP method. Resolved to now use GET. Thanks to Tracy for finding and reporting this.
+
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
 
@@ -270,7 +275,7 @@ Revision history
 		<cfargument name="trim_user" 				required="false" 	type="Boolean"	default="false" hint="When set to true, each tweet returned in a timeline will include a user object including ONLY the status author's numerical ID, otherwise you will receive the complete user object." />
 		<cfargument name="checkHeader"				required="false"	type="boolean"	default="false" hint="If set to true, I will abort the request and return the response headers for debugging." />
 			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/retweets/' & arguments.id & '.json' />
-		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 
 	<!--- GET statuses/show/:id --->
@@ -657,7 +662,7 @@ Revision history
 		<cfargument name="include_entities" 		required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="skip_status" 				required="false" 	default="" 			type="string"	hint="When set to either true, t or 1 statuses will not be included in the returned user objects." />
 		<cfargument name="checkHeader"				required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'account/update_profile_colors.json' />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'account/update_profile_image.json' />
 		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='POST',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 
