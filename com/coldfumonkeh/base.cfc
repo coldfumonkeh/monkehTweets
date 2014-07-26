@@ -605,8 +605,14 @@ Revision history
 								<cfset find 	= '@' & entity.screen_name />
                     			<cfset replace 	= '<a href="http://twitter.com/#entity.screen_name#" title="#entity.name#" rel="nofollow" target="_blank">#find#</a>' />
 							</cfcase>
+							<cfcase value="symbols">
+								<cfset find 	= '$' & entity.text />
+                    			<cfset replace 	= '<a href="https://twitter.com/search?q=%24#entity.text#&src=ctag" title="#entity.text#" rel="nofollow" target="_blank">#find#</a>' />
+							</cfcase>
 						</cfswitch>
-						<cfset html = replace(html, find, replace) />
+						<cfif replace neq ''>
+							<cfset html = replace(html, find, replace) />
+						</cfif>
 					</cfloop>
 				</cfloop>
 			</cfif>
