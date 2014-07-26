@@ -208,6 +208,13 @@ component extends="mxunit.framework.TestCase" {
 		debug(dataReturn);
 	}*/
 	
+	
+	public any function getStatusLookup() {
+		var dataReturn = variables.monkehTweet.getStatusLookup(id='21', include_entities='true');
+		debug(dataReturn);
+	}
+	
+	
 	public any function help_configuration() {
 		var dataReturn	=	variables.monkehTweet.configuration();
 		debug(dataReturn);

@@ -130,6 +130,11 @@ Revision history
 	- fixed an issue with the updateProfileBackgroundImage and updateProfileImage methods producing a 414 error. Thanks to @DanielElmore for finding and reporting this.
 	- fixed an issue with the getRetweets method using the incorrect HTTP method. Resolved to now use GET. Thanks to Tracy for finding and reporting this.
 
+26/07/2014 - Version 1.4.7
+
+	- addition of new method getStatusLookup which covers the Twitter GET statuses/lookup method
+	- merged updated from Mark Hetherington to fix issue with symbols entity values. Thanks Mark!
+
 --->
 <cfcomponent output="false" displayname="monkehTweet" hint="I am the main facade / service object for the twitter api." extends="base">
 
@@ -198,6 +203,17 @@ Revision history
 	<!--- Timelines --->
 	<!--- Timelines are collections of Tweets, ordered with the most recent first. --->
 
+	<!--- GET statuses/lookup --->
+	<cffunction name="getStatusLookup" access="public" output="false" hint="Returns fully-hydrated tweet objects for up to 100 tweets per request, as specified by comma-separated values passed to the id parameter. This method is especially useful to get the details (hydrate) a collection of Tweet IDs. GET statuses/show/:id is used to retrieve a single tweet object.">
+		<cfargument name="id" 						required="true" 	type="string" 					hint="A comma separated list of tweet IDs, up to 100 are allowed in a single request. Example Values: 20, 432656548536401920" />
+		<cfargument name="include_entities"			required="false" 	default=""		type="string" 	hint="The entities node that may appear within embedded statuses will be disincluded when set to false." />
+		<cfargument name="trim_user" 				required="false"	default=""		type="string"	hint="When set to either true, t or 1, each tweet returned in a timeline will include a user object including only the status authors numerical ID. Omit this parameter to receive the complete user object." />
+		<cfargument name="map"						required="false"	default=""		type="string"	hint="When using the map parameter, tweets that do not exist or cannot be viewed by the current user will still have their key represented but with an explicitly null value paired with it" />
+		<cfargument name="checkHeader"				required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the headers and sent information for debugging." />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'statuses/lookup.json' />
+		<cfreturn genericAuthenticationMethod(httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments,checkHeader=arguments.checkHeader) />
+	</cffunction>
+	
 	<!--- GET statuses/mentions_timeline --->
 	<cffunction name="getMentions" access="public" output="false" hint="Returns the 20 most recent mentions (status containing @username) for the authenticating user.">
 		<cfargument name="count" 					required="false" 	default="" 		type="string" 	hint="Specifies the number of statuses to retrieve. May not be greater than 200." />
