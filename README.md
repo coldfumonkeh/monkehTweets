@@ -2,10 +2,6 @@
 
 # monkehTweets ColdFusion Twitter API
 
-Need help or want to disuss monkehTweets? Join the IRC channel:
-
-#monkehTweets chat.freenode.net
-
 ---
 
 monkehTweets is a ColdFusion Wrapper written to interact with the Twitter API.
@@ -13,6 +9,10 @@ Full installation details (incredibly simple) are included within
 the */installation* directory.
 
 monkehTweets has been compatible with Twitter's v1.1 API since October 2012 (well in advance of the change in May 2013)
+
+Need help or want to disuss monkehTweets? Join the IRC channel:
+
+#monkehTweets chat.freenode.net
 
 ## Authors
 
