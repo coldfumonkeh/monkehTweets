@@ -12,7 +12,7 @@ monkehTweets has been compatible with Twitter's v1.1 API since October 2012 (wel
 
 Need help or want to disuss monkehTweets? Join the IRC channel:
 
-#monkehTweets chat.freenode.net
+    #monkehTweets chat.freenode.net
 
 ## Authors
 
