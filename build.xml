@@ -35,6 +35,7 @@
   <property name="acf10-linux32.local.url" value="/opt/ci/cf10-linux32.tar.gz" />
   <property name="acf10-linux64.local.url" value="/opt/ci/cf10-linux64.tar.gz" />
   <property name="acf902-linux64.local.url" value="/opt/ci/cf902-linux64.tar.gz" />
+  <property name="lucee42.local.url" value="/opt/ci/lucee-4.5.0.042-express.zip" />
 
   <!-- test frameworks -->
   <property name="testbox.local.url" value="/opt/ci/testbox_1.1.0.zip" />
@@ -47,6 +48,8 @@
   <property name="acf10-linux32.remote.url" value="http://cfml-ci.s3.amazonaws.com/cf10-linux32.tar.gz" />
   <property name="acf10-linux64.remote.url" value="http://cfml-ci.s3.amazonaws.com/cf10-linux64.tar.gz" />
   <property name="acf902-linux64.remote.url" value="http://cfml-ci.s3.amazonaws.com/cf902-linux64.tar.gz" />
+  <property name="lucee42.remote.url" value="https://bitbucket.org/lucee/lucee/downloads/lucee-4.5.0.042-express.zip" />
+
 
   <property name="testbox.remote.url" value="http://downloads.ortussolutions.com/testbox_1.1.0.zip" />
   <property name="mxunit.remote.url" value="https://github.com/marcins/mxunit/archive/fix-railo-nulls.zip" />
