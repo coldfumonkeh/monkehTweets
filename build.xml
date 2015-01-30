@@ -69,6 +69,7 @@
   <property name="acf10-linux32.helper" value="acf" />
   <property name="acf10-linux64.helper" value="acf" />
   <property name="acf902-linux64.helper" value="acf9" />
+  <property name="lucee42.helper" value="lucee42" />
 
   <fail unless="platform" message="Platform is not set" />
   <fail unless="${platform}.${source}.url">Unkown platform ${platform} for source ${source}.
