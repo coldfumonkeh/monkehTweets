@@ -75,6 +75,7 @@
   <fail unless="${platform}.${source}.url">Unkown platform ${platform} for source ${source}.
 
 Valid values are:
+ lucee42
  railo40
  railo41
  railo41-osx
