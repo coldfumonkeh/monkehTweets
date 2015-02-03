@@ -86,11 +86,17 @@ Revision history
 
 	- revision of handleReturnFormat to return a string without messing around with serialization and back again.
 		Thanks to Mark Hetherington for suggesting this on Github
-	- fixing local variable error (for < CF9 ) on the entify method. 
-	
+	- fixing local variable error (for < CF9 ) on the entify method.
+
 27/01/2014 - Version 1.4.4
 
 	- added api endpoint value (without the version number) and additional getter to retrieve it within the main component using the no_version filter.
+
+
+03/02/2015 - Version 1.4.8
+
+	- addition of cfhttp timeout value set in the constructor to help protect against hanging requests as raised by Tom Chiverton: https://github.com/coldfumonkeh/monkehTweets/issues/22
+
 
 --->
 <cfcomponent displayname="base" output="false" hint="I am the base class containing util methods and common functions">
@@ -100,6 +106,7 @@ Revision history
 	<cffunction name="init" access="public" output="false" returntype="any" hint="I am the constructor method for the base class">
 		<cfargument name="authDetails" 	required="true" 	type="any" 						hint="I am the authDetails class." />
 		<cfargument name="parseResults"	required="false" 	type="boolean" default="false" 	hint="A boolean value to determine if the output data is parsed or returned as a string" />
+		<cfargument name="timeout" required="false"	type="string" default="30" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 			<cfscript>
 				variables.instance.apiEndpoint		= 'https://api.twitter.com/';
 				variables.instance.baseURL 			= 'http://twitter.com/';
@@ -108,10 +115,12 @@ Revision history
 				variables.instance.uploadURL 		= 'https://upload.twitter.com/1.1/';
 				variables.instance.parseResults 	= arguments.parseResults;
 
+				variables.instance.timeout = arguments.timeout;
+
 				// OAuth specific constuctors
 				variables.instance.consumerKey 		= arguments.authDetails.getConsumerKey();
 				variables.instance.consumerSecret 	= arguments.authDetails.getConsumerSecret();
-				
+
 				variables.instance.reqEndpoint		= variables.instance.apiEndpoint & 'oauth/request_token';
 				variables.instance.authEndpoint		= variables.instance.apiEndpoint & 'oauth/authorize';
 				variables.instance.accessEndpoint	= variables.instance.apiEndpoint & 'oauth/access_token';
@@ -138,7 +147,7 @@ Revision history
 	<cffunction name="getapiEndpoint" access="public" output="false" returntype="string" hint="I return the api endpoint for use in the OAuth method calls.">
 		<cfreturn variables.instance.apiEndpoint />
 	</cffunction>
-	
+
 	<cffunction name="getapiURL" access="public" output="false" returntype="string" hint="I return the api url for use in the method calls.">
 		<cfreturn variables.instance.apiURL />
 	</cffunction>
@@ -199,8 +208,9 @@ Revision history
 
 	<cffunction name="makeGetCall" access="package" output="false" returntype="Any" hint="I am the function that makes the cfhttp GET requests">
 		<cfargument name="URLEndpoint" 	required="true" type="string" hint="The URL to call for the GET request." />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 			<cfset var cfhttp	 = '' />
-			<cfhttp url="#arguments.URLEndpoint#" method="get" useragent="monkehTweets" />
+			<cfhttp url="#arguments.URLEndpoint#" method="get" useragent="monkehTweets" timeout="#arguments.timeout#" />
 			<cfset checkStatusCode(cfhttp) />
 		<cfreturn cfhttp.FileContent />
 	</cffunction>
@@ -230,6 +240,7 @@ Revision history
 		<cfargument name="url" 			type="string" 	displayname="url" 		hint="URL to request" 		required="true" />
 		<cfargument name="method" 		type="string" 	displayname="method" 	hint="Method of HTTP Call" 	required="true" />
 		<cfargument name="parameters" 	type="struct" 	displayname="method" 	hint="HTTP parameters" 		required="false" default="#structNew()#" />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 			<cfset var returnStruct = {} />
 
 				<cfif structKeyExists(arguments.parameters,'params')>
@@ -237,14 +248,14 @@ Revision history
 					<cfset structDelete(arguments.parameters,'params') />
 				</cfif>
 
-				<cfhttp url="#arguments.url#" method="#arguments.method#" result="returnStruct" multipart="true">
+				<cfhttp url="#arguments.url#" method="#arguments.method#" result="returnStruct" multipart="true" timeout="#arguments.timeout#">
 					<cfif structKeyExists (arguments.parameters,'media[]') and arguments.method is 'POST'>
 						<cfhttpparam type="file" file="#arguments.parameters['media[]']#" name="media[]" />
 					</cfif>
 					<cfif structKeyExists (arguments.parameters,'image') and arguments.method is 'POST'>
 						<cfhttpparam type="file" file="#arguments.parameters['image']#" name="image" />
 					</cfif>
-					
+
 					<!--- Strip out the non-required parameters (the custom monkehTweet arguments) --->
 					<cfset structDelete(arguments.parameters,'checkHeader', false) />
 					<cfset structDelete(arguments.parameters,'format', false) />
@@ -280,9 +291,10 @@ Revision history
 		</cfscript>
 	</cffunction>
 
-	<!--- PUBLIC FUNCTIONS --->		
+	<!--- PUBLIC FUNCTIONS --->
 	<cffunction name="getAuthorisation" access="public" output="false" returntype="struct" hint="I make the call to Twitter to request authorisation to access the account.">
 		<cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 		<cfscript>
 			var returnStruct					= {};
 			var requestToken					= {};
@@ -302,7 +314,7 @@ Revision history
 																parameters	: stuParams
 															);
 
-				requestToken					= httpOAuthCall(twitRequest.getString(),'GET');
+				requestToken					= httpOAuthCall(url=twitRequest.getString(), method='GET', timeout=arguments.timeout);
 				returnStruct['success']			= false;
 
 				// If there is a string for auth token
@@ -334,13 +346,14 @@ Revision history
 		<cfargument name="requestToken"		type="string" 	required="true" hint="Request Token needed to get Access Token." />
 		<cfargument name="requestSecret"	type="string" 	required="true" hint="Request Token Secret needed to get Access Token." />
 		<cfargument name="verifier" 		type="string"	required="true" hint="I am the oauth_verifier string returned from the authentication request." />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 		<cfscript>
 			var returnStruct		= {};
 			var accessToken			= {};
 			var oAuthKeys			= {};
 			var twitRequest			= '';
 			var stuParams			= {};
-			
+
 				stuParams['oauth_verifier']		= arguments.verifier;
 
 				twitRequest			= oAuthAccessObject(
@@ -350,8 +363,8 @@ Revision history
 										parameters	: stuParams
 									);
 			returnStruct['success']	= false;
-			
-			accessToken				= httpOAuthCall(twitRequest.toURL(),'get');
+
+			accessToken				= httpOAuthCall(url=twitRequest.toURL(), method='get', timeout=arguments.timeout);
 
 			// If there is a string for auth token
 			if (findNoCase("oauth_token",accessToken.filecontent)) {
@@ -372,6 +385,7 @@ Revision history
 		<cfargument name="httpurl"			type="string"	required="true"		hint="Parameters for the url to the service"/>
 		<cfargument name="httpmethod"		type="string"	required="true"		hint="HTTP Method" />
 		<cfargument name="parameters"		type="struct"	required="false"	hint="Parameters for the url to the service" />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 		<cfscript>
 			var requestResult		= '';
 			var twitRequest			= '';
@@ -404,7 +418,7 @@ Revision history
 					structInsert(stuParams,'image',arguments.parameters['image']);
 				}
 
-			requestResult = httpOAuthCall(twitRequest.toURL(),arguments.httpmethod, stuParams);
+			requestResult = httpOAuthCall(url=twitRequest.toURL(), method=arguments.httpmethod, parameters=stuParams, timeout=arguments.timeout);
 			return requestResult;
 		</cfscript>
 	</cffunction>
@@ -470,6 +484,7 @@ Revision history
 		<cfargument name="httpMethod" 	required="true" 	type="String" 	default="POST"			hint="I am the method of the authenticated request. GET or POST." />
 		<cfargument name="parameters" 	required="false" 	type="Struct"	default="#StructNew()#" hint="I am a structure of parameters for the request." />
 		<cfargument name="checkHeader"	required="false"	default="false" type="boolean"	hint="If set to true, I will abort the request and return the headers and sent information for debugging." />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 			<cfset var twitRequest		= 	{} />
 			<cfset var isOKToProceed	=	true />
 			<cfset var strReturn 		= 	'' />
@@ -490,7 +505,8 @@ Revision history
 								accessSecret	: getAuthDetails().getOAuthTokenSecret(),
 								httpurl			: arguments.httpURL,
 								httpmethod		: arguments.httpMethod,
-								parameters		: clearEmptyParams(arguments.parameters)
+								parameters		: clearEmptyParams(arguments.parameters),
+								timeout				: arguments.timeout
 							);
 
 						if(arguments.checkHeader) {
