@@ -385,7 +385,7 @@ Revision history
 		<cfargument name="httpurl"			type="string"	required="true"		hint="Parameters for the url to the service"/>
 		<cfargument name="httpmethod"		type="string"	required="true"		hint="HTTP Method" />
 		<cfargument name="parameters"		type="struct"	required="false"	hint="Parameters for the url to the service" />
-		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
+		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
 		<cfscript>
 			var requestResult		= '';
 			var twitRequest			= '';

@@ -2,3 +2,20 @@ test
 .settings
 settings.xml
 .project
+
+# Logs
+logs
+*.log
+
+# Settings and Config
+.settings
+settings.xml
+.project
+
+# Local Environment
+Vagrantfile
+WEB-INF
+.vagrant
+
+# Testing
+mxunit
