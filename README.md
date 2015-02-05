@@ -5,7 +5,7 @@
 ---
 
 monkehTweets is a ColdFusion Wrapper written to interact with the Twitter API.
-Full installation details (incredibly simple) are included within 
+Full installation details (incredibly simple) are included within
 the */installation* directory.
 
 monkehTweets has been compatible with Twitter's v1.1 API since October 2012 (well in advance of the change in May 2013)
@@ -26,7 +26,7 @@ Developed by Matt Gifford (aka coldfumonkeh)
 
 Got a lot out of this package? Saved you time and money?
 
-Share the love and visit Matt's wishlist: http://www.amazon.co.uk/wishlist/B9PFNDZNH4PY 
+Share the love and visit Matt's wishlist: http://www.amazon.co.uk/wishlist/B9PFNDZNH4PY
 
 ---
 
@@ -37,6 +37,12 @@ monkehTweets requires ColdFusion 8+
 The package has also been tested on Railo 3.3.1.000
 
 Project home: http://monkehTweet.riaforge.org
+
+## CommandBox Compatible
+
+If you have [CommandBox](http://www.ortussolutions.com/products/commandbox) running on your local machine (and you should) you can download this project using the following command:
+
+    box install monkehtweets
 
 ## Useful Links
 
