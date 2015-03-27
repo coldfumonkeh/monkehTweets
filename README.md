@@ -34,7 +34,7 @@ Share the love and visit Matt's wishlist: http://www.amazon.co.uk/wishlist/B9PFN
 
 monkehTweets requires ColdFusion 8+
 
-The package has been tested on:
+The package has been tested against:
 
 * Adobe ColdFusion 9
 * Adobe ColdFusion 10
