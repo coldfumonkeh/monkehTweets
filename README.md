@@ -34,7 +34,14 @@ Share the love and visit Matt's wishlist: http://www.amazon.co.uk/wishlist/B9PFN
 
 monkehTweets requires ColdFusion 8+
 
-The package has also been tested on Railo 3.3.1.000
+The package has been tested on:
+
+* Adobe ColdFusion 9
+* Adobe ColdFusion 10
+* Railo 4
+* Railo 4.1
+* Railo 4.2
+* Lucee 4.5
 
 Project home: http://monkehTweet.riaforge.org
 

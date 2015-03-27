@@ -2,7 +2,7 @@
 <project basedir="." default="test" name="monkehTweet">
 
   <!--
-    The monkehTweets project.
+    The CFML CI template project.
 
     For integration instructions, see the Github project page:
 
@@ -31,11 +31,12 @@
   <!-- Local URLs: Set these to locally available copies of the test server
   platforms if available to avoid a remote HTTP download - won't work for Travis CI -->
   <property name="railo41.local.url" value="/opt/ci/railo-express-4.1.2.005-nojre.tar.gz" />
+  <property name="railo42.local.url" value="/opt/ci/railo-express-4.2.1.000-nojre.tar.gz" />
   <property name="railo41-osx.local.url" value="/opt/ci/railo-express-4.1.2.005-macosx.zip" />
+  <property name="lucee451.local.url" value="/opt/ci/lucee-express-4.5.1.000.zip" />
   <property name="acf10-linux32.local.url" value="/opt/ci/cf10-linux32.tar.gz" />
   <property name="acf10-linux64.local.url" value="/opt/ci/cf10-linux64.tar.gz" />
   <property name="acf902-linux64.local.url" value="/opt/ci/cf902-linux64.tar.gz" />
-  <property name="lucee42.local.url" value="/opt/ci/lucee-4.5.0.042-express.zip" />
 
   <!-- test frameworks -->
   <property name="testbox.local.url" value="/opt/ci/testbox_1.1.0.zip" />
@@ -44,14 +45,13 @@
   <!-- Remote URLs -->
   <property name="railo40.remote.url" value="http://cfml-ci.s3.amazonaws.com/railo-express-4.0.4.001-nojre.tar.gz" />
   <property name="railo41.remote.url" value="http://cfml-ci.s3.amazonaws.com/railo-express-4.1.2.005-nojre.tar.gz" />
-  <property name="railo42beta.remote.url" value="http://cfml-ci.s3.amazonaws.com/railo-express-4.2.0.000-nojre.tar.gz" />
+  <property name="railo42.remote.url" value="http://cfml-ci.s3.amazonaws.com/railo-express-4.2.1.000-nojre.tar.gz" />
+  <property name="lucee451.remote.url" value="https://bitbucket.org/lucee/lucee/downloads/lucee-4.5.1.000-express.zip" />
   <property name="acf10-linux32.remote.url" value="http://cfml-ci.s3.amazonaws.com/cf10-linux32.tar.gz" />
   <property name="acf10-linux64.remote.url" value="http://cfml-ci.s3.amazonaws.com/cf10-linux64.tar.gz" />
   <property name="acf902-linux64.remote.url" value="http://cfml-ci.s3.amazonaws.com/cf902-linux64.tar.gz" />
-  <property name="lucee42.remote.url" value="https://bitbucket.org/lucee/lucee/downloads/lucee-4.5.0.042-express.zip" />
 
-
-  <property name="testbox.remote.url" value="http://downloads.ortussolutions.com/testbox_1.1.0.zip" />
+  <property name="testbox.remote.url" value="http://downloads.ortussolutions.com/ortussolutions/testbox/1.1.0/testbox-1.1.0.zip" />
   <property name="mxunit.remote.url" value="https://github.com/marcins/mxunit/archive/fix-railo-nulls.zip" />
 
   <!--
@@ -65,21 +65,20 @@
   <property name="railo40.helper" value="railo" />
   <property name="railo41.helper" value="railo" />
   <property name="railo41-osx.helper" value="railo" />
-  <property name="railo42beta.helper" value="railo" />
+  <property name="railo42.helper" value="railo-42plus" />
+  <property name="lucee451.helper" value="lucee" />
   <property name="acf10-linux32.helper" value="acf" />
   <property name="acf10-linux64.helper" value="acf" />
   <property name="acf902-linux64.helper" value="acf9" />
-  <property name="lucee42.helper" value="lucee42" />
 
   <fail unless="platform" message="Platform is not set" />
   <fail unless="${platform}.${source}.url">Unkown platform ${platform} for source ${source}.
 
 Valid values are:
- lucee42
  railo40
  railo41
  railo41-osx
- railo42beta
+ railo42
  acf10-linux32
  acf10-linux64
  acf902-linux64</fail>

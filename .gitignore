@@ -18,4 +18,4 @@ WEB-INF
 .vagrant
 
 # Testing
-mxunit
+/mxunit
