@@ -1,29 +1,91 @@
 {
-  "name" : "monkehTweets",
-  "slug" : "monkehtweets",
-  "version" : "1.4.8.0",
-  "author" : "Matt Gifford <matt@monkehworks.com>",
-  "location" : "https://github.com/coldfumonkeh/monkehTweets",
-  "directory" : "",
-  "createPackageDirectory" : "false",
-  "Homepage" : "https://github.com/coldfumonkeh/monkehTweets",
-  "Documentation" : "https://github.com/coldfumonkeh/monkehTweets",
-  "Repository" : {
-    "type" : "git", "URL" : "https://github.com/coldfumonkeh/monkehTweets"
-  },
-  "Bugs" : "https://github.com/coldfumonkeh/monkehTweets/issues",
-  "shortDescription" : "A ColdFusion wrapper to interact with the Twitter API (with OAuth integration)",
-  "keywords" : [ "twitter", "api", "oauth" ],
-  "private" : "false",
-  "engines" : [
-    { "type" : "railo", "version" : ">=4.1.x" },
-    { "type" : "adobe", "version" : ">=9.0.0" }
-  ],
-  "defaultEngine" : "railo",
-  "defaultPort" : "8085",
-  "License" : [
-    { "type" : "MIT", "URL" : "" }
-  ],
-  "Contributors" : [ {"name": "Matt Gifford", "url": "https://www.monkehworks.com"} ],
-  "ignore" : [ "tests/*", "README.md", "Vagrantfile", "mxunit/*", ".gitignore", "travis.yml", "build.xml" ]
+    "name":"monkehTweets",
+    "slug":"monkehtweets",
+    "version":"1.4.8.0",
+    "author":"Matt Gifford <matt@monkehworks.com>",
+    "location":"https://github.com/coldfumonkeh/monkehTweets",
+    "directory":"",
+    "createPackageDirectory":"false",
+    "Homepage":"https://github.com/coldfumonkeh/monkehTweets",
+    "Documentation":"https://github.com/coldfumonkeh/monkehTweets",
+    "Repository":{
+        "type":"git",
+        "URL":"https://github.com/coldfumonkeh/monkehTweets"
+    },
+    "Bugs":"https://github.com/coldfumonkeh/monkehTweets/issues",
+    "shortDescription":"A ColdFusion wrapper to interact with the Twitter API (with OAuth integration)",
+    "keywords":[
+        "twitter",
+        "api",
+        "oauth"
+    ],
+    "testbox":{
+        "runner":[
+            {
+                "default":"http://127.0.0.1:8085/testbox/tests/runner.cfm"
+            }
+        ],
+        "labels":[
+
+        ],
+        "reporter":"",
+        "reporterResults":"",
+        "bundles":[
+            ""
+        ],
+        "directory":{
+            "mapping":"tests.testbox",
+            "recurse":true
+        },
+        "watchers":[
+
+        ],
+        "notify":{
+            "emails":[
+
+            ],
+            "growl":"",
+            "url":""
+        }
+    }
+    "private":"false",
+    "engines":[
+        {
+            "type":"railo",
+            "version":">=4.1.x"
+        },
+        {
+            "type":"adobe",
+            "version":">=9.0.0"
+        }
+    ],
+    "defaultEngine":"railo",
+    "defaultPort":"8085",
+    "License":[
+        {
+            "type":"MIT",
+            "URL":""
+        }
+    ],
+    "Contributors":[
+        {
+            "name":"Matt Gifford",
+            "url":"https://www.monkehworks.com"
+        }
+    ],
+    "ignore":[
+        "tests/*",
+        "README.md",
+        "Vagrantfile",
+        "mxunit/*",
+        ".gitignore",
+        "travis.yml",
+        "build.xml"
+    ],
+    "dependencies":{
+        "testbox":"2.1.0"
+    },
+    "installPaths":{
+        "testbox":"testbox"
+    }
 }

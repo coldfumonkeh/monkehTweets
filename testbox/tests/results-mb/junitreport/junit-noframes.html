@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:lxslt="http://xml.apache.org/xslt" xmlns:stringutils="xalan://org.apache.tools.ant.util.StringUtils">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>My MockBox Results</title>
+<style type="text/css">
+      body {
+        font:normal 68% verdana,arial,helvetica;
+        color:#000000;
+      }
+      table tr td, table tr th {
+          font-size: 68%;
+      }
+      table.details tr th{
+        font-weight: bold;
+        text-align:left;
+        background:#a6caf0;
+      }
+      table.details tr td{
+        background:#eeeee0;
+      }
+
+      p {
+        line-height:1.5em;
+        margin-top:0.5em; margin-bottom:1.0em;
+      }
+      h1 {
+        margin: 0px 0px 5px; font: 165% verdana,arial,helvetica
+      }
+      h2 {
+        margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+      }
+      h3 {
+        margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+      }
+      h4 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      h5 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      h6 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      .Error {
+        font-weight:bold; color:red;
+      }
+      .Failure {
+        font-weight:bold; color:purple;
+      }
+      .Properties {
+        text-align:right;
+      }
+      </style>
+<script type="text/javascript" language="JavaScript">
+        var TestCases = new Array();
+        var cur;
+        
+    cur = TestCases['.MockBox Suite'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'close';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_55';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs.mockbox&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results-mb&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-05-21 10:25:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs.mockbox&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results-mb&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/javierpineda';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.0';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab078.28';
+    
+        cur['version'] = '4.2.1.000';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    </script><script type="text/javascript" language="JavaScript">
+        function displayProperties (name) {
+          var win = window.open('','JUnitSystemProperties','scrollbars=1,resizable=1');
+          var doc = win.document;
+          doc.open();
+          doc.write("<html><head><title>Properties of " + name + "</title>");
+          doc.write("<style>")
+          doc.write("body {font:normal 68% verdana,arial,helvetica; color:#000000; }");
+          doc.write("table tr td, table tr th { font-size: 68%; }");
+          doc.write("table.properties { border-collapse:collapse; border-left:solid 1 #cccccc; border-top:solid 1 #cccccc; padding:5px; }");
+          doc.write("table.properties th { text-align:left; border-right:solid 1 #cccccc; border-bottom:solid 1 #cccccc; background-color:#eeeeee; }");
+          doc.write("table.properties td { font:normal; text-align:left; border-right:solid 1 #cccccc; border-bottom:solid 1 #cccccc; background-color:#fffffff; }");
+          doc.write("h3 { margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica }");
+          doc.write("</style>");
+          doc.write("</head><body>");
+          doc.write("<h3>Properties of " + name + "</h3>");
+          doc.write("<div align=\"right\"><a href=\"javascript:window.close();\">Close</a></div>");
+          doc.write("<table class='properties'>");
+          doc.write("<tr><th>Name</th><th>Value</th></tr>");
+          for (prop in TestCases[name]) {
+            doc.write("<tr><th>" + prop + "</th><td>" + TestCases[name][prop] + "</td></tr>");
+          }
+          doc.write("</table>");
+          doc.write("</body></html>");
+          doc.close();
+          win.focus();
+        }
+      
+      </script>
+</head>
+<body>
+<a name="top"></a>
+<h1>My MockBox Results</h1>
+<table width="100%">
+<tr>
+<td align="left"></td><td align="right">Designed for use with <a href="http://www.junit.org">JUnit</a> and <a href="http://ant.apache.org/ant">Ant</a>.</td>
+</tr>
+</table>
+<hr size="1">
+<h2>Summary</h2>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Tests</th><th>Failures</th><th>Errors</th><th>Success rate</th><th>Time</th>
+</tr>
+<tr valign="top" class="">
+<td>24</td><td>0</td><td>0</td><td>100.00%</td><td>0.258</td>
+</tr>
+</table>
+<table border="0" width="95%">
+<tr>
+<td style="text-align: justify;">
+        Note: <i>failures</i> are anticipated and checked for with assertions while <i>errors</i> are unanticipated.
+        </td>
+</tr>
+</table>
+<hr size="1" width="95%" align="left">
+<h2>Packages</h2>
+        Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.
+        <table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
+</tr>
+<tr valign="top" class="">
+<td><a href="#"></a></td><td>24</td><td>0</td><td>0</td><td>0.258</td><td>2014-06-24T21:03:02</td><td>108.166.178.244</td>
+</tr>
+</table>
+<hr size="1" width="95%" align="left">
+<a name=""></a>
+<h3>Package </h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
+</tr>
+<tr valign="top" class="">
+<td><a href="#MockBox Suite">MockBox Suite</a></td><td>24</td><td>0</td><td>0</td><td>0.258</td><td>2014-06-24T21:03:02</td><td>108.166.178.244</td>
+</tr>
+</table>
+<a href="#top">Back to top</a>
+<p></p>
+<p></p>
+<hr size="1" width="95%" align="left">
+<a name="MockBox Suite"></a>
+<h3>TestCase MockBox Suite</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testCollaborator</td><td>Success</td><td></td><td>0.008</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyCallCount</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testInterfaceContracts</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStubs</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyAtLeast</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testContainsClosureOrUDF</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testGetProperty</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyOnce</td><td>Success</td><td></td><td>0.010</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyNever</td><td>Success</td><td></td><td>0.008</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testCallbacks</td><td>Success</td><td></td><td>0.011</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testContainsCFKeyword</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockPrivateMethods</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockWithArguments</td><td>Success</td><td></td><td>0.008</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStubWithInheritance</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStateMachineResults</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testProperties</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMethodArgumentSignatures</td><td>Success</td><td></td><td>0.064</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStubWithImplements</td><td>Success</td><td></td><td>0.040</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testSpys</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockRealMethods</td><td>Success</td><td></td><td>0.020</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVirtualMethods</td><td>Success</td><td></td><td>0.014</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyAtMost</td><td>Success</td><td></td><td>0.006</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testCFUDF</td><td>Success</td><td></td><td>0.014</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockMethodCallCount</td><td>Success</td><td></td><td>0.009</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('.MockBox Suite');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a>
+</body>
+</html>

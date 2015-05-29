@@ -1,0 +1,107 @@
+<testsuites><testsuite
+tests="24"
+failures="0"
+errors="0"
+skipped="0"
+time="0.258"
+timestamp="2014-06-24T21:03:02"
+hostname="108.166.178.244"
+package="test.specs.mockbox.MockBoxTest"
+name="MockBox Suite"
+><properties><property name="installkit" value="" /><property name="rootdir" value="/var/www/vhosts/staging.ortussolutions.com/javierpineda" /><property name="serialnumber" value="0" /><property name="productlevel" value="os" /><property name="appserver" value="" /><property name="productname" value="Railo" /><property name="expiration" value="{ts &apos;2037-12-31 17:00:00&apos;}" /><property name="supportedlocales" value="malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)" /><property name="productversion" value="10,0,0,0" /><property name="version" value="2.6.32-042stab078.28" /><property name="buildnumber" value="" /><property name="additionalinformation" value="" /><property name="archmodel" value="64" /><property name="name" value="Linux" /><property name="arch" value="amd64" /><property name="loaderversion" value="4" /><property name="version" value="4.2.1.000" /><property name="loaderpath" value="/opt/railo/lib/railo.jar" /><property name="release-date" value="{ts &apos;2014-05-21 10:25:00&apos;}" /><property name="versionnameexplanation" value="http://en.wikipedia.org/wiki/Togo_(dog)" /><property name="versionname" value="Togo" /><property name="state" value="final" /><property name="auth_password" value="" /><property name="auth_type" value="" /><property name="auth_user" value="" /><property name="cert_cookie" value="" /><property name="cert_flags" value="" /><property name="cert_issuer" value="" /><property name="cert_keysize" value="" /><property name="cert_secretkeysize" value="" /><property name="cert_serialnumber" value="" /><property name="cert_server_issuer" value="" /><property name="cert_server_subject" value="" /><property name="cert_subject" value="" /><property name="cf_template_path" value="/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm" /><property name="content_length" value="" /><property name="content_type" value="" /><property name="gateway_interface" value="" /><property name="http_accept" value="text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2" /><property name="http_accept_encoding" value="" /><property name="http_accept_language" value="" /><property name="http_connection" value="close" /><property name="http_cookie" value="" /><property name="http_host" value="integration.staging.ortussolutions.com" /><property name="http_user_agent" value="Java/1.7.0_55" /><property name="http_referer" value="" /><property name="https" value="" /><property name="https_keysize" value="" /><property name="https_secretkeysize" value="" /><property name="https_server_issuer" value="" /><property name="https_server_subject" value="" /><property name="path_info" value="" /><property name="path_translated" value="/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm" /><property name="query_string" value="&amp;directory=test.specs.mockbox&amp;recurse=true&amp;reporter=ANTJunit&amp;labels=&amp;reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results-mb&amp;propertiesSummary=true" /><property name="remote_addr" value="108.166.178.244" /><property name="remote_host" value="108.166.178.244" /><property name="remote_user" value="" /><property name="request_method" value="GET" /><property name="request_url" value="http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&amp;directory=test.specs.mockbox&amp;recurse=true&amp;reporter=ANTJunit&amp;labels=&amp;reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results-mb&amp;propertiesSummary=true" /><property name="script_name" value="/testbox/tests/runner.cfm" /><property name="server_name" value="integration.staging.ortussolutions.com" /><property name="server_port" value="80" /><property name="server_port_secure" value="0" /><property name="server_protocol" value="HTTP/1.0" /><property name="server_software" value="" /><property name="web_server_api" value="" /><property name="context_path" value="" /><property name="local_addr" value="108.166.178.244" /><property name="local_host" value="staging.ortussolutions.com" /></properties><testcase
+name="MockBox Suite testCollaborator"
+time="0.008"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testVerifyCallCount"
+time="0.005"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testInterfaceContracts"
+time="0.004"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testStubs"
+time="0.004"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testVerifyAtLeast"
+time="0.004"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testContainsClosureOrUDF"
+time="0.005"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testGetProperty"
+time="0.001"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testVerifyOnce"
+time="0.01"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testVerifyNever"
+time="0.008"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testCallbacks"
+time="0.011"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testContainsCFKeyword"
+time="0.005"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testMockPrivateMethods"
+time="0.004"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testMockWithArguments"
+time="0.008"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testStubWithInheritance"
+time="0.004"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testStateMachineResults"
+time="0.004"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testProperties"
+time="0.001"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testMethodArgumentSignatures"
+time="0.064"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testStubWithImplements"
+time="0.04"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testSpys"
+time="0.005"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testMockRealMethods"
+time="0.02"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testVirtualMethods"
+time="0.014"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testVerifyAtMost"
+time="0.006"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testCFUDF"
+time="0.014"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase><testcase
+name="MockBox Suite testMockMethodCallCount"
+time="0.009"
+classname="test.specs.mockbox.MockBoxTest"
+></testcase></testsuite></testsuites>

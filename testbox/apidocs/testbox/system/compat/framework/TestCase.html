@@ -1,0 +1,2577 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>TestCase</title>
+	<meta name="keywords" content="testbox.system.compat.framework.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../../../highlighter/styles/shCoreDefault.css">
+	<script src="../../../../highlighter/scripts/shCore.js"></script>
+	<script src="../../../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>TestBox v2.1.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../../../index.html?testbox/system/compat/framework/TestCase.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: testbox.system.compat.framework"><span class="label label-success">testbox.system.compat.framework</span></a>
+</div>
+
+<h2>
+
+Class
+
+ TestCase</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre>railo-context.Component
+        <img src="../../../../resources/inherit.gif" alt="extended by "><a href="../../../../testbox/system/BaseSpec.html" title="class in testbox.system">testbox.system.BaseSpec</a>
+            <img src="../../../../resources/inherit.gif" alt="extended by ">testbox.system.compat.framework.TestCase
+</pre>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>This is the TestBox MXUnit compatible object. You can use this object as a direct replacement
+To MXUnit BaseTest Case.
+All assertions found in this object delegate to our core Assertion object.</p>
+</div>
+
+
+
+
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="TestCase.html#init()">init</A></strong>()
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LIFE-CYCLE Methods **********************************.
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#addAssertDecorator()">addAssertDecorator</A></strong>(string decoratorName)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utility for dynamically adding assertion behaviors at runtime.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#afterTests()">afterTests</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assert()">assert</A></strong>(string condition, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed expression is true.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertArrayEquals()">assertArrayEquals</A></strong>(array expected, array actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares two arrays, element by element, and fails if differences exist.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertEquals()">assertEquals</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core assertion that compares the values the EXPECTED and ACTUAL parameters.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertEqualsCase()">assertEqualsCase</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core assertion that compares the values the EXPECTED and ACTUAL parameters with case-sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertEqualsWithTolerance()">assertEqualsWithTolerance</A></strong>(any expected, any actual, numeric tolerance, [any datePart=''], [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed in actual number or date is expected to be close to it within +/- a passed delta and optional datepart.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertFalse()">assertFalse</A></strong>(string condition, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is false.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsArray()">assertIsArray</A></strong>(any a, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is array.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsDefined()">assertIsDefined</A></strong>(any o, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is defined or not.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsEmpty()">assertIsEmpty</A></strong>(any o, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert string is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsEmptyArray()">assertIsEmptyArray</A></strong>(any a, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert array is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsEmptyQuery()">assertIsEmptyQuery</A></strong>(any q, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert query is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsEmptyStruct()">assertIsEmptyStruct</A></strong>(any struct, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert struct is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsExactTypeOf()">assertIsExactTypeOf</A></strong>(any o, any type, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is of a certrain object type without any inheritance lookup.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsQuery()">assertIsQuery</A></strong>(any q, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is query.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsStruct()">assertIsStruct</A></strong>(any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is struct.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsTypeOf()">assertIsTypeOf</A></strong>(any actual, any typeName, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is of a certrain object type.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertIsXMLDoc()">assertIsXMLDoc</A></strong>(any xml, [any message='Passed in xml is not a valid XML Object'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is an XMLDoc.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertNotEquals()">assertNotEquals</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core assertion that compares the values the EXPECTED and ACTUAL parameters to NOT be equal.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertNotSame()">assertNotSame</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that an expected and actual objec is NOT the same instance.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertQueryEquals()">assertQueryEquals</A></strong>(query expected, query actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares 2 queries, cell by cell, and fails if differences exist.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertSame()">assertSame</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that an expected and actual objec is the same instance.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertStructEquals()">assertStructEquals</A></strong>(struct expected, struct actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares two structures, key by key, and fails if differences exist.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#assertTrue()">assertTrue</A></strong>(string condition, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is true.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#beforeTests()">beforeTests</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#debug()">debug</A></strong>(any var, [string label=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MXUnit style debug.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#expectException()">expectException</A></strong>([any expectedExceptionType], [any expectedExceptionMessage='.*'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expect an exception from the testing spec.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#fail()">fail</A></strong>([any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fail assertion.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#getMockFactory()">getMockFactory</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#injectMethod()">injectMethod</A></strong>(any receiver, any giver, string functionName, [string functionNameInReceiver='[runtime expression]'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;injects the method from giver into receiver.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#injectProperty()">injectProperty</A></strong>(any receiver, string propertyName, any propertyValue, [string scope='variables'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Injects properties into the receiving object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#mock()">mock</A></strong>([any mocked])
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>remote&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#runTestRemote()">runTestRemote</A></strong>([any testMethod=''], [boolean debug='false'], [any output='simple'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run a test remotely like MXUnit.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#setMockingFramework()">setMockingFramework</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#setup()">setup</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="TestCase.html#teardown()">teardown</A></strong>()
+			<br>
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_testbox.system.BaseSpec"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd><a href="../../../../testbox/system/BaseSpec.html" title="class in testbox.system">testbox.system.BaseSpec</a></kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+					
+					
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+					
+					
+					
+						
+					
+					
+					
+					
+				
+				
+				
+					<a href="../../../..//testbox/system/BaseSpec.html#addAssertions()">addAssertions</a>, <a href="../../../..//testbox/system/BaseSpec.html#addMatchers()">addMatchers</a>, <a href="../../../..//testbox/system/BaseSpec.html#afterEach()">afterEach</a>, <a href="../../../..//testbox/system/BaseSpec.html#aroundEach()">aroundEach</a>, <a href="../../../..//testbox/system/BaseSpec.html#beforeEach()">beforeEach</a>, <a href="../../../..//testbox/system/BaseSpec.html#clearDebugBuffer()">clearDebugBuffer</a>, <a href="../../../..//testbox/system/BaseSpec.html#closureStub()">closureStub</a>, <a href="../../../..//testbox/system/BaseSpec.html#console()">console</a>, <a href="../../../..//testbox/system/BaseSpec.html#createEmptyMock()">createEmptyMock</a>, <a href="../../../..//testbox/system/BaseSpec.html#createMock()">createMock</a>, <a href="../../../..//testbox/system/BaseSpec.html#createStub()">createStub</a>, <a href="../../../..//testbox/system/BaseSpec.html#describe()">describe</a>, <a href="../../../..//testbox/system/BaseSpec.html#expect()">expect</a>, <a href="../../../..//testbox/system/BaseSpec.html#expectedException()">expectedException</a>, <a href="../../../..//testbox/system/BaseSpec.html#getDebugBuffer()">getDebugBuffer</a>, <a href="../../../..//testbox/system/BaseSpec.html#getMockBox()">getMockBox</a>, <a href="../../../..//testbox/system/BaseSpec.html#getProperty()">getProperty</a>, <a href="../../../..//testbox/system/BaseSpec.html#hasExpectedException()">hasExpectedException</a>, <a href="../../../..//testbox/system/BaseSpec.html#isExpectedException()">isExpectedException</a>, <a href="../../../..//testbox/system/BaseSpec.html#it()">it</a>, <a href="../../../..//testbox/system/BaseSpec.html#makePublic()">makePublic</a>, <a href="../../../..//testbox/system/BaseSpec.html#prepareMock()">prepareMock</a>, <a href="../../../..//testbox/system/BaseSpec.html#print()">print</a>, <a href="../../../..//testbox/system/BaseSpec.html#println()">println</a>, <a href="../../../..//testbox/system/BaseSpec.html#querySim()">querySim</a>, <a href="../../../..//testbox/system/BaseSpec.html#runAfterEachClosures()">runAfterEachClosures</a>, <a href="../../../..//testbox/system/BaseSpec.html#runAroundEachClosures()">runAroundEachClosures</a>, <a href="../../../..//testbox/system/BaseSpec.html#runBeforeEachClosures()">runBeforeEachClosures</a>, <a href="../../../..//testbox/system/BaseSpec.html#runRemote()">runRemote</a>, <a href="../../../..//testbox/system/BaseSpec.html#runSpec()">runSpec</a>, <a href="../../../..//testbox/system/BaseSpec.html#runTestMethod()">runTestMethod</a>, <a href="../../../..//testbox/system/BaseSpec.html#xdescribe()">xdescribe</a>, <a href="../../../..//testbox/system/BaseSpec.html#xit()">xit</a>
+				
+			</td>
+		</tr>
+	</table>
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_railo-context.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>railo-context.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+	<p>LIFE-CYCLE Methods **********************************</p>
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="addAssertDecorator()"><!-- --></a>
+	<h3>addAssertDecorator</h3>
+	
+	<kbd>public any <strong>addAssertDecorator</strong>(string decoratorName)</kbd>
+	
+	<br><br>
+
+	
+		<p>Utility for dynamically adding assertion behaviors at runtime</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>decoratorName</code> - The fully qualied name of the assertion component to add; e.g., org.mycompany.MyAssertionComponent</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="afterTests()"><!-- --></a>
+	<h3>afterTests</h3>
+	
+	<kbd>public any <strong>afterTests</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assert()"><!-- --></a>
+	<h3>assert</h3>
+	
+	<kbd>public any <strong>assert</strong>(string condition, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed expression is true</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../../..//testbox/system/BaseSpec.html#assert()">assert</a></code>
+			in class
+			<code>
+				<a href="../../../../testbox/system/BaseSpec.html" title="class in testbox.system">BaseSpec</a>
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>condition</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertArrayEquals()"><!-- --></a>
+	<h3>assertArrayEquals</h3>
+	
+	<kbd>public any <strong>assertArrayEquals</strong>(array expected, array actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Compares two arrays, element by element, and fails if differences exist</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertEquals()"><!-- --></a>
+	<h3>assertEquals</h3>
+	
+	<kbd>public any <strong>assertEquals</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Core assertion that compares the values the EXPECTED and ACTUAL parameters</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertEqualsCase()"><!-- --></a>
+	<h3>assertEqualsCase</h3>
+	
+	<kbd>public any <strong>assertEqualsCase</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Core assertion that compares the values the EXPECTED and ACTUAL parameters with case-sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertEqualsWithTolerance()"><!-- --></a>
+	<h3>assertEqualsWithTolerance</h3>
+	
+	<kbd>public any <strong>assertEqualsWithTolerance</strong>(any expected, any actual, numeric tolerance, [any datePart=''], [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed in actual number or date is expected to be close to it within +/- a passed delta and optional datepart</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>tolerance</code></dd>
+		
+		<dd><code>datePart</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertFalse()"><!-- --></a>
+	<h3>assertFalse</h3>
+	
+	<kbd>public any <strong>assertFalse</strong>(string condition, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is false</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>condition</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsArray()"><!-- --></a>
+	<h3>assertIsArray</h3>
+	
+	<kbd>public any <strong>assertIsArray</strong>(any a, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is array</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>a</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsDefined()"><!-- --></a>
+	<h3>assertIsDefined</h3>
+	
+	<kbd>public any <strong>assertIsDefined</strong>(any o, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is defined or not</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>o</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsEmpty()"><!-- --></a>
+	<h3>assertIsEmpty</h3>
+	
+	<kbd>public any <strong>assertIsEmpty</strong>(any o, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert string is empty</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>o</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsEmptyArray()"><!-- --></a>
+	<h3>assertIsEmptyArray</h3>
+	
+	<kbd>public any <strong>assertIsEmptyArray</strong>(any a, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert array is empty</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>a</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsEmptyQuery()"><!-- --></a>
+	<h3>assertIsEmptyQuery</h3>
+	
+	<kbd>public any <strong>assertIsEmptyQuery</strong>(any q, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert query is empty</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>q</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsEmptyStruct()"><!-- --></a>
+	<h3>assertIsEmptyStruct</h3>
+	
+	<kbd>public any <strong>assertIsEmptyStruct</strong>(any struct, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert struct is empty</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>struct</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsExactTypeOf()"><!-- --></a>
+	<h3>assertIsExactTypeOf</h3>
+	
+	<kbd>public any <strong>assertIsExactTypeOf</strong>(any o, any type, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is of a certrain object type without any inheritance lookup</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>o</code></dd>
+		
+		<dd><code>type</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsQuery()"><!-- --></a>
+	<h3>assertIsQuery</h3>
+	
+	<kbd>public any <strong>assertIsQuery</strong>(any q, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is query</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>q</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsStruct()"><!-- --></a>
+	<h3>assertIsStruct</h3>
+	
+	<kbd>public any <strong>assertIsStruct</strong>(any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is struct</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsTypeOf()"><!-- --></a>
+	<h3>assertIsTypeOf</h3>
+	
+	<kbd>public any <strong>assertIsTypeOf</strong>(any actual, any typeName, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is of a certrain object type</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>typeName</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertIsXMLDoc()"><!-- --></a>
+	<h3>assertIsXMLDoc</h3>
+	
+	<kbd>public any <strong>assertIsXMLDoc</strong>(any xml, [any message='Passed in xml is not a valid XML Object'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is an XMLDoc</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>xml</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertNotEquals()"><!-- --></a>
+	<h3>assertNotEquals</h3>
+	
+	<kbd>public any <strong>assertNotEquals</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Core assertion that compares the values the EXPECTED and ACTUAL parameters to NOT be equal</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertNotSame()"><!-- --></a>
+	<h3>assertNotSame</h3>
+	
+	<kbd>public any <strong>assertNotSame</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that an expected and actual objec is NOT the same instance
+This only works on objects that are passed by reference, please remember that in Railo
+arrays pass by reference and in Adobe CF they pass by value.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertQueryEquals()"><!-- --></a>
+	<h3>assertQueryEquals</h3>
+	
+	<kbd>public any <strong>assertQueryEquals</strong>(query expected, query actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Compares 2 queries, cell by cell, and fails if differences exist</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertSame()"><!-- --></a>
+	<h3>assertSame</h3>
+	
+	<kbd>public any <strong>assertSame</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that an expected and actual objec is the same instance
+This only works on objects that are passed by reference, please remember that in Railo
+arrays pass by reference and in Adobe CF they pass by value.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertStructEquals()"><!-- --></a>
+	<h3>assertStructEquals</h3>
+	
+	<kbd>public any <strong>assertStructEquals</strong>(struct expected, struct actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Compares two structures, key by key, and fails if differences exist</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="assertTrue()"><!-- --></a>
+	<h3>assertTrue</h3>
+	
+	<kbd>public any <strong>assertTrue</strong>(string condition, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is true</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>condition</code></dd>
+		
+		<dd><code>message</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="beforeTests()"><!-- --></a>
+	<h3>beforeTests</h3>
+	
+	<kbd>public any <strong>beforeTests</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="debug()"><!-- --></a>
+	<h3>debug</h3>
+	
+	<kbd>public any <strong>debug</strong>(any var, [string label=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>MXUnit style debug</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../../..//testbox/system/BaseSpec.html#debug()">debug</a></code>
+			in class
+			<code>
+				<a href="../../../../testbox/system/BaseSpec.html" title="class in testbox.system">BaseSpec</a>
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>var</code> - The variable to debug</dd>
+		
+		<dd><code>label</code> - The label to add to the debug entry</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="expectException()"><!-- --></a>
+	<h3>expectException</h3>
+	
+	<kbd>public any <strong>expectException</strong>([any expectedExceptionType], [any expectedExceptionMessage='.*'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Expect an exception from the testing spec</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expectedExceptionType</code> - the type to expect</dd>
+		
+		<dd><code>expectedExceptionMessage</code> - Optional exception message</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="fail()"><!-- --></a>
+	<h3>fail</h3>
+	
+	<kbd>public any <strong>fail</strong>([any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Fail assertion</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+		<dl>
+			<dt><strong>Overrides:</strong></dt>
+			<dd>
+			<code>
+			<a href="../../../..//testbox/system/BaseSpec.html#fail()">fail</a></code>
+			in class
+			<code>
+				<a href="../../../../testbox/system/BaseSpec.html" title="class in testbox.system">BaseSpec</a>
+			</code>
+			</dd>
+		</dl>
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>message</code> - The message to fail with</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMockFactory()"><!-- --></a>
+	<h3>getMockFactory</h3>
+	
+	<kbd>public any <strong>getMockFactory</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="injectMethod()"><!-- --></a>
+	<h3>injectMethod</h3>
+	
+	<kbd>public any <strong>injectMethod</strong>(any receiver, any giver, string functionName, [string functionNameInReceiver='[runtime expression]'])</kbd>
+	
+	<br><br>
+
+	
+		<p>injects the method from giver into receiver. This is helpful for quick and dirty mocking</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>receiver</code></dd>
+		
+		<dd><code>giver</code></dd>
+		
+		<dd><code>functionName</code></dd>
+		
+		<dd><code>functionNameInReceiver</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="injectProperty()"><!-- --></a>
+	<h3>injectProperty</h3>
+	
+	<kbd>public any <strong>injectProperty</strong>(any receiver, string propertyName, any propertyValue, [string scope='variables'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Injects properties into the receiving object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>receiver</code></dd>
+		
+		<dd><code>propertyName</code></dd>
+		
+		<dd><code>propertyValue</code></dd>
+		
+		<dd><code>scope</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="mock()"><!-- --></a>
+	<h3>mock</h3>
+	
+	<kbd>public any <strong>mock</strong>([any mocked])</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>mocked</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="runTestRemote()"><!-- --></a>
+	<h3>runTestRemote</h3>
+	
+	<kbd>remote any <strong>runTestRemote</strong>([any testMethod=''], [boolean debug='false'], [any output='simple'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Run a test remotely like MXUnit</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>testMethod</code> - A list or array of test names that are the ones that will be executed ONLY!</dd>
+		
+		<dd><code>debug</code> - Show debug output on the reports or not</dd>
+		
+		<dd><code>output</code> - The type of reporter to run the test with</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setMockingFramework()"><!-- --></a>
+	<h3>setMockingFramework</h3>
+	
+	<kbd>public any <strong>setMockingFramework</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setup()"><!-- --></a>
+	<h3>setup</h3>
+	
+	<kbd>public any <strong>setup</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="teardown()"><!-- --></a>
+	<h3>teardown</h3>
+	
+	<kbd>public any <strong>teardown</strong>()</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+
