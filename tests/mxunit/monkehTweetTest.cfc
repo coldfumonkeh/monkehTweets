@@ -1,7 +1,7 @@
 component extends="mxunit.framework.TestCase" {
 
     public any function setup() {
-		variables.monkehTweet	=	new monkehTweets.com.coldfumonkeh.monkehTweet(
+		variables.monkehTweet	=	new monkehTweet.com.coldfumonkeh.monkehTweet(
 				consumerKey			=	'jmNKuslFxhRl5hoEOTcw',
 				consumerSecret		=	'1LzHvvhGCxf3T2ZtywJBr8UUXYi1tdjr982RYSN0kE',
 				oauthToken			=	'244138540-4ADnpe1h4WcnaetNVhl8TrmMucJh7AlMa2uF9YsY',
@@ -15,7 +15,7 @@ component extends="mxunit.framework.TestCase" {
 
 
   public any function defaultTimeoutValue() {
-    objMonkehTweet	=	new monkehTweets.com.coldfumonkeh.monkehTweet(
+    objMonkehTweet	=	new monkehTweet.com.coldfumonkeh.monkehTweet(
         consumerKey			=	'jmNKuslFxhRl5hoEOTcw',
         consumerSecret		=	'1LzHvvhGCxf3T2ZtywJBr8UUXYi1tdjr982RYSN0kE',
         oauthToken			=	'244138540-4ADnpe1h4WcnaetNVhl8TrmMucJh7AlMa2uF9YsY',
@@ -28,7 +28,7 @@ component extends="mxunit.framework.TestCase" {
 
 
   public any function overrideTimeoutValue() {
-    objMonkehTweet	=	new monkehTweets.com.coldfumonkeh.monkehTweet(
+    objMonkehTweet	=	new monkehTweet.com.coldfumonkeh.monkehTweet(
         consumerKey			=	'jmNKuslFxhRl5hoEOTcw',
         consumerSecret		=	'1LzHvvhGCxf3T2ZtywJBr8UUXYi1tdjr982RYSN0kE',
         oauthToken			=	'244138540-4ADnpe1h4WcnaetNVhl8TrmMucJh7AlMa2uF9YsY',
