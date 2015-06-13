@@ -890,7 +890,7 @@ Revision history
 		<cfargument name="include_entities" 		required="false" 	default="false" 	type="Boolean"	hint="When set to true, each tweet will include a node called 'entities'. This node offers a variety of metadata about the tweet in a discreet structure, including: user_mentions, urls, and hashtags." />
 		<cfargument name="checkHeader"				required="false"	default="false"		type="boolean"	hint="If set to true, I will abort the request and return the response headers for debugging." />
 		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
-			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'favorites/list.json?' & buildParamString(arguments) />
+			<cfset var strTwitterMethod = getCorrectEndpoint('api') & 'favorites/list.json' />
 		<cfreturn genericAuthenticationMethod(timeout=getTimeout(), httpURL=strTwitterMethod,httpMethod='GET',parameters=arguments, checkHeader=arguments.checkHeader) />
 	</cffunction>
 
