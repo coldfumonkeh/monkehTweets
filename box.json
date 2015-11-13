@@ -4,7 +4,7 @@
   "version" : "1.4.8.0",
   "author" : "Matt Gifford <matt@monkehworks.com>",
   "location" : "https://github.com/coldfumonkeh/monkehTweets",
-  "directory" : "monkehTweets",
+  "directory" : "",
   "createPackageDirectory" : "true",
   "Homepage" : "https://github.com/coldfumonkeh/monkehTweets",
   "Documentation" : "https://github.com/coldfumonkeh/monkehTweets",
