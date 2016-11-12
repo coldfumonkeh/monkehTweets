@@ -2,9 +2,9 @@ language: java
 env:
   matrix:
 # currently the only way to do a multi-dimensional env matrix
-    - PLATFORM=railo40 TESTFRAMEWORK=mxunit
-    - PLATFORM=railo41 TESTFRAMEWORK=mxunit
-    - PLATFORM=railo42 TESTFRAMEWORK=mxunit
+    #- PLATFORM=railo40 TESTFRAMEWORK=mxunit
+    #- PLATFORM=railo41 TESTFRAMEWORK=mxunit
+    #- PLATFORM=railo42 TESTFRAMEWORK=mxunit
     - PLATFORM=lucee451 TESTFRAMEWORK=mxunit
     # - PLATFORM=lucee5_beta TESTFRAMEWORK=mxunit
     # - PLATFORM=acf10-linux64 TESTFRAMEWORK=mxunit
