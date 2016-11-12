@@ -1,20 +1,20 @@
 language: java
-env:
-  matrix:
-# currently the only way to do a multi-dimensional env matrix
-    #- PLATFORM=railo40 TESTFRAMEWORK=mxunit
-    #- PLATFORM=railo41 TESTFRAMEWORK=mxunit
-    #- PLATFORM=railo42 TESTFRAMEWORK=mxunit
-    - PLATFORM=lucee451 TESTFRAMEWORK=mxunit
-    # - PLATFORM=lucee5_beta TESTFRAMEWORK=mxunit
-    # - PLATFORM=acf10-linux64 TESTFRAMEWORK=mxunit
-    - PLATFORM=acf902-linux64 TESTFRAMEWORK=mxunit
-    # - PLATFORM=railo40 TESTFRAMEWORK=testbox
-    # - PLATFORM=railo41 TESTFRAMEWORK=testbox
-    # - PLATFORM=railo42 TESTFRAMEWORK=testbox
-    # - PLATFORM=lucee5_beta TESTFRAMEWORK=testbox
-    # - PLATFORM=lucee451 TESTFRAMEWORK=testbox
-    # - PLATFORM=acf10-linux64 TESTFRAMEWORK=testbox
+sudo: required
+dist: trusty
 
-install: ant -Dtest.framework=$TESTFRAMEWORK -Dsource=remote -Dwork.dir=$HOME/work -Dbuild.dir=$TRAVIS_BUILD_DIR -Dplatform=$PLATFORM install-ci-deps
-script: ant -Dtest.framework=$TESTFRAMEWORK -Dsource=remote -Dwork.dir=$HOME/work -Dbuild.dir=$TRAVIS_BUILD_DIR -Dplatform=$PLATFORM test-ci
+before_install:
+  - sudo apt-key adv --keyserver keys.gnupg.net --recv 6DA70622
+  - sudo echo "deb http://downloads.ortussolutions.com/debs/noarch /" | sudo tee -a /etc/apt/sources.list.d/commandbox.list
+
+install:
+  #Commandbox setup
+  - box install
+  - box server start port=49616 rewritesEnable=false openBrowser=false
+
+before_script:
+  - curl http://localhost:49616/
+
+script: >
+    testResults="echo $(box testbox run)";
+    echo "$testResults";
+    if grep -i "\[Failures: [1-9][0-9]\?\]\|<t[^>]*>\|<b[^>]*>" <<< $testResults;  then exit 1; fi
