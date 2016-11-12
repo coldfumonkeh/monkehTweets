@@ -57,5 +57,3 @@ One of the questions received in regards to monkehTweets is how to manage authen
 You can find the answer right here:
 
 - [Managing multiple Twitter users' authentication using monkehTweets](http://www.monkehworks.com/managing-multiple-twitter-users-authentication-with-monkehtweet)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/coldfumonkeh/monkehtweets/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

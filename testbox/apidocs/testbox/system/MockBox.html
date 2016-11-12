@@ -1,0 +1,1685 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MockBox</title>
+	<meta name="keywords" content="testbox.system.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../highlighter/styles/shCoreDefault.css">
+	<script src="../../highlighter/scripts/shCore.js"></script>
+	<script src="../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>TestBox v2.1.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../index.html?testbox/system/MockBox.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: testbox.system"><span class="label label-success">testbox.system</span></a>
+</div>
+
+<h2>
+
+Class
+
+ MockBox</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre>railo-context.Component
+        <img src="../../resources/inherit.gif" alt="extended by ">testbox.system.MockBox
+</pre>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				output 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>A unit testing mocking/stubing factory for ColdFusion 7 and above and any CFML Engine</p>
+</div>
+
+
+
+
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="MockBox.html#init()">init</A></strong>([string generationPath=''])
+				<br>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Create an instance of MockBox.
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$()">$</A></strong>(string method, [any returns], boolean preserveReturnType='true', [boolean throwException='false'], [string throwType=''], [string throwDetail=''], [string throwMessage=''], [boolean callLogging='false'], [boolean preserveArguments='false'], [any callback])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mock a Method, simple but magical Injected as: $().
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$args()">$args</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this method to mock specific arguments when calling a mocked method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$atLeast()">$atLeast</A></strong>(numeric minNumberOfInvocations, [string methodName=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that at least a certain number of calls have been made on the mock or a specific mock method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$atMost()">$atMost</A></strong>(numeric maxNumberOfInvocations, [string methodName=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that at most a certain number of calls have been made on the mock or a specific mock method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$callback()">$callback</A></strong>(any target)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this method to mock more than 1 result as passed in arguments.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$callLog()">$callLog</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve the method call logger structures.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>numeric</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$count()">$count</A></strong>([string methodName=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I return the number of times the specified mock object's methods have been called or a specific method has been called.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>struct</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$debug()">$debug</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debugging method for MockBox enabled mocks/stubs, useful to find out things about your mocks.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$getProperty()">$getProperty</A></strong>(any name, [any scope='variables'], [any default])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets an internal mocked object property.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$never()">$never</A></strong>([string methodName=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that no interactions have been made to the mock or a specific mock method: Alias to $times(0).
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$once()">$once</A></strong>([string methodName=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that only 1 call has been made on the mock or a specific mock method.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$property()">$property</A></strong>(string propertyName, [string propertyScope='variables'], any mock)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mock a property inside of an object in any scope.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$reset()">$reset</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset all mock counters and logs on the targeted mock.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$results()">$results</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this method to mock more than 1 result as passed in arguments.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>boolean</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#$times()">$times</A></strong>(numeric count, [string methodName=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert how many calls have been made to the mock or a specific mock method: Injected as $verifyCallCount() and $times().
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#createEmptyMock()">createEmptyMock</A></strong>([string className], [any object], [boolean callLogging='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an empty mock object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#createMock()">createMock</A></strong>([string className], [any object], [boolean clearMethods='false'], [boolean callLogging='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a mock object or prepares an object to act as a mock for spying.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#createStub()">createStub</A></strong>([boolean callLogging='true'], [string extends=''], [string implements=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an empty stub object that you can use for mocking.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;void</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#decorateMock()">decorateMock</A></strong>(any target)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decorate a mock object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#getGenerationPath()">getGenerationPath</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the current generation path.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code><a href="../../testbox/system/mockutils/MockGenerator.html" title="class in testbox.system.mockutils">MockGenerator</a></code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#getMockGenerator()">getMockGenerator</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the Mock Generator Utility.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;<a href="../../testbox/system/util/Util.html" title="class in testbox.system.util">Util</a></code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#getUtil()">getUtil</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create and return a util object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#getVersion()">getVersion</A></strong>()
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the MockBox version.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#normalizeArguments()">normalizeArguments</A></strong>(any args)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Normalize argument values on method calls.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#prepareMock()">prepareMock</A></strong>([any object], [boolean callLogging='true'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepares an already instantiated object to act as a mock for spying and much more.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>query</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#querySim()">querySim</A></strong>(string queryData)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First line are the query columns separated by commas.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>void</code>
+		</td>
+		<td>
+			<strong><a href="MockBox.html#setGenerationPath()">setGenerationPath</A></strong>(string generationPath)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Override the mocks generation path.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_railo-context.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>railo-context.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>([string generationPath=''])</kbd>
+
+	<br><br>
+
+	
+	<p>Create an instance of MockBox</p>
+	
+
+	
+	<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+			<dd><code>generationPath</code> - The mocking generation relative path.  If not defined, then the factory will use its internal tmp path. Just make sure that this folder is accessible from an include.</dd>
+		
+	</dl>
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="$()"><!-- --></a>
+	<h3>$</h3>
+	
+	<kbd>public any <strong>$</strong>(string method, [any returns], boolean preserveReturnType='true', [boolean throwException='false'], [string throwType=''], [string throwDetail=''], [string throwMessage=''], [boolean callLogging='false'], [boolean preserveArguments='false'], [any callback])</kbd>
+	
+	<br><br>
+
+	
+		<p>Mock a Method, simple but magical Injected as: $()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>method</code> - The method you want to mock or spy on</dd>
+		
+		<dd><code>returns</code> - The results it must return, if not passed it returns void or you will have to do the mockResults() chain</dd>
+		
+		<dd><code>preserveReturnType</code> - If false, the mock will make the returntype of the method equal to ANY</dd>
+		
+		<dd><code>throwException</code> - If you want the method call to throw an exception</dd>
+		
+		<dd><code>throwType</code> - The type of the exception to throw</dd>
+		
+		<dd><code>throwDetail</code> - The detail of the exception to throw</dd>
+		
+		<dd><code>throwMessage</code> - The message of the exception to throw</dd>
+		
+		<dd><code>callLogging</code> - Will add the machinery to also log the incoming arguments to each subsequent calls to this method</dd>
+		
+		<dd><code>preserveArguments</code> - If true, argument signatures are kept, else they are ignored. If true, BEWARE with $args() matching as default values and missing arguments need to be passed too.</dd>
+		
+		<dd><code>callback</code> - A callback to execute that should return the desired results, this can be a UDF or closure.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$args()"><!-- --></a>
+	<h3>$args</h3>
+	
+	<kbd>public any <strong>$args</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Use this method to mock specific arguments when calling a mocked method.  Can only be called when chained to a $() call.  If a method is called with arguments and no match, it defaults to the base results defined. Injected as: $args()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$atLeast()"><!-- --></a>
+	<h3>$atLeast</h3>
+	
+	<kbd>public boolean <strong>$atLeast</strong>(numeric minNumberOfInvocations, [string methodName=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that at least a certain number of calls have been made on the mock or a specific mock method. Injected as $atLeast()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>minNumberOfInvocations</code> - The min number of calls to assert</dd>
+		
+		<dd><code>methodName</code> - Name of the method to verify the calls from, if blank, from the entire mock</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$atMost()"><!-- --></a>
+	<h3>$atMost</h3>
+	
+	<kbd>public boolean <strong>$atMost</strong>(numeric maxNumberOfInvocations, [string methodName=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that at most a certain number of calls have been made on the mock or a specific mock method. Injected as $atMost()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>maxNumberOfInvocations</code> - The max number of calls to assert</dd>
+		
+		<dd><code>methodName</code> - Name of the method to verify the calls from, if blank, from the entire mock</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$callback()"><!-- --></a>
+	<h3>$callback</h3>
+	
+	<kbd>public any <strong>$callback</strong>(any target)</kbd>
+	
+	<br><br>
+
+	
+		<p>Use this method to mock more than 1 result as passed in arguments.  Can only be called when chained to a $() or $().$args() call. Results will be determined by the callback sent in. Basically the method will call this callback and return its results)</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The UDF or closure to execute as a callback</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$callLog()"><!-- --></a>
+	<h3>$callLog</h3>
+	
+	<kbd>public struct <strong>$callLog</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Retrieve the method call logger structures. Injected as: $callLog()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$count()"><!-- --></a>
+	<h3>$count</h3>
+	
+	<kbd>public numeric <strong>$count</strong>([string methodName=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>I return the number of times the specified mock object's methods have been called or a specific method has been called.  If the mock method has not been defined the results is a -1</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>methodName</code> - Name of the method to get the total made calls from. If not passed, then we count all methods in this mock object</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$debug()"><!-- --></a>
+	<h3>$debug</h3>
+	
+	<kbd>public struct <strong>$debug</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Debugging method for MockBox enabled mocks/stubs, useful to find out things about your mocks. Injected as $debug()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$getProperty()"><!-- --></a>
+	<h3>$getProperty</h3>
+	
+	<kbd>public any <strong>$getProperty</strong>(any name, [any scope='variables'], [any default])</kbd>
+	
+	<br><br>
+
+	
+		<p>Gets an internal mocked object property</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>name</code> - The name of the property to retrieve.</dd>
+		
+		<dd><code>scope</code> - The scope to which to retrieve the property from. Defaults to 'variables' scope.</dd>
+		
+		<dd><code>default</code> - Default value to return if property does not exist</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$never()"><!-- --></a>
+	<h3>$never</h3>
+	
+	<kbd>public boolean <strong>$never</strong>([string methodName=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that no interactions have been made to the mock or a specific mock method: Alias to $times(0). Injected as $never()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>methodName</code> - Name of the method to verify the calls from</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$once()"><!-- --></a>
+	<h3>$once</h3>
+	
+	<kbd>public boolean <strong>$once</strong>([string methodName=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that only 1 call has been made on the mock or a specific mock method. Injected as $once()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>methodName</code> - Name of the method to verify the calls from, if blank, from the entire mock</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$property()"><!-- --></a>
+	<h3>$property</h3>
+	
+	<kbd>public any <strong>$property</strong>(string propertyName, [string propertyScope='variables'], any mock)</kbd>
+	
+	<br><br>
+
+	
+		<p>Mock a property inside of an object in any scope. Injected as = $property()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>propertyName</code> - The name of the property to mock</dd>
+		
+		<dd><code>propertyScope</code> - The scope where the property lives in. By default we will use the variables scope.</dd>
+		
+		<dd><code>mock</code> - The object or data to inject</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$reset()"><!-- --></a>
+	<h3>$reset</h3>
+	
+	<kbd>public any <strong>$reset</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Reset all mock counters and logs on the targeted mock. Injected as $reset</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$results()"><!-- --></a>
+	<h3>$results</h3>
+	
+	<kbd>public any <strong>$results</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Use this method to mock more than 1 result as passed in arguments.  Can only be called when chained to a $() or $().$args() call.  Results will be recycled on a multiple of their lengths according to how many times they are called, simulating a state-machine algorithm. Injected as: $results()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="$times()"><!-- --></a>
+	<h3>$times</h3>
+	
+	<kbd>public boolean <strong>$times</strong>(numeric count, [string methodName=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert how many calls have been made to the mock or a specific mock method: Injected as $verifyCallCount() and $times()</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>count</code> - The number of calls to assert</dd>
+		
+		<dd><code>methodName</code> - Name of the method to verify the calls from, if not passed it asserts all mocked method calls</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createEmptyMock()"><!-- --></a>
+	<h3>createEmptyMock</h3>
+	
+	<kbd>public any <strong>createEmptyMock</strong>([string className], [any object], [boolean callLogging='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Creates an empty mock object. By empty we mean we remove all methods so you can mock them.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>className</code> - The class name of the object to mock. The mock factory will instantiate it for you</dd>
+		
+		<dd><code>object</code> - The object to mock, already instantiated</dd>
+		
+		<dd><code>callLogging</code> - Add method call logging for all mocked methods. Defaults to true</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createMock()"><!-- --></a>
+	<h3>createMock</h3>
+	
+	<kbd>public any <strong>createMock</strong>([string className], [any object], [boolean clearMethods='false'], [boolean callLogging='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Create a mock object or prepares an object to act as a mock for spying.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>className</code> - The class name of the object to mock. The mock factory will instantiate it for you</dd>
+		
+		<dd><code>object</code> - The object to mock, already instantiated</dd>
+		
+		<dd><code>clearMethods</code> - If true, all methods in the target mock object will be removed. You can then mock only the methods that you want to mock. Defaults to false</dd>
+		
+		<dd><code>callLogging</code> - Add method call logging for all mocked methods. Defaults to true</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="createStub()"><!-- --></a>
+	<h3>createStub</h3>
+	
+	<kbd>public any <strong>createStub</strong>([boolean callLogging='true'], [string extends=''], [string implements=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Create an empty stub object that you can use for mocking.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>callLogging</code> - Add method call logging for all mocked methods</dd>
+		
+		<dd><code>extends</code> - Make the stub extend from certain CFC</dd>
+		
+		<dd><code>implements</code> - Make the stub adhere to an interface</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="decorateMock()"><!-- --></a>
+	<h3>decorateMock</h3>
+	
+	<kbd>private void <strong>decorateMock</strong>(any target)</kbd>
+	
+	<br><br>
+
+	
+		<p>Decorate a mock object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getGenerationPath()"><!-- --></a>
+	<h3>getGenerationPath</h3>
+	
+	<kbd>public string <strong>getGenerationPath</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Get the current generation path</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getMockGenerator()"><!-- --></a>
+	<h3>getMockGenerator</h3>
+	
+	<kbd>public <a href="../../testbox/system/mockutils/MockGenerator.html" title="class in testbox.system.mockutils">MockGenerator</a> <strong>getMockGenerator</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Get the Mock Generator Utility</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getUtil()"><!-- --></a>
+	<h3>getUtil</h3>
+	
+	<kbd>private <a href="../../testbox/system/util/Util.html" title="class in testbox.system.util">Util</a> <strong>getUtil</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Create and return a util object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getVersion()"><!-- --></a>
+	<h3>getVersion</h3>
+	
+	<kbd>public string <strong>getVersion</strong>()</kbd>
+	
+	<br><br>
+
+	
+		<p>Get the MockBox version</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="normalizeArguments()"><!-- --></a>
+	<h3>normalizeArguments</h3>
+	
+	<kbd>public any <strong>normalizeArguments</strong>(any args)</kbd>
+	
+	<br><br>
+
+	
+		<p>Normalize argument values on method calls</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>args</code> - The arguments structure to normalize</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="prepareMock()"><!-- --></a>
+	<h3>prepareMock</h3>
+	
+	<kbd>public any <strong>prepareMock</strong>([any object], [boolean callLogging='true'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Prepares an already instantiated object to act as a mock for spying and much more.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>object</code> - The already instantiated object to prepare for mocking</dd>
+		
+		<dd><code>callLogging</code> - Add method call logging for all mocked methods</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="querySim()"><!-- --></a>
+	<h3>querySim</h3>
+	
+	<kbd>public query <strong>querySim</strong>(string queryData)</kbd>
+	
+	<br><br>
+
+	
+		<p>First line are the query columns separated by commas. Then do a consecuent rows separated by line breaks separated by | to denote columns.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>queryData</code> - The data to create queries</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="setGenerationPath()"><!-- --></a>
+	<h3>setGenerationPath</h3>
+	
+	<kbd>public void <strong>setGenerationPath</strong>(string generationPath)</kbd>
+	
+	<br><br>
+
+	
+		<p>Override the mocks generation path</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>generationPath</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

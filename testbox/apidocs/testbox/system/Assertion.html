@@ -1,0 +1,2512 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Assertion</title>
+	<meta name="keywords" content="testbox.system.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../highlighter/styles/shCoreDefault.css">
+	<script src="../../highlighter/scripts/shCore.js"></script>
+	<script src="../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>TestBox v2.1.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../index.html?testbox/system/Assertion.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: testbox.system"><span class="label label-success">testbox.system</span></a>
+</div>
+
+<h2>
+
+Class
+
+ Assertion</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre>railo-context.Component
+        <img src="../../resources/inherit.gif" alt="extended by ">testbox.system.Assertion
+</pre>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>Copyright Since 2005 TestBox Framework by Luis Majano and Ortus Solutions, Corp
+www.coldbox.org | www.ortussolutions.com
+This object represents our Assertion style DSL for Unit style testing</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#assert()">assert</A></strong>(boolean expression, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed expression is true.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#between()">between</A></strong>(any actual, any min, any max, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed in actual number or date is between the passed in min and max values.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#closeTo()">closeTo</A></strong>(any expected, any actual, any delta, [any datePart=''], [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed in actual number or date is expected to be close to it within +/- a passed delta and optional datepart.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#deepKey()">deepKey</A></strong>(struct target, string key, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that a given key exists in the passed in struct by searching the entire nested structure.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#equalize()">equalize</A></strong>(any expected, any actual)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRIVATE Methods **********************************.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#fail()">fail</A></strong>([any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fail assertion.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#getIdentityHashCode()">getIdentityHashCode</A></strong>(any target)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#getStringName()">getStringName</A></strong>(any obj)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a string name representation of an incoming object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#getTargetLength()">getTargetLength</A></strong>(any target)
+			<br>
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#includes()">includes</A></strong>(any target, any needle, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the given "needle" argument exists in the incoming string or array with no case-sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#includesWithCase()">includesWithCase</A></strong>(any target, any needle, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the given "needle" argument exists in the incoming string or array with case-sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#instanceOf()">instanceOf</A></strong>(any actual, string typeName, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual object is of the expected instance type.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isEmpty()">isEmpty</A></strong>(any target, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that a a given string, array, structure or query is empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isEqual()">isEqual</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is equal to each other, no case is required.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isEqualWithCase()">isEqualWithCase</A></strong>(string expected, string actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert strings are equal to each other with case.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isFalse()">isFalse</A></strong>(boolean actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is false.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isGT()">isGT</A></strong>(any actual, any target, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual value is greater than the target value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isGTE()">isGTE</A></strong>(any actual, any target, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual value is greater than or equal the target value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isLT()">isLT</A></strong>(any actual, any target, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual value is less than the target value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isLTE()">isLTE</A></strong>(any actual, any target, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual value is less than or equal the target value.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isNotEmpty()">isNotEmpty</A></strong>(any target, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that a a given string, array, structure or query is not empty.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isNotEqual()">isNotEqual</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is not equal to each other, no case is required.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isNotSameInstance()">isNotSameInstance</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert an object is not the same instance as another object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isSameInstance()">isSameInstance</A></strong>(any expected, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert an object is the same instance as another object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#isTrue()">isTrue</A></strong>(boolean actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is true.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#key()">key</A></strong>(any target, string key, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that a given key exists in the passed in struct/object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#lengthOf()">lengthOf</A></strong>(any target, string length, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert the size of a given string, array, structure or query.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#match()">match</A></strong>(string actual, string regex, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual data matches the incoming regular expression with no case sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#matchWithCase()">matchWithCase</A></strong>(string actual, string regex, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual data matches the incoming regular expression with case sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notDeepKey()">notDeepKey</A></strong>(struct target, string key, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that a given key DOES NOT exists in the passed in struct by searching the entire nested structure.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notIncludes()">notIncludes</A></strong>(any target, any needle, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the given "needle" argument exists in the incoming string or array with no case-sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notIncludesWithCase()">notIncludesWithCase</A></strong>(any target, any needle, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the given "needle" argument does not exist in the incoming string or array with case-sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notInstanceOf()">notInstanceOf</A></strong>(any actual, string typeName, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual object is NOT of the expected instance type.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notKey()">notKey</A></strong>(any target, string key, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that a given key DOES NOT exist in the passed in struct/object.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notLengthOf()">notLengthOf</A></strong>(any target, string length, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert the size of a given string, array, structure or query.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notMatch()">notMatch</A></strong>(string actual, string regex, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the actual data does NOT match the incoming regular expression with no case sensitivity.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notNull()">notNull</A></strong>([any actual], [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is not null.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notThrows()">notThrows</A></strong>(any target, [any type=''], [any regex=''], [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed in function will NOT throw an exception, an exception of a specified type or exception message regex.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#notTypeOf()">notTypeOf</A></strong>(string type, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that is NOT a type of the incoming actual data, it uses the internal ColdFusion isValid() function behind the scenes.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#null()">null</A></strong>([any actual], [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert something is null.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#throws()">throws</A></strong>(any target, [any type=''], [any regex='.*'], [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the passed in function will throw an exception.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>any</code>
+		</td>
+		<td>
+			<strong><a href="Assertion.html#typeOf()">typeOf</A></strong>(string type, any actual, [any message=''])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert the type of the incoming actual data, it uses the internal ColdFusion isValid() function behind the scenes.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_railo-context.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>railo-context.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="assert()"><!-- --></a>
+	<h3>assert</h3>
+	
+	<kbd>public any <strong>assert</strong>(boolean expression, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed expression is true</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expression</code> - The expression to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="between()"><!-- --></a>
+	<h3>between</h3>
+	
+	<kbd>public any <strong>between</strong>(any actual, any min, any max, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed in actual number or date is between the passed in min and max values</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual number or date to evaluate</dd>
+		
+		<dd><code>min</code> - The expected min number or date</dd>
+		
+		<dd><code>max</code> - The expected max number or date</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="closeTo()"><!-- --></a>
+	<h3>closeTo</h3>
+	
+	<kbd>public any <strong>closeTo</strong>(any expected, any actual, any delta, [any datePart=''], [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed in actual number or date is expected to be close to it within +/- a passed delta and optional datepart</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code> - The expected number or date</dd>
+		
+		<dd><code>actual</code> - The actual number or date</dd>
+		
+		<dd><code>delta</code> - The +/- delta to range it</dd>
+		
+		<dd><code>datePart</code> - If passed in values are dates, then you can use the datepart to evaluate it</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="deepKey()"><!-- --></a>
+	<h3>deepKey</h3>
+	
+	<kbd>public any <strong>deepKey</strong>(struct target, string key, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that a given key exists in the passed in struct by searching the entire nested structure</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object/struct</dd>
+		
+		<dd><code>key</code> - The key to check for existence anywhere in the nested structure</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="equalize()"><!-- --></a>
+	<h3>equalize</h3>
+	
+	<kbd>private any <strong>equalize</strong>(any expected, any actual)</kbd>
+	
+	<br><br>
+
+	
+		<p>PRIVATE Methods **********************************</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code></dd>
+		
+		<dd><code>actual</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="fail()"><!-- --></a>
+	<h3>fail</h3>
+	
+	<kbd>public any <strong>fail</strong>([any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Fail assertion</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getIdentityHashCode()"><!-- --></a>
+	<h3>getIdentityHashCode</h3>
+	
+	<kbd>private any <strong>getIdentityHashCode</strong>(any target)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getStringName()"><!-- --></a>
+	<h3>getStringName</h3>
+	
+	<kbd>public any <strong>getStringName</strong>(any obj)</kbd>
+	
+	<br><br>
+
+	
+		<p>Get a string name representation of an incoming object.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>obj</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="getTargetLength()"><!-- --></a>
+	<h3>getTargetLength</h3>
+	
+	<kbd>private any <strong>getTargetLength</strong>(any target)</kbd>
+	
+	<br><br>
+
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="includes()"><!-- --></a>
+	<h3>includes</h3>
+	
+	<kbd>public any <strong>includes</strong>(any target, any needle, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the given "needle" argument exists in the incoming string or array with no case-sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check if the incoming needle exists in. This can be a string or array</dd>
+		
+		<dd><code>needle</code> - The substring to find in a string or the value to find in an array</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="includesWithCase()"><!-- --></a>
+	<h3>includesWithCase</h3>
+	
+	<kbd>public any <strong>includesWithCase</strong>(any target, any needle, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the given "needle" argument exists in the incoming string or array with case-sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check if the incoming needle exists in. This can be a string or array</dd>
+		
+		<dd><code>needle</code> - The substring to find in a string or the value to find in an array</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="instanceOf()"><!-- --></a>
+	<h3>instanceOf</h3>
+	
+	<kbd>public any <strong>instanceOf</strong>(any actual, string typeName, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual object is of the expected instance type</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>typeName</code> - The typename to check</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isEmpty()"><!-- --></a>
+	<h3>isEmpty</h3>
+	
+	<kbd>public any <strong>isEmpty</strong>(any target, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that a a given string, array, structure or query is empty</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check the length for, this can be a string, array, structure or query</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isEqual()"><!-- --></a>
+	<h3>isEqual</h3>
+	
+	<kbd>public any <strong>isEqual</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is equal to each other, no case is required</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code> - The expected data</dd>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isEqualWithCase()"><!-- --></a>
+	<h3>isEqualWithCase</h3>
+	
+	<kbd>public any <strong>isEqualWithCase</strong>(string expected, string actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert strings are equal to each other with case.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code> - The expected data</dd>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isFalse()"><!-- --></a>
+	<h3>isFalse</h3>
+	
+	<kbd>public any <strong>isFalse</strong>(boolean actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is false</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isGT()"><!-- --></a>
+	<h3>isGT</h3>
+	
+	<kbd>public any <strong>isGT</strong>(any actual, any target, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual value is greater than the target value</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual value</dd>
+		
+		<dd><code>target</code> - The target value</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isGTE()"><!-- --></a>
+	<h3>isGTE</h3>
+	
+	<kbd>public any <strong>isGTE</strong>(any actual, any target, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual value is greater than or equal the target value</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual value</dd>
+		
+		<dd><code>target</code> - The target value</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isLT()"><!-- --></a>
+	<h3>isLT</h3>
+	
+	<kbd>public any <strong>isLT</strong>(any actual, any target, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual value is less than the target value</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual value</dd>
+		
+		<dd><code>target</code> - The target value</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isLTE()"><!-- --></a>
+	<h3>isLTE</h3>
+	
+	<kbd>public any <strong>isLTE</strong>(any actual, any target, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual value is less than or equal the target value</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual value</dd>
+		
+		<dd><code>target</code> - The target value</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isNotEmpty()"><!-- --></a>
+	<h3>isNotEmpty</h3>
+	
+	<kbd>public any <strong>isNotEmpty</strong>(any target, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that a a given string, array, structure or query is not empty</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check the length for, this can be a string, array, structure or query</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isNotEqual()"><!-- --></a>
+	<h3>isNotEqual</h3>
+	
+	<kbd>public any <strong>isNotEqual</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is not equal to each other, no case is required</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code> - The expected data</dd>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isNotSameInstance()"><!-- --></a>
+	<h3>isNotSameInstance</h3>
+	
+	<kbd>public any <strong>isNotSameInstance</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert an object is not the same instance as another object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code> - The expected data</dd>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isSameInstance()"><!-- --></a>
+	<h3>isSameInstance</h3>
+	
+	<kbd>public any <strong>isSameInstance</strong>(any expected, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert an object is the same instance as another object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>expected</code> - The expected data</dd>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="isTrue()"><!-- --></a>
+	<h3>isTrue</h3>
+	
+	<kbd>public any <strong>isTrue</strong>(boolean actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is true</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="key()"><!-- --></a>
+	<h3>key</h3>
+	
+	<kbd>public any <strong>key</strong>(any target, string key, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that a given key exists in the passed in struct/object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object/struct</dd>
+		
+		<dd><code>key</code> - The key to check for existence</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="lengthOf()"><!-- --></a>
+	<h3>lengthOf</h3>
+	
+	<kbd>public any <strong>lengthOf</strong>(any target, string length, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert the size of a given string, array, structure or query</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check the length for, this can be a string, array, structure or query</dd>
+		
+		<dd><code>length</code> - The length to check</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="match()"><!-- --></a>
+	<h3>match</h3>
+	
+	<kbd>public any <strong>match</strong>(string actual, string regex, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual data matches the incoming regular expression with no case sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>regex</code> - The regex to check with</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="matchWithCase()"><!-- --></a>
+	<h3>matchWithCase</h3>
+	
+	<kbd>public any <strong>matchWithCase</strong>(string actual, string regex, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual data matches the incoming regular expression with case sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>regex</code> - The regex to check with</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notDeepKey()"><!-- --></a>
+	<h3>notDeepKey</h3>
+	
+	<kbd>public any <strong>notDeepKey</strong>(struct target, string key, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that a given key DOES NOT exists in the passed in struct by searching the entire nested structure</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object/struct</dd>
+		
+		<dd><code>key</code> - The key to check for existence anywhere in the nested structure</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notIncludes()"><!-- --></a>
+	<h3>notIncludes</h3>
+	
+	<kbd>public any <strong>notIncludes</strong>(any target, any needle, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the given "needle" argument exists in the incoming string or array with no case-sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check if the incoming needle exists in. This can be a string or array</dd>
+		
+		<dd><code>needle</code> - The substring to find in a string or the value to find in an array</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notIncludesWithCase()"><!-- --></a>
+	<h3>notIncludesWithCase</h3>
+	
+	<kbd>public any <strong>notIncludesWithCase</strong>(any target, any needle, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the given "needle" argument does not exist in the incoming string or array with case-sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check if the incoming needle exists in. This can be a string or array</dd>
+		
+		<dd><code>needle</code> - The substring to find in a string or the value to find in an array</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notInstanceOf()"><!-- --></a>
+	<h3>notInstanceOf</h3>
+	
+	<kbd>public any <strong>notInstanceOf</strong>(any actual, string typeName, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual object is NOT of the expected instance type</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>typeName</code> - The typename to check</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notKey()"><!-- --></a>
+	<h3>notKey</h3>
+	
+	<kbd>public any <strong>notKey</strong>(any target, string key, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that a given key DOES NOT exist in the passed in struct/object</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object/struct</dd>
+		
+		<dd><code>key</code> - The key to check for existence</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notLengthOf()"><!-- --></a>
+	<h3>notLengthOf</h3>
+	
+	<kbd>public any <strong>notLengthOf</strong>(any target, string length, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert the size of a given string, array, structure or query</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target object to check the length for, this can be a string, array, structure or query</dd>
+		
+		<dd><code>length</code> - The length to check</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notMatch()"><!-- --></a>
+	<h3>notMatch</h3>
+	
+	<kbd>public any <strong>notMatch</strong>(string actual, string regex, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the actual data does NOT match the incoming regular expression with no case sensitivity</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>regex</code> - The regex to check with</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notNull()"><!-- --></a>
+	<h3>notNull</h3>
+	
+	<kbd>public any <strong>notNull</strong>([any actual], [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is not null</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notThrows()"><!-- --></a>
+	<h3>notThrows</h3>
+	
+	<kbd>public any <strong>notThrows</strong>(any target, [any type=''], [any regex=''], [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed in function will NOT throw an exception, an exception of a specified type or exception message regex</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target function to execute and check for exceptions</dd>
+		
+		<dd><code>type</code> - Match this type with the exception thrown</dd>
+		
+		<dd><code>regex</code> - Match this regex against the message+detail of the exception</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="notTypeOf()"><!-- --></a>
+	<h3>notTypeOf</h3>
+	
+	<kbd>public any <strong>notTypeOf</strong>(string type, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that is NOT a type of the incoming actual data, it uses the internal ColdFusion isValid() function behind the scenes</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>type</code> - The type to check, valid types are: array, binary, boolean, component, date, time, float, numeric, integer, query, string, struct, url, uuid</dd>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="null()"><!-- --></a>
+	<h3>null</h3>
+	
+	<kbd>public any <strong>null</strong>([any actual], [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert something is null</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>actual</code> - The actual data to test</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="throws()"><!-- --></a>
+	<h3>throws</h3>
+	
+	<kbd>public any <strong>throws</strong>(any target, [any type=''], [any regex='.*'], [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert that the passed in function will throw an exception</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>target</code> - The target function to execute and check for exceptions</dd>
+		
+		<dd><code>type</code> - Match this type with the exception thrown</dd>
+		
+		<dd><code>regex</code> - Match this regex against the message + detail of the exception</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="typeOf()"><!-- --></a>
+	<h3>typeOf</h3>
+	
+	<kbd>public any <strong>typeOf</strong>(string type, any actual, [any message=''])</kbd>
+	
+	<br><br>
+
+	
+		<p>Assert the type of the incoming actual data, it uses the internal ColdFusion isValid() function behind the scenes</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>type</code> - The type to check, valid types are: array, binary, boolean, component, date, time, float, numeric, integer, query, string, struct, url, uuid</dd>
+		
+		<dd><code>actual</code> - The actual data to check</dd>
+		
+		<dd><code>message</code> - The message to send in the failure</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+

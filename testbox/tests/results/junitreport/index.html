@@ -1,0 +1,3260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:lxslt="http://xml.apache.org/xslt" xmlns:stringutils="xalan://org.apache.tools.ant.util.StringUtils">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>My Awesome TestBox Results</title>
+<style type="text/css">
+      body {
+        font:normal 68% verdana,arial,helvetica;
+        color:#000000;
+      }
+      table tr td, table tr th {
+          font-size: 68%;
+      }
+      table.details tr th{
+        font-weight: bold;
+        text-align:left;
+        background:#a6caf0;
+      }
+      table.details tr td{
+        background:#eeeee0;
+      }
+
+      p {
+        line-height:1.5em;
+        margin-top:0.5em; margin-bottom:1.0em;
+      }
+      h1 {
+        margin: 0px 0px 5px; font: 165% verdana,arial,helvetica
+      }
+      h2 {
+        margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+      }
+      h3 {
+        margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+      }
+      h4 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      h5 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      h6 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      .Error {
+        font-weight:bold; color:red;
+      }
+      .Failure {
+        font-weight:bold; color:purple;
+      }
+      .Properties {
+        text-align:right;
+      }
+      </style>
+<script type="text/javascript" language="JavaScript">
+        var TestCases = new Array();
+        var cur;
+        
+    cur = TestCases['.TestBox xUnit suite for cf10 and above'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['.TestBox xUnit suite for CF9'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.BDDInheritanceTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.BDDLifecycleTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.BDDTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.BaseTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.CustomAssertions'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.DebugTests'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.EdgeCases'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.LabelsTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.MXUnitCompatTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.NestedDescribeTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.ThreadCollisions'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['.MockBox Suite'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    
+    cur = TestCases['test.specs.more.EmbedTest'] = new Array();
+    
+        cur['additionalinformation'] = '';
+    
+        cur['appserver'] = '';
+    
+        cur['arch'] = 'amd64';
+    
+        cur['archmodel'] = '64';
+    
+        cur['auth_password'] = '';
+    
+        cur['auth_type'] = '';
+    
+        cur['auth_user'] = '';
+    
+        cur['buildnumber'] = '';
+    
+        cur['cert_cookie'] = '';
+    
+        cur['cert_flags'] = '';
+    
+        cur['cert_issuer'] = '';
+    
+        cur['cert_keysize'] = '';
+    
+        cur['cert_secretkeysize'] = '';
+    
+        cur['cert_serialnumber'] = '';
+    
+        cur['cert_server_issuer'] = '';
+    
+        cur['cert_server_subject'] = '';
+    
+        cur['cert_subject'] = '';
+    
+        cur['cf_template_path'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['content_length'] = '';
+    
+        cur['content_type'] = '';
+    
+        cur['context_path'] = '';
+    
+        cur['expiration'] = '{ts \'2037-12-31 17:00:00\'}';
+    
+        cur['gateway_interface'] = '';
+    
+        cur['http_accept'] = 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2';
+    
+        cur['http_accept_encoding'] = '';
+    
+        cur['http_accept_language'] = '';
+    
+        cur['http_connection'] = 'keep-alive';
+    
+        cur['http_cookie'] = '';
+    
+        cur['http_host'] = 'integration.staging.ortussolutions.com';
+    
+        cur['http_referer'] = '';
+    
+        cur['http_user_agent'] = 'Java/1.7.0_60';
+    
+        cur['https'] = '';
+    
+        cur['https_keysize'] = '';
+    
+        cur['https_secretkeysize'] = '';
+    
+        cur['https_server_issuer'] = '';
+    
+        cur['https_server_subject'] = '';
+    
+        cur['installkit'] = '';
+    
+        cur['loaderpath'] = '/opt/railo/lib/railo.jar';
+    
+        cur['loaderversion'] = '4.3';
+    
+        cur['local_addr'] = '108.166.178.244';
+    
+        cur['local_host'] = 'staging.ortussolutions.com';
+    
+        cur['name'] = 'Linux';
+    
+        cur['path_info'] = '';
+    
+        cur['path_translated'] = '/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/runner.cfm';
+    
+        cur['productlevel'] = 'os';
+    
+        cur['productname'] = 'Railo';
+    
+        cur['productversion'] = '10,0,0,0';
+    
+        cur['query_string'] = '&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['release-date'] = '{ts \'2014-06-23 12:16:00\'}';
+    
+        cur['remote_addr'] = '108.166.178.244';
+    
+        cur['remote_host'] = '108.166.178.244';
+    
+        cur['remote_user'] = '';
+    
+        cur['request_method'] = 'GET';
+    
+        cur['request_url'] = 'http://integration.staging.ortussolutions.com/testbox/tests/runner.cfm?&directory=test.specs&recurse=true&reporter=ANTJunit&labels=&reportPath=/var/www/vhosts/staging.ortussolutions.com/integration/testbox/tests/results&propertiesSummary=true';
+    
+        cur['rootdir'] = '/var/www/vhosts/staging.ortussolutions.com/vistacaballo';
+    
+        cur['script_name'] = '/testbox/tests/runner.cfm';
+    
+        cur['serialnumber'] = '0';
+    
+        cur['server_name'] = 'integration.staging.ortussolutions.com';
+    
+        cur['server_port'] = '80';
+    
+        cur['server_port_secure'] = '0';
+    
+        cur['server_protocol'] = 'HTTP/1.1';
+    
+        cur['server_software'] = '';
+    
+        cur['state'] = 'final';
+    
+        cur['supportedlocales'] = 'malay (malaysia),arabic (qatar),icelandic (iceland),finnish (finland),polish,english (malta),italian (switzerland),dutch (belgium),arabic (saudi arabia),arabic (iraq),spanish (puerto rico),spanish (chile),finnish,german (austria),danish,english (united kingdom),spanish (panama),serbian,arabic (yemen),macedonian (macedonia),macedonian,english (canada),vietnamese (vietnam),dutch (netherlands),spanish (united states),chinese (china),spanish (honduras),english (united states),french,thai,arabic,arabic (morocco),latvian,german,indonesian (indonesia),croatian,english (south africa),korean (south korea),arabic (tunisia),indonesian,japanese,serbian (serbia),belarusian (belarus),chinese (taiwan),arabic (sudan),portuguese,icelandic,ja_JP_JP_#u-ca-japanese,spanish (bolivia),arabic (algeria),malay,spanish (argentina),arabic (united arab emirates),french (canada),slovenian,spanish,lithuanian (lithuania),sr_ME_#Latn,arabic (syria),russian (russia),french (belgium),spanish (spain),bulgarian,hebrew (israel),swedish,english,hebrew,danish (denmark),spanish (costa rica),chinese (hong kong),chinese,catalan (spain),thai (thailand),ukrainian (ukraine),spanish (dominican republic),spanish (venezuela),polish (poland),arabic (libya),arabic (jordan),italian,ukrainian,hungarian (hungary),irish,spanish (guatemala),spanish (paraguay),bulgarian (bulgaria),croatian (croatia),sr_BA_#Latn,romanian (romania),french (luxembourg),norwegian,lithuanian,english (singapore),spanish (ecuador),serbian (bosnia and herzegovina),spanish (nicaragua),slovak,russian,maltese,spanish (el salvador),dutch,hindi (india),estonian,greek (greece),slovenian (slovenia),italian (italy),japanese (japan),german (luxembourg),french (switzerland),maltese (malta),arabic (bahrain),albanian,vietnamese,serbian (montenegro),portuguese (brazil),norwegian (norway),greek,german (switzerland),chinese (singapore),arabic (kuwait),arabic (egypt),irish (ireland),spanish (peru),czech (czech republic),turkish (turkey),czech,spanish (uruguay),english (ireland),english (india),arabic (oman),serbian (serbia and montenegro),catalan,belarusian,serbian (latin),korean,albanian (albania),portuguese (portugal),latvian (latvia),sr_RS_#Latn,slovak (slovakia),spanish (mexico),english (australia),no_NO_NY,english (new zealand),swedish (sweden),romanian,arabic (lebanon),german (germany),th_TH_TH_#u-nu-thai,turkish,spanish (colombia),english (philippines),estonian (estonia),greek (cyprus),hungarian,french (france)';
+    
+        cur['version'] = '2.6.32-042stab079.6';
+    
+        cur['version'] = '4.2.1.002';
+    
+        cur['versionname'] = 'Togo';
+    
+        cur['versionnameexplanation'] = 'http://en.wikipedia.org/wiki/Togo_(dog)';
+    
+        cur['web_server_api'] = '';
+    </script><script type="text/javascript" language="JavaScript">
+        function displayProperties (name) {
+          var win = window.open('','JUnitSystemProperties','scrollbars=1,resizable=1');
+          var doc = win.document;
+          doc.open();
+          doc.write("<html><head><title>Properties of " + name + "</title>");
+          doc.write("<style>")
+          doc.write("body {font:normal 68% verdana,arial,helvetica; color:#000000; }");
+          doc.write("table tr td, table tr th { font-size: 68%; }");
+          doc.write("table.properties { border-collapse:collapse; border-left:solid 1 #cccccc; border-top:solid 1 #cccccc; padding:5px; }");
+          doc.write("table.properties th { text-align:left; border-right:solid 1 #cccccc; border-bottom:solid 1 #cccccc; background-color:#eeeeee; }");
+          doc.write("table.properties td { font:normal; text-align:left; border-right:solid 1 #cccccc; border-bottom:solid 1 #cccccc; background-color:#fffffff; }");
+          doc.write("h3 { margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica }");
+          doc.write("</style>");
+          doc.write("</head><body>");
+          doc.write("<h3>Properties of " + name + "</h3>");
+          doc.write("<div align=\"right\"><a href=\"javascript:window.close();\">Close</a></div>");
+          doc.write("<table class='properties'>");
+          doc.write("<tr><th>Name</th><th>Value</th></tr>");
+          for (prop in TestCases[name]) {
+            doc.write("<tr><th>" + prop + "</th><td>" + TestCases[name][prop] + "</td></tr>");
+          }
+          doc.write("</table>");
+          doc.write("</body></html>");
+          doc.close();
+          win.focus();
+        }
+      
+      </script>
+</head>
+<body>
+<a name="top"></a>
+<h1>My Awesome TestBox Results</h1>
+<table width="100%">
+<tr>
+<td align="left"></td><td align="right">Designed for use with <a href="http://www.junit.org">JUnit</a> and <a href="http://ant.apache.org/ant">Ant</a>.</td>
+</tr>
+</table>
+<hr size="1">
+<h2>Summary</h2>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Tests</th><th>Failures</th><th>Errors</th><th>Success rate</th><th>Time</th>
+</tr>
+<tr valign="top" class="">
+<td>253</td><td>0</td><td>0</td><td>100.00%</td><td>4.196</td>
+</tr>
+</table>
+<table border="0" width="95%">
+<tr>
+<td style="text-align: justify;">
+        Note: <i>failures</i> are anticipated and checked for with assertions while <i>errors</i> are unanticipated.
+        </td>
+</tr>
+</table>
+<hr size="1" width="95%" align="left">
+<h2>Packages</h2>
+        Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.
+        <table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
+</tr>
+<tr valign="top" class="">
+<td><a href="#"></a></td><td>115</td><td>0</td><td>0</td><td>1.474</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#test.specs">test.specs</a></td><td>90</td><td>0</td><td>0</td><td>2.689</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#test.specs.more">test.specs.more</a></td><td>48</td><td>0</td><td>0</td><td>0.033</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+</table>
+<hr size="1" width="95%" align="left">
+<a name=""></a>
+<h3>Package </h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
+</tr>
+<tr valign="top" class="">
+<td><a href="#TestBox xUnit suite for cf10 and above">TestBox xUnit suite for cf10 and above</a></td><td>48</td><td>0</td><td>0</td><td>0.033</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#TestBox xUnit suite for CF9">TestBox xUnit suite for CF9</a></td><td>43</td><td>0</td><td>0</td><td>0.031</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#MockBox Suite">MockBox Suite</a></td><td>24</td><td>0</td><td>0</td><td>1.410</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+</table>
+<a href="#top">Back to top</a>
+<p></p>
+<p></p>
+<a name="test.specs"></a>
+<h3>Package test.specs</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
+</tr>
+<tr valign="top" class="">
+<td><a href="#BDDInheritanceTest">BDDInheritanceTest</a></td><td>7</td><td>0</td><td>0</td><td>0.033</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#BDDLifecycleTest">BDDLifecycleTest</a></td><td>3</td><td>0</td><td>0</td><td>0.048</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#BDDTest">BDDTest</a></td><td>27</td><td>0</td><td>0</td><td>1.349</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#BaseTest">BaseTest</a></td><td>1</td><td>0</td><td>0</td><td>0.001</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#CustomAssertions">CustomAssertions</a></td><td>3</td><td>0</td><td>0</td><td>0.190</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#DebugTests">DebugTests</a></td><td>4</td><td>0</td><td>0</td><td>0.022</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#EdgeCases">EdgeCases</a></td><td>1</td><td>0</td><td>0</td><td>0.004</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#LabelsTest">LabelsTest</a></td><td>5</td><td>0</td><td>0</td><td>0.012</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#MXUnitCompatTest">MXUnitCompatTest</a></td><td>36</td><td>0</td><td>0</td><td>1.014</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#NestedDescribeTest">NestedDescribeTest</a></td><td>1</td><td>0</td><td>0</td><td>0.005</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+<tr valign="top" class="">
+<td><a href="#ThreadCollisions">ThreadCollisions</a></td><td>2</td><td>0</td><td>0</td><td>0.011</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+</table>
+<a href="#top">Back to top</a>
+<p></p>
+<p></p>
+<a name="test.specs.more"></a>
+<h3>Package test.specs.more</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th width="80%">Name</th><th>Tests</th><th>Errors</th><th>Failures</th><th nowrap>Time(s)</th><th nowrap>Time Stamp</th><th>Host</th>
+</tr>
+<tr valign="top" class="">
+<td><a href="#EmbedTest">EmbedTest</a></td><td>48</td><td>0</td><td>0</td><td>0.033</td><td>2014-11-12T21:16:39</td><td>108.166.178.244</td>
+</tr>
+</table>
+<a href="#top">Back to top</a>
+<p></p>
+<p></p>
+<hr size="1" width="95%" align="left">
+<a name="BaseTest"></a>
+<h3>TestCase BaseTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.BaseTest testFromInheritance</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.BaseTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="BDDInheritanceTest"></a>
+<h3>TestCase BDDInheritanceTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>A spec is just a closure so it can contain code</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have more than one expectation test</td><td>Success</td><td></td><td>0.012</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have negative expectations</td><td>Success</td><td></td><td>0.011</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have tests that can be skipped easily like this one</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have tests that execute if the right environment exists (railo only)</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have tests that execute if the right environment exists (acf only)</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have a skip that is executed at runtime</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.BDDInheritanceTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="BDDLifecycleTest"></a>
+<h3>TestCase BDDLifecycleTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>A suite before should be 1</td><td>Success</td><td></td><td>0.009</td>
+</tr>
+<tr valign="top" class="">
+<td>A suite A nested suite before should be 4</td><td>Success</td><td></td><td>0.015</td>
+</tr>
+<tr valign="top" class="">
+<td>A suite A nested suite Another nested suite before should be 11</td><td>Success</td><td></td><td>0.024</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.BDDLifecycleTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="BDDTest"></a>
+<h3>TestCase BDDTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>A spec is just a closure so it can contain code</td><td>Success</td><td></td><td>0.214</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have more than one expectation test</td><td>Success</td><td></td><td>0.015</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have negative expectations</td><td>Success</td><td></td><td>0.012</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can get private properties</td><td>Success</td><td></td><td>0.388</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have tests that can be skipped easily like this one</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have tests that execute if the right environment exists (railo only)</td><td>Success</td><td></td><td>0.007</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have tests that execute if the right environment exists (acf only)</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have a skip that is executed at runtime</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have null expectations</td><td>Success</td><td></td><td>0.008</td>
+</tr>
+<tr valign="top" class="">
+<td>A spec can have discrete math</td><td>Success</td><td></td><td>0.013</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers are cool and foo should be really false</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers are still cool and the negation of foo should be really true</td><td>Success</td><td></td><td>0.006</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers Nested suite: Testing loading via a CFC should be awesome</td><td>Success</td><td></td><td>0.189</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers Nested suite: Testing loading via a CFC should know its maker</td><td>Success</td><td></td><td>0.010</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers Nested suite: Testing loading via a CFC Yet another nested suite should have cascaded beforeEach() call from parent</td><td>Success</td><td></td><td>0.013</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers Nested suite: Testing loading via a CFC Yet another nested suite should have cascaded beforeEach() call from grandparent</td><td>Success</td><td></td><td>0.012</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Matchers Another Nested Suite can also be awesome</td><td>Success</td><td></td><td>0.007</td>
+</tr>
+<tr valign="top" class="">
+<td>A railo only suite should only execute for railo</td><td>Success</td><td></td><td>0.003</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite Can have a separate beforeEach for this suite</td><td>Success</td><td></td><td>0.184</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite can add incorrectly and fail</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite cannot divide by zero</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite cannot divide by zero with message regex</td><td>Success</td><td></td><td>0.010</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite can do throws with no message</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite can do throws with message and detail regex</td><td>Success</td><td></td><td>0.007</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite can use a mocked stub</td><td>Success</td><td></td><td>0.224</td>
+</tr>
+<tr valign="top" class="">
+<td>A calculator test suite can produce errors</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.BDDTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="CustomAssertions"></a>
+<h3>TestCase CustomAssertions</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>Custom Assertions awesome works</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Assertions funky works</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>Custom Assertions funky can fail</td><td>Success</td><td></td><td>0.002</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.CustomAssertions');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="DebugTests"></a>
+<h3>TestCase DebugTests</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>Debug can have custom labels</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>Debug can have generic labels</td><td>Success</td><td></td><td>0.005</td>
+</tr>
+<tr valign="top" class="">
+<td>Debug can do top functionality</td><td>Success</td><td></td><td>0.002</td>
+</tr>
+<tr valign="top" class="">
+<td>Debug another Suite can have generic labels too</td><td>Success</td><td></td><td>0.008</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.DebugTests');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="EdgeCases"></a>
+<h3>TestCase EdgeCases</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>Tests sparse array works</td><td>Success</td><td></td><td>0.003</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.EdgeCases');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="EmbedTest"></a>
+<h3>TestCase EmbedTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testThrows</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testLengthOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsEmpty</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testisEqualWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testMatchWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNegatedAwesomeCustomAssertion</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testExpectedExceptionWithValueAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsGT</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testExpectedExceptionFromMethodWithType</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testAssert</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotDeepKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testDeepKey</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIncludes</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testInstanceOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotLengthOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testnotIncludesWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsGTE</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsEmptyFunctions</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsEqualQuery</td><td>Success</td><td></td><td>0.003</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIncludesWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotInstanceOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsNotEmpty</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testExpectedExceptionNoValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testExpectedExceptionFromMethod</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testisNotEqual</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsLTE</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testAssertShortcut</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testnullValue</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testThatShouldFailWithShortcut</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotThrows</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotMatch</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotIncludes</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotNullValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testFloatingPointNumberAddition</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testAwesomeCustomAssertion</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testisEqual</td><td>Success</td><td></td><td>0.009</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testExpectedExceptionFromMethodWithTypeAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testSkipped</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testisTrue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testIsLT</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testisFalse</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testExpectedExceptionWithValue</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testTypeOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testThatShouldFail</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testMatch</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.more.EmbedTest testNotTypeOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.more.EmbedTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="LabelsTest"></a>
+<h3>TestCase LabelsTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>Suite with a label should execute</td><td>Success</td><td></td><td>0.010</td>
+</tr>
+<tr valign="top" class="">
+<td>Suite with a label should execute as well</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>Suite with a label Nested Suite should execute as well, as nested suite is inside a label suite</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>Suites with no labels should not execute</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>Suites with no labels should not execute</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.LabelsTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="MockBox Suite"></a>
+<h3>TestCase MockBox Suite</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testCollaborator</td><td>Success</td><td></td><td>0.050</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyCallCount</td><td>Success</td><td></td><td>0.006</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testInterfaceContracts</td><td>Success</td><td></td><td>0.342</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStubs</td><td>Success</td><td></td><td>0.007</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyAtLeast</td><td>Success</td><td></td><td>0.018</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testContainsClosureOrUDF</td><td>Success</td><td></td><td>0.012</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testGetProperty</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyOnce</td><td>Success</td><td></td><td>0.019</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyNever</td><td>Success</td><td></td><td>0.080</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testCallbacks</td><td>Success</td><td></td><td>0.139</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testContainsCFKeyword</td><td>Success</td><td></td><td>0.195</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockPrivateMethods</td><td>Success</td><td></td><td>0.019</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockWithArguments</td><td>Success</td><td></td><td>0.052</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStubWithInheritance</td><td>Success</td><td></td><td>0.011</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStateMachineResults</td><td>Success</td><td></td><td>0.110</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testProperties</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMethodArgumentSignatures</td><td>Success</td><td></td><td>0.149</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testStubWithImplements</td><td>Success</td><td></td><td>0.041</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testSpys</td><td>Success</td><td></td><td>0.014</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockRealMethods</td><td>Success</td><td></td><td>0.020</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVirtualMethods</td><td>Success</td><td></td><td>0.025</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testVerifyAtMost</td><td>Success</td><td></td><td>0.018</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testCFUDF</td><td>Success</td><td></td><td>0.028</td>
+</tr>
+<tr valign="top" class="">
+<td>MockBox Suite testMockMethodCallCount</td><td>Success</td><td></td><td>0.049</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('.MockBox Suite');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="MXUnitCompatTest"></a>
+<h3>TestCase MXUnitCompatTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testIsDefined</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsEmptyArray</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testInjectProperty</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testExpectedExceptionFromMethodWithType</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsStruct</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testMockMethods</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertNotSame</td><td>Success</td><td></td><td>0.002</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAssert</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAssertArrayEquals</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsEmptyQuery</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsEmptyStruct</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertQueryEquals</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAssertEquals</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsXMLDoc</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAssertTrue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertStructEquals</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsExactTypeOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testExpectedExceptionNoValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsArray</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAssertEqualsCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertEqualsWithTolerance</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertNotEquals</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testFailsMethod</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAddAssertDecorator</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testDebug</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testMakePublic</td><td>Success</td><td></td><td>0.742</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testInjectMethod</td><td>Success</td><td></td><td>0.002</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testRaiseException_pass</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertIsQuery</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testExpectedExceptionFromMethodWithTypeAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertFalse</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testFromInheritance</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testAssertIsEmpty</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testMakePublicWithPackage</td><td>Success</td><td></td><td>0.243</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testExpectedExceptionWithValue</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>test.specs.MXUnitCompatTest testassertSame</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.MXUnitCompatTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="NestedDescribeTest"></a>
+<h3>TestCase NestedDescribeTest</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>Outer describe Inner describe Tests are ONLY in inner it()</td><td>Success</td><td></td><td>0.003</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.NestedDescribeTest');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="TestBox xUnit suite for cf10 and above"></a>
+<h3>TestCase TestBox xUnit suite for cf10 and above</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testThrows</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testLengthOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotKey</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsEmpty</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testisEqualWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testMatchWithCase</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNegatedAwesomeCustomAssertion</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testExpectedExceptionWithValueAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsGT</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testExpectedExceptionFromMethodWithType</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testAssert</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotDeepKey</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testDeepKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIncludes</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testInstanceOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotLengthOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testnotIncludesWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsGTE</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsEmptyFunctions</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsEqualQuery</td><td>Success</td><td></td><td>0.003</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIncludesWithCase</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotInstanceOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsNotEmpty</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testExpectedExceptionNoValue</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testExpectedExceptionFromMethod</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testisNotEqual</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsLTE</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testAssertShortcut</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testnullValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testThatShouldFailWithShortcut</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotThrows</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotMatch</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotIncludes</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotNullValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testFloatingPointNumberAddition</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testAwesomeCustomAssertion</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testisEqual</td><td>Success</td><td></td><td>0.010</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testExpectedExceptionFromMethodWithTypeAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testSkipped</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testisTrue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testIsLT</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testisFalse</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testExpectedExceptionWithValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testTypeOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testThatShouldFail</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testMatch</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for cf10 and above testNotTypeOf</td><td>Success</td><td></td><td>0.002</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('.TestBox xUnit suite for cf10 and above');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="TestBox xUnit suite for CF9"></a>
+<h3>TestCase TestBox xUnit suite for CF9</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testLengthOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsEmpty</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testisEqualWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testMatchWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testExpectedExceptionWithValueAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsGT</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testExpectedExceptionFromMethodWithType</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testAssert</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotDeepKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testDeepKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIncludes</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testInstanceOf</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotLengthOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testnotIncludesWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsGTE</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsEqualQuery</td><td>Success</td><td></td><td>0.004</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIncludesWithCase</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotInstanceOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsNotEmpty</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testExpectedExceptionNoValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testExpectedExceptionFromMethod</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testisNotEqual</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsLTE</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testAssertShortcut</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testThatShouldFailWithShortcut</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testnullValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotMatch</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotIncludes</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotNullValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testFloatingPointNumberAddition</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testisEqual</td><td>Success</td><td></td><td>0.009</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testExpectedExceptionFromMethodWithTypeAndRegex</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testSkipped</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testisTrue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testIsLT</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testisFalse</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testKey</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testExpectedExceptionWithValue</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testTypeOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testThatShouldFail</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testMatch</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>TestBox xUnit suite for CF9 testNotTypeOf</td><td>Success</td><td></td><td>0.001</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('.TestBox xUnit suite for CF9');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a><a name="ThreadCollisions"></a>
+<h3>TestCase ThreadCollisions</h3>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="">
+<td>Thread Collisions will NOT fail on the second spec due to identical spec name based thread name</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+<tr valign="top" class="">
+<td>Thread Collisions will NOT fail on the second spec due to identical spec name based thread name</td><td>Success</td><td></td><td>0.000</td>
+</tr>
+</table>
+<div class="Properties">
+<a href="javascript:displayProperties('test.specs.ThreadCollisions');">
+                    Properties &raquo;
+                </a>
+</div>
+<p></p>
+<a href="#top">Back to top</a>
+</body>
+</html>

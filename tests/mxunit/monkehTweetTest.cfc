@@ -80,15 +80,29 @@ component extends="mxunit.framework.TestCase" {
 		return dataReturn;
 	}
 
-	/*public any function update_with_media() {
-		var dataReturn	=	variables.monkehTweet.postUpdateWithMedia(status='Updating and testing ##monkehTweet. ##ColdFusion', media="/Applications/ColdFusion9/wwwroot/monkehTweet/test/code.png");
+	public any function update_with_media() {
+		var dataReturn	=	variables.monkehTweet.postUpdateWithMedia(status='Image update test', media="/vagrant/tests/mxunit/mayo.JPG");
 		debug(dataReturn);
 		return dataReturn;
-	}*/
+	}
 
 	public any function postUpdate() {
 		var dataReturn = variables.monkehTweet.postUpdate('Nothing to see here.. just testing something. Move along.');
 		debug(dataReturn);
+		return dataReturn;
+	}
+
+  public any function postUpdateWithSingleBang() {
+		var dataReturn = variables.monkehTweet.postUpdate('Single bang!');
+		debug(dataReturn);
+    /*assertEquals('200', dataReturn.code);*/
+		return dataReturn;
+	}
+
+  public any function postUpdateWithDoubleBang() {
+		var dataReturn = variables.monkehTweet.postUpdate('Double bang!!');
+		debug(dataReturn);
+    /*assertEquals('200', dataReturn.code);*/
 		return dataReturn;
 	}
 

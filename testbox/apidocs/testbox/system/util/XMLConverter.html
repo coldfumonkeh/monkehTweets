@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>XMLConverter</title>
+	<meta name="keywords" content="testbox.system.util.concurrent.Callable interface">
+	<!-- common assets -->
+	
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel ="stylesheet" type="text/css" href="../../../bootstrap/css/bootstrap.min.css">
+<link rel ="stylesheet" type="text/css" href="../../../stylesheet.css">
+	
+<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,700,700italic|Ubuntu+Mono' rel='stylesheet' type='text/css' />
+	
+<script src="../../../bootstrap/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="../../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+	// Global Tool Tip Settings
+	$( '[title]' ).tooltip({
+		 animation: 'slide',
+		 delay: { show: 250, hide: 250 }
+	});
+});
+</script>
+	<!-- syntax highlighter -->
+	<link type="text/css" rel="stylesheet" href="../../../highlighter/styles/shCoreDefault.css">
+	<script src="../../../highlighter/scripts/shCore.js"></script>
+	<script src="../../../highlighter/scripts/shBrushColdFusion.js"></script>
+	<script src="../../../highlighter/scripts/shBrushXml.js"></script>
+	<script src="../../../highlighter/scripts/shBrushSql.js"></script>
+	<script src="../../../highlighter/scripts/shBrushJScript.js"></script>
+	<script src="../../../highlighter/scripts/shBrushJava.js"></script>
+	<script src="../../../highlighter/scripts/shBrushCss.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body class="withNavbar">
+
+
+
+
+
+
+<!-- ========= START OF NAVBAR ======= -->
+<a name="navbar_top"></a>
+<a href="#skip-navbar_top" title="skip navigation links"></a>	
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+    
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#class-navigation">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>TestBox v2.1.0</strong></a>
+		</div>
+
+	    <div class="collapse navbar-collapse" id="class-navigation">
+	    	<ul class="nav navbar-nav">
+				
+					
+					<li><a href="../../../overview-summary.html"><i class="glyphicon glyphicon-plane"></i> overview</a></li>
+					
+				
+
+				
+					<li><a href="package-summary.html"><i class="glyphicon glyphicon-folder-open"></i> &nbsp;package</a></li>
+				
+
+			  	
+					<li class="dropdown active">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-file"></i> class <b class="caret"></b></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="#class">Class Definition</a></li>
+							<li><a href="#constructor_summary">Constructor Summary</a></li>
+							<li><a href="#constructor_detail">Constructor Detail</a></li>
+							<li><a href="#inherited_methods">Inherited Methods</a></li>
+							<li><a href="#method_summary">Method Summary</a></li>
+							<li><a href="#method_detail">Method Detail</a></li>
+							<li><a href="#property_summary">Property Summary</a></li>
+							<li><a href="#property_detail">Property Detail</a></li>
+							
+						</ul>
+					</li>
+				
+	      	</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="../../../index.html?testbox/system/util/XMLConverter.html" target="_top">
+					<i class="glyphicon glyphicon-fullscreen"></i> Frames
+					</a>
+				</li>
+			</ul>
+	    </div>
+
+	</div>
+</nav>	
+
+<a name="skip-navbar_top"></a>
+<!-- ========= END OF NAVBAR ========= -->
+
+<!-- ======== start of class data ======== -->
+<a name="class"><!-- --></a>
+
+<!-- Package -->
+<div class="pull-right">
+	<a href="package-summary.html" title="Package: testbox.system.util"><span class="label label-success">testbox.system.util</span></a>
+</div>
+
+<h2>
+
+Class
+
+ XMLConverter</h2>
+
+
+
+
+
+
+
+
+	
+		
+	
+	
+
+	
+		
+		
+			
+		
+	
+	
+
+
+<!-- Inheritance Tree-->
+<pre>railo-context.Component
+        <img src="../../../resources/inherit.gif" alt="extended by ">testbox.system.util.XMLConverter
+</pre>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>Class Attributes:</strong></div>
+		<div class="panel-body">
+		
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				output 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				synchronized 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				accessors 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+			
+			<li class="label label-danger label-annotations">
+				persistent 
+				
+				: false		
+				
+			</li>
+			&nbsp;
+			
+		
+			
+		
+			
+		
+		
+	</div>
+</div>
+
+
+	
+	
+
+
+
+
+
+
+
+<div id="class-hint">
+	<p>A utility tool that can marshall data to XML</p>
+</div>
+
+
+
+
+
+
+
+	
+	
+	<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+	<a name="constructor_summary"><!-- --></a>
+	<table class="table table-bordered table-hover">
+		<tr class="info">
+			<th align="left" colspan="2">
+				<strong>Constructor Summary</strong>
+			</th>
+		</tr>
+		<tr>
+			
+			<td>
+				<strong><a href="XMLConverter.html#init()">init</A></strong>()
+				<br>
+				
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<a name="method_summary"><!-- --></a>
+<table class="table table-bordered table-hover">
+	<tr class="info">
+		<th align="left" colspan="2">
+			<strong>Method Summary</strong>
+		</th>
+	</tr>
+
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#arrayToXML()">arrayToXML</A></strong>(array data, [boolean useCDATA='false'], string rootName='')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts an array into XML with no headers.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#objectToXML()">objectToXML</A></strong>(any data, [boolean useCDATA='false'], string rootName='')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts an object(entity) into XML by inspecting its properties and then calling the appropriate getters on it.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#queryToXML()">queryToXML</A></strong>(query data, [string CDATAColumns=''], [string columnlist='[runtime expression]'], [boolean useCDATA='false'], string rootName='')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts a query to XML with no headers.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#safeText()">safeText</A></strong>(string txt, [boolean useCDATA='false'])
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a safe xml text.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#structToXML()">structToXML</A></strong>(any data, [boolean useCDATA='false'], string rootName='')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts a struct into XML with no headers.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#toXML()">toXML</A></strong>(any data, [string columnlist], [boolean useCDATA='false'], [boolean addHeader='true'], string encoding='UTF-8', [string delimiter=','], string rootName='')
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convert any type of data to XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;any</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#translateValue()">translateValue</A></strong>(struct args, any targetValue)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translate a value into XML.
+			
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
+		<td align="right" valign="top" width="1%">
+			<code>private&nbsp;string</code>
+		</td>
+		<td>
+			<strong><a href="XMLConverter.html#unicodeWin1252()">unicodeWin1252</A></strong>(string value)
+			<br>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts MS-Windows superset characters (Windows-1252) into their XML friendly unicode counterparts.
+			
+		</td>
+	</tr>
+	
+</table>
+
+
+
+<a name="inherited_methods"><!-- --></a>
+
+
+	
+
+	
+
+	&nbsp;
+	<a name="methods_inherited_from_class_railo-context.Component"><!-- --></a>
+	<table class="table table-hover table-bordered">
+		<tr class="info">
+			<th align="left">
+				<strong>Methods inherited from class <kbd>railo-context.Component</kbd></strong>
+			</th>
+		</tr>
+		<tr>
+			<td>
+				
+				
+				
+				
+				
+					<span class="label label-warning"><em>None</em></span>
+				
+			</td>
+		</tr>
+	</table>
+
+
+<hr>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+	<a name="constructor_detail"><!-- --></a>
+	<table class="table table-bordered">
+		<tr class="info">
+			<th colspan="1" align="left">
+				<strong>Constructor Detail</strong>
+			</th>
+		</tr>
+	</table>
+
+	<a name="init()"><!-- --></a><h3>
+	init</h3>
+	<kbd>public <strong>init</strong>()</kbd>
+
+	<br><br>
+
+	
+
+	
+	<hr>
+
+
+<!-- ============ PROPERTY DETAIL ========== -->
+
+
+
+
+
+
+
+
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<a name="method_detail"><!-- --></a>
+<table class="table table-bordered">
+	<tr class="info">
+		<th colspan="1" align="left">
+			<strong>Method Detail</strong>
+		</th>
+	</tr>
+</table>
+
+
+	
+	<a name="arrayToXML()"><!-- --></a>
+	<h3>arrayToXML</h3>
+	
+	<kbd>public string <strong>arrayToXML</strong>(array data, [boolean useCDATA='false'], string rootName='')</kbd>
+	
+	<br><br>
+
+	
+		<p>Converts an array into XML with no headers.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>data</code> - The array to convert</dd>
+		
+		<dd><code>useCDATA</code> - Use CDATA content for ALL values. False by default</dd>
+		
+		<dd><code>rootName</code> - The name of the root element, else it defaults to the internal defaults.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="objectToXML()"><!-- --></a>
+	<h3>objectToXML</h3>
+	
+	<kbd>public string <strong>objectToXML</strong>(any data, [boolean useCDATA='false'], string rootName='')</kbd>
+	
+	<br><br>
+
+	
+		<p>Converts an object(entity) into XML by inspecting its properties and then calling the appropriate getters on it.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>data</code> - The structure, object, any to convert.</dd>
+		
+		<dd><code>useCDATA</code> - Use CDATA content for ALL values</dd>
+		
+		<dd><code>rootName</code> - The name of the root element, else it defaults to the internal defaults.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="queryToXML()"><!-- --></a>
+	<h3>queryToXML</h3>
+	
+	<kbd>public string <strong>queryToXML</strong>(query data, [string CDATAColumns=''], [string columnlist='[runtime expression]'], [boolean useCDATA='false'], string rootName='')</kbd>
+	
+	<br><br>
+
+	
+		<p>Converts a query to XML with no headers.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>data</code> - The query to convert</dd>
+		
+		<dd><code>CDATAColumns</code> - Which columns to wrap in cdata tags</dd>
+		
+		<dd><code>columnlist</code> - Choose which columns to include in the translation, by default it uses all the columns in the query</dd>
+		
+		<dd><code>useCDATA</code> - Use CDATA content for ALL values</dd>
+		
+		<dd><code>rootName</code> - The name of the root element, else it defaults to the internal defaults.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="safeText()"><!-- --></a>
+	<h3>safeText</h3>
+	
+	<kbd>private string <strong>safeText</strong>(string txt, [boolean useCDATA='false'])</kbd>
+	
+	<br><br>
+
+	
+		<p>Create a safe xml text</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>txt</code></dd>
+		
+		<dd><code>useCDATA</code> - Use CDATA content for ALL values</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="structToXML()"><!-- --></a>
+	<h3>structToXML</h3>
+	
+	<kbd>public string <strong>structToXML</strong>(any data, [boolean useCDATA='false'], string rootName='')</kbd>
+	
+	<br><br>
+
+	
+		<p>Converts a struct into XML with no headers.</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>data</code> - The structure, object, any to convert.</dd>
+		
+		<dd><code>useCDATA</code> - Use CDATA content for ALL values</dd>
+		
+		<dd><code>rootName</code> - The name of the root element, else it defaults to the internal defaults.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="toXML()"><!-- --></a>
+	<h3>toXML</h3>
+	
+	<kbd>public string <strong>toXML</strong>(any data, [string columnlist], [boolean useCDATA='false'], [boolean addHeader='true'], string encoding='UTF-8', [string delimiter=','], string rootName='')</kbd>
+	
+	<br><br>
+
+	
+		<p>Convert any type of data to XML. This method will auto-discover the type. Valid types are array,query,struct</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>data</code> - The data to convert to xml</dd>
+		
+		<dd><code>columnlist</code> - Choose which columns to inspect, by default it uses all the columns in the query, if using a query</dd>
+		
+		<dd><code>useCDATA</code> - Use CDATA content for ALL values. The default is false</dd>
+		
+		<dd><code>addHeader</code> - Add an xml header to the packet returned.</dd>
+		
+		<dd><code>encoding</code> - The character encoding of the header. UTF-8 is the default</dd>
+		
+		<dd><code>delimiter</code> - The delimiter in the list. Comma by default</dd>
+		
+		<dd><code>rootName</code> - The name of the root element, else it defaults to the internal defaults.</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="translateValue()"><!-- --></a>
+	<h3>translateValue</h3>
+	
+	<kbd>private any <strong>translateValue</strong>(struct args, any targetValue)</kbd>
+	
+	<br><br>
+
+	
+		<p>Translate a value into XML</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>args</code> - The original argument collection</dd>
+		
+		<dd><code>targetValue</code> - The value to translate</dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+	
+	<a name="unicodeWin1252()"><!-- --></a>
+	<h3>unicodeWin1252</h3>
+	
+	<kbd>private string <strong>unicodeWin1252</strong>(string value)</kbd>
+	
+	<br><br>
+
+	
+		<p>Converts MS-Windows superset characters (Windows-1252) into their XML friendly unicode counterparts</p>
+	
+
+	
+		
+		
+	
+
+	
+	
+
+	
+		<dl>
+		<dt><strong>Parameters:</strong></dt>
+		
+		<dd><code>value</code></dd>
+		
+		</dl>
+	
+
+	
+
+	</dl>
+	<hr>
+
+
+
+
+</body>
+</html>
+
