@@ -10,10 +10,6 @@ the */installation* directory.
 
 monkehTweets has been compatible with Twitter's v1.1 API since October 2012 (well in advance of the change in May 2013)
 
-Need help or want to disuss monkehTweets? Join the IRC channel:
-
-    #monkehTweets chat.freenode.net
-
 ## Authors
 
 Developed by Matt Gifford (aka coldfumonkeh)
@@ -42,14 +38,45 @@ The package has been tested against:
 * Railo 4.1
 * Railo 4.2
 * Lucee 4.5
+* Lucee 5
 
 Project home: http://monkehTweet.riaforge.org
 
-## CommandBox Compatible
+# CommandBox Compatible
 
-If you have [CommandBox](http://www.ortussolutions.com/products/commandbox) running on your local machine (and you should) you can download this project using the following command:
+## Installation
+This CF wrapper can be installed as standalone or as a ColdBox Module. Either approach requires a simple CommandBox command:
 
-    box install monkehtweets
+`box install monkehtweet`
+
+Then follow either the standalone or module instructions below.
+
+### Standalone
+This wrapper will be installed into a directory called `monkehTweet` and then can be instantiated via new `monkehTweet.com.coldfumonkeh.monkehTweet()` with the following constructor arguments:
+
+```
+     consumerKey			=	'',
+     consumerSecret		=	'',
+     oauthToken			=	'',
+     oauthTokenSecret	=	'',
+     userAccountName    =	'',
+     parseResults  =	true
+```
+
+### ColdBox Module
+This package also is a ColdBox module as well. The module can be configured by creating a `monkehTweeta configuration structure in your application configuration file: config/Coldbox.cfc with the following settings:
+
+```
+monkehTweet = {
+     consumerKey			=	'',
+     consumerSecret		=	'',
+     oauthToken			=	'',
+     oauthTokenSecret	=	'',
+     userAccountName		=	'',
+     parseResults		=	true,
+};
+```
+Then you can leverage the CFC via the injection DSL: `monkehTweet@MonkehTweet`
 
 ## Useful Links
 

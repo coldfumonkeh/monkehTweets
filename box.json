@@ -1,6 +1,6 @@
 {
-    "name":"monkehTweets",
-    "slug":"monkehtweets",
+    "name":"monkehTweet",
+    "slug":"monkehtweet",
     "version":"1.4.8.0",
     "author":"Matt Gifford <matt@monkehworks.com>",
     "location":"https://github.com/coldfumonkeh/monkehTweets",
@@ -8,6 +8,7 @@
     "createPackageDirectory":"false",
     "Homepage":"https://github.com/coldfumonkeh/monkehTweets",
     "Documentation":"https://github.com/coldfumonkeh/monkehTweets",
+    "type":"modules",
     "Repository":{
         "type":"git",
         "URL":"https://github.com/coldfumonkeh/monkehTweets"
@@ -47,7 +48,7 @@
             "growl":"",
             "url":""
         }
-    }
+    },
     "private":"false",
     "engines":[
         {
