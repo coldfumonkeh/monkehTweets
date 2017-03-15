@@ -52,7 +52,7 @@ This CF wrapper can be installed as standalone or as a ColdBox Module. Either ap
 Then follow either the standalone or module instructions below.
 
 ### Standalone
-This wrapper will be installed into a directory called `monkehTweet` and then can be instantiated via new `monkehTweet.com.coldfumonkeh.monkehTweet()` with the following constructor arguments:
+This wrapper will be installed into a directory called `monkehTweet` and then can be instantiated via `new monkehTweet.com.coldfumonkeh.monkehTweet()` with the following constructor arguments:
 
 ```
      consumerKey			=	'',

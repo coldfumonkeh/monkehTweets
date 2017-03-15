@@ -5,7 +5,7 @@
     "author":"Matt Gifford <matt@monkehworks.com>",
     "location":"https://github.com/coldfumonkeh/monkehTweets",
     "directory":"",
-    "createPackageDirectory":"false",
+    "createPackageDirectory":"true",
     "Homepage":"https://github.com/coldfumonkeh/monkehTweets",
     "Documentation":"https://github.com/coldfumonkeh/monkehTweets",
     "type":"modules",
