@@ -45,8 +45,8 @@ component {
 		var monkehSettings = controller.getConfigSettings().monkehTweet;
 
 		// Map Library
-		binder.map( "MonkehTweet@monkehTweet" )
-			.to( "#moduleMapping#.monkehTweet" )
+		binder.map( "monkehTweet@monkehtweet" )
+			.to( "#moduleMapping#.com.coldfumonkeh.monkehTweet" )
 			.initArg( name="consumerKey", 			value=monkehSettings.consumerKey )
 			.initArg( name="consumerSecret", 		value=monkehSettings.consumerSecret )
 			.initArg( name="oauthToken", 			value=monkehSettings.oauthToken )
