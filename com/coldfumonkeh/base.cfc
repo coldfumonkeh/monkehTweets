@@ -295,6 +295,8 @@ Revision history
 	<cffunction name="getAuthorisation" access="public" output="false" returntype="struct" hint="I make the call to Twitter to request authorisation to access the account.">
 		<cfargument name="callBackURL"	type="string" hint="The URL to hit on call back from authorisation" required="false" default="" />
 		<cfargument name="timeout" required="false"	type="string" default="#variables.instance.timeout#" hint="An optional timeout value, in seconds, that is the maximum time the cfhttp requests can take. If the time-out passes without a response, ColdFusion considers the request to have failed." />
+		<cfargument name="forceLogin" required="false" type="boolean" default="false" hint="An optional value that forces the authorising twitter user to login">
+
 		<cfscript>
 			var returnStruct					= {};
 			var requestToken					= {};
@@ -328,6 +330,10 @@ Revision history
 
 					// Should get back oauth_token & oauth_token_secret
 					AuthURL =  variables.instance.authEndpoint & "?oauth_token=" & oAuthKeys.oauth_token & callBackURLEncoded;
+					if (arguments.forceLogin == true) {
+						AuthURL &= "&force_login=true";
+					}
+
 
 					returnStruct['authURL']			= AuthURL;
 					returnStruct['token']			= oAuthKeys.oauth_token;
