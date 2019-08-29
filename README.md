@@ -45,6 +45,7 @@ Project home: http://monkehTweet.riaforge.org
 # CommandBox Compatible
 
 ## Installation
+
 This CF wrapper can be installed as standalone or as a ColdBox Module. Either approach requires a simple CommandBox command:
 
 `box install monkehtweet`
@@ -52,31 +53,37 @@ This CF wrapper can be installed as standalone or as a ColdBox Module. Either ap
 Then follow either the standalone or module instructions below.
 
 ### Standalone
+
 This wrapper will be installed into a directory called `monkehTweet` and then can be instantiated via `new monkehTweet.com.coldfumonkeh.monkehTweet()` with the following constructor arguments:
 
-```
-     consumerKey			=	'',
-     consumerSecret		=	'',
-     oauthToken			=	'',
-     oauthTokenSecret	=	'',
-     userAccountName    =	'',
-     parseResults  =	true
+```js
+     consumerKey      =	'',
+     consumerSecret   =	'',
+     oauthToken       =	'',
+     oauthTokenSecret =	'',
+     userAccountName  =	'',
+     parseResults     = true
 ```
 
 ### ColdBox Module
-This package also is a ColdBox module as well. The module can be configured by creating a `monkehTweeta configuration structure in your application configuration file: config/Coldbox.cfc with the following settings:
 
-```
+This package also is a ColdBox module as well. The module can be configured by creating a `monkehTweet` configuration structure in your application configuration file: `config/Coldbox.cfc` with the following settings:
+
+```js
 monkehTweet = {
-     consumerKey			=	'',
-     consumerSecret		=	'',
-     oauthToken			=	'',
+     consumerKey      =	'',
+     consumerSecret   =	'',
+     oauthToken       =	'',
      oauthTokenSecret	=	'',
-     userAccountName		=	'',
-     parseResults		=	true,
+     userAccountName  =	'',
+     parseResults     =	true,
 };
 ```
-Then you can leverage the CFC via the injection DSL: `monkehTweet@MonkehTweet`
+Then you can inject the CFC via Wirebox:
+
+```js
+property name="monkehTweet" inject="monkehTweet@MonkehTweet";
+```
 
 ## Useful Links
 
