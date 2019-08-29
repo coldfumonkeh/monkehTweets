@@ -14,8 +14,8 @@ monkehTweets has been compatible with Twitter's v1.1 API since October 2012 (wel
 
 Developed by Matt Gifford (aka coldfumonkeh)
 
-- http://www.mattgifford.co.uk
-- http://www.monkehworks.com
+- [http://www.mattgifford.co.uk](web.archive.org/web/20180413021035/https://www.mattgifford.co.uk/)
+- [http://www.monkehworks.com](http://web.archive.org/web/20161118203524/https://www.monkehworks.com/)
 
 
 ### Share the love
@@ -40,7 +40,7 @@ The package has been tested against:
 * Lucee 4.5
 * Lucee 5
 
-Project home: http://monkehTweet.riaforge.org
+Project home: [http://monkehTweet.riaforge.org](http://web.archive.org/web/20180129120640/http://monkehtweet.riaforge.org/)
 
 # CommandBox Compatible
 
@@ -83,4 +83,4 @@ Then you can leverage the CFC via the injection DSL: `monkehTweet@MonkehTweet`
 One of the questions received in regards to monkehTweets is how to manage authentication for multiple users.
 You can find the answer right here:
 
-- [Managing multiple Twitter users' authentication using monkehTweets](http://www.monkehworks.com/managing-multiple-twitter-users-authentication-with-monkehtweet)
+- [Managing multiple Twitter users' authentication using monkehTweets](http://web.archive.org/web/20141011232750/www.monkehworks.com/managing-multiple-twitter-users-authentication-with-monkehtweet)
